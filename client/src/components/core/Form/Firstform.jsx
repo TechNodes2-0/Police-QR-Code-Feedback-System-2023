@@ -19,7 +19,7 @@ function FirstForm({ onNext }) {
   };
 
   return (
-    <div className="w-[1200px] max-w-maxContent flex-col items-center justify-between gap-3">
+    <div className=" max-w-maxContent flex-col items-center justify-between gap-3 border-purple-600">
       <label htmlFor="policeStation" className="block text-lg font-semibold">
         Select a Police Station:
       </label>
@@ -37,20 +37,6 @@ function FirstForm({ onNext }) {
           </option>
         ))}
       </select>
-<div className="flex flex-row gap-3">
-      <button
-        onClick={handleNext}
-        className="mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 cursor-pointer"
-      >
-        Next
-      </button>
-      <button
-        onClick={handleNext}
-        className="mt-4 bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600 cursor-pointer"
-      >
-        Previous
-      </button>
-      </div>
     </div>
   );
 }

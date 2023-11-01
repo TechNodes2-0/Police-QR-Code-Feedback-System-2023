@@ -2,7 +2,7 @@ import React from 'react';
 
 function HeroSection() {
   return (
-    <div className="bg-blue-100 text-black flex flex-col items-center justify-center h-screen">
+    <div className="bg-blue-100 text-black flex flex-col items-center justify-center text-center h-screen border bottom-2 border-black m-20  ">
       <img
         src="https://blogger.googleusercontent.com/img/a/AVvXsEgW_JkmdUfxlLBXuoLZBwRBmfo-CCmMmrcC3t_tyGrRmMalXHKjCI38cCfJZ7nV4f5panqPFpnRY2hIpfhsZKOlV6Yz_91lghVxwQJavgvR3ILawMOQHR0be9-TToG80SkN4kEYe9uCQssQf1-t5HTLoivphtc2OUuU2miuOTw06S9FGmkSSlvuLj2F=w311-h400"
         alt="Welcome to Anubhuti"

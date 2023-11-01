@@ -14,7 +14,7 @@ function SecondForm() {
   };
 
   return (
-    <div>
+    <div className="w-11/13  max-w-maxContent flex-col items-center justify-between gap-3 border-black">
       <label htmlFor="username" className="block text-lg font-semibold">
         Username:
       </label>
@@ -39,12 +39,7 @@ function SecondForm() {
         className="border border-gray-300 rounded p-2 w-full mt-2"
       />
 
-      <button
-        onClick={handleNext}
-        className="mt-4 bg-blue-500 text-white p-2 rounded-lg hover-bg-blue-600 cursor-pointer"
-      >
-        Next
-      </button>
+
     </div>
   );
 }

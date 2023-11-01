@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import FirstForm from "../../components/core/Form/FirstForm";
-import SecondForm from "../../components/core/Form/SecondForm";
-import HeroSection from "../../components/core/Form/HeroSection";
-import DemoForm from "../../components/core/Form/DemoForm";
+import { Link } from "react-router-dom";
+import Firstform from "../../components/core/Form/Firstform";
+import Secondform from "../../components/core/Form/Secondform";
+import OTPForm from "../../components/core/Form/OTPForm"; // Import your OTPForm component
 
 export default function Form() {
   const [currentStage, setCurrentStage] = useState(1);
@@ -15,21 +15,41 @@ export default function Form() {
     setCurrentStage(currentStage - 1);
   };
 
-  const renderCurrentStage = () => {
-    switch (currentStage) {
-      case 1:
-        return <FirstForm onNext={handleNext} />;
-      case 2:
-        return <SecondForm onNext={handleNext} onPrevious={handlePrevious} />;
-      default:
-        return null;
-    }
-  };
-
   return (
-    <div className="bg-blue-100 relative mx-auto flex w-screen max-w-maxContent flex-col items-center justify-between mt-0 text-black">
-      <HeroSection />
-      {renderCurrentStage()}
+    <div className="flex flex-row items-center justify-center h-screen bg-blue-100 text-black gap-20">
+      <img
+        src="https://blogger.googleusercontent.com/img/a/AVvXsEgW_JkmdUfxlLBXuoLZBwRBmfo-CCmMmrcC3t_tyGrRmMalXHKjCI38cCfJZ7nV4f5panqPFpnRY2hIpfhsZKOlV6Yz_91lghVxwQJavgvR3ILawMOQHR0be9-TToG80SkN4kEYe9uCQssQf1-t5HTLoivphtc2OUuU2miuOTw06S9FGmkSSlvuLj2F=w311-h400"
+        alt="user"
+      />
+      <section className="flex flex-col gap-4">
+        <h1 className="text-4xl font-bold text-center">Form</h1>
+        <div className="form-container m-10 gap-3 flex flex-col">
+          <div className="form body">
+            {currentStage === 1 && <Firstform />}
+            {currentStage === 2 && <Secondform />}
+            {currentStage === 3 && <OTPForm />} {/* Third stage - OTPForm */}
+            {/* Add more stages as needed */}
+          </div>
+          <div className="footer flex flex-row mb-0 mx-auto">
+            {currentStage > 1 && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 my-4 py-2 px-4 rounded"
+                onClick={handlePrevious}
+              >
+                Previous
+              </button>
+            )}
+            {currentStage < 3 && (
+              <button
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold mx-2 my-4 py-2 px-4 rounded"
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
