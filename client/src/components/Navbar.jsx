@@ -10,19 +10,21 @@ function Navbar() {
   return (
     <div className="fixed w-full z-10">
       <div className="px-5 flex justify-between items-center bg-white shadow-sm text-black h-12">
-        <div className="flex font-bold cursor-default">
+        <div className="flex font-bold cursor-default select-none">
+          <Link to="/">
           <img
             className="h-5 w-5 mx-2 my-auto"
             src="https://img.icons8.com/?size=512&id=104233&format=png"
             alt=""
           />
+          </Link>
           <p className="my-auto">Gujrat Police</p>
         </div>
         <div className="font-semibold capitalize max-md:hidden">
           <div className="flex justify-center cursor-pointer">
-            <a to="/" className="mx-3 hover:text-gray-800">
+            <Link to="/" className="mx-3 hover:text-gray-800">
               Home
-            </a>
+            </Link>
             <a to="/about" className="mx-3 hover:text-gray-800">
               about
             </a>
