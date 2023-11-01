@@ -1,0 +1,33 @@
+/* QRCodeGenerator.css */
+/* You can customize these styles further as needed */
+.container {
+  background-color: #ffffff;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.heading {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.qr-code {
+  margin-top: 1rem;
+}
+
+.download-btn {
+  background-color: #3498db;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.download-btn:hover {
+  background-color: #2980b9;
+}
