@@ -4,6 +4,7 @@ import "./App.css";
 import NotFound from "./pages/Error/NotFound";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 function App() {
@@ -17,11 +18,10 @@ function App() {
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
         </Route>
-
         {/* ------------Test End--------- */}
-
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
