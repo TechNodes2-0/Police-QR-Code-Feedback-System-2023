@@ -4,6 +4,7 @@ import "./App.css";
 import NotFound from "./pages/Error/NotFound";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer/>
     </>
   );
 }
