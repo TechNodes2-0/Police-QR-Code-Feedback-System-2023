@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function OTPForm() {
+export default function OTPForm({ onNext, onUpdate }) {
   const [otp, setOTP] = useState("");
   const [isVerified, setIsVerified] = useState(false);
 
@@ -14,6 +14,9 @@ export default function OTPForm() {
     e.preventDefault();
     if (otp === correctOTP) {
       setIsVerified(true);
+      // You can update user information here if needed
+      onUpdate({ isVerified: true });
+      onNext();
     } else {
       alert("Incorrect OTP. Please try again.");
     }

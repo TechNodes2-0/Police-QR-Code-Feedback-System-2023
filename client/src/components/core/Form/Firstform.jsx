@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 
-function FirstForm({ onNext }) {
+export default function FirstForm({ onNext, onUpdate }) {
   const [selectedPoliceStation, setSelectedPoliceStation] = useState("");
   const policeStations = [
-    "Police Station 1",
-    "Police Station 2",
-    "Police Station 3",
+    "Vadodara City Police Station",
+    "Surat City Police Station",
+    "Ahmedabad City Police Station",
     // Add more police stations as needed
   ];
 
   const handleNext = () => {
     // Check if a police station is selected before proceeding to the next stage
     if (selectedPoliceStation) {
+      // Update user information
+      onUpdate({ selectedPoliceStation });
       onNext(); // Call the onNext function to advance to the next stage
     } else {
       alert("Please select a police station.");
@@ -37,8 +39,12 @@ function FirstForm({ onNext }) {
           </option>
         ))}
       </select>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        onClick={handleNext}
+      >
+        Next
+      </button>
     </div>
   );
 }
-
-export default FirstForm;
