@@ -1,4 +1,5 @@
-import { Routes as Router, Route } from "react-router-dom";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import NotFound from "./pages/Error/NotFound";
 import Home from "./pages/Home/Home";
@@ -8,10 +9,10 @@ function App() {
   return (
     <>
         <Navbar/>
-      <Router>
+      <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
-      </Router>
+      </Routes>
     </>
   );
 }
