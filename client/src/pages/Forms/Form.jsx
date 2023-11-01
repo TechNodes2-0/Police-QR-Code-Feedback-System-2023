@@ -11,6 +11,7 @@ export default function Form() {
     name: "",
     number: "",
     selectedPoliceStation: "",
+    otp: "",
   });
 
   const handleNext = () => {
