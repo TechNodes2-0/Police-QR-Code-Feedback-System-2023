@@ -1,0 +1,36 @@
+{
+  "Divisions": [
+    {
+      "DivisionName": "A Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "B Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "C Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "D Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "E Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "F Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "G Division",
+      "DistrictID": 1
+    },
+    {
+      "DivisionName": "H Division",
+      "DistrictID": 1
+    }
+  ]
+}
