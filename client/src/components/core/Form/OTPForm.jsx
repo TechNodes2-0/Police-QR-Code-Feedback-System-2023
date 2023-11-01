@@ -1,59 +1,93 @@
 import React, { useState } from "react";
+const SERVER_IP = 'http://localhost:5005';
 
-export default function OTPForm({ onNext, onUpdate }) {
-  const [otp, setOTP] = useState("");
-  const [isVerified, setIsVerified] = useState(false);
+export default function OTPForm({}) {
 
-  const correctOTP = "123456"; // Hardcoded correct OTP for demonstration
-
-  const handleOTPChange = (e) => {
-    setOTP(e.target.value);
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (otp === correctOTP) {
-      setIsVerified(true);
-      // You can update user information here if needed
-      onUpdate({ isVerified: true });
-      onNext();
-    } else {
-      alert("Incorrect OTP. Please try again.");
+  const [phone_number, setPhoneNumber] = useState("")
+const [password, setPassword] = useState("")
+const [codeSent, setCodeSent] = useState(false)
+const [code, setCode] = useState("")
+async function sendCode(){
+  await fetch(SERVER_IP+'/api/send-code',{
+  method: 'POST',
+  headers: {
+    'Accept':'application/json',
+    'Content-Type':'application/json'
+  },
+  body: JSON.stringify({phone_number:phone_number,password:"123456"})
+  }).then(response => {
+  console.log(response);
+  if(response.ok === true) {
+    alert("Verification code sent successfully")
+    setCodeSent(true);
+  }
+  else
+  alert("Oh no we have an error")
+})
+}
+async function verifyCode(){
+  await fetch(SERVER_IP+'/api/verify-code',{
+    method: 'POST',
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify({phone_number:phone_number, code:code})
+    }).then(response => {
+    console.log(response);
+    if(response.ok === true) {
+      alert("Number verified successfully")
     }
-  };
-
+    else
+    alert("Oh no we have an error")
+  })
+  }
   return (
-    <div>
-      {isVerified ? (
-        <div>
-          <p>You are verified!</p>
-          {/* You can add further actions for the verified user here */}
-        </div>
-      ) : (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label htmlFor="otp" className="block text-sm font-medium text-gray-700">
-              Enter OTP:
-            </label>
-            <input
-              type="text"
-              id="otp"
-              name="otp"
-              value={otp}
-              onChange={handleOTPChange}
-              className="mt-1 p-2 block w-full border border-gray-300 rounded-md focus:ring focus:ring-indigo-300 focus:ring-opacity-50 focus:border-indigo-300"
-            />
-          </div>
-          <div className="text-center">
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Submit OTP
-            </button>
-          </div>
-        </form>
-      )}
+    !codeSent?
+    <div style={styles.mainDiv}>
+      <h1 style={{margin:20}}>Registration form</h1>
+     <input onChange={(e) =>setPhoneNumber(e.target.value)} style={styles.input} placeholder="Enter your phone number with international prefix (+17632736140) "/>
+     <input onChange={(e) =>setPassword(e.target.value)} style={styles.input} placeholder="Enter your password" type="password"/>
+     <button style={styles.registerButton}
+     onClick={async() =>await sendCode()}
+     >Register</button>
+    </div> :
+    <div style={styles.mainDiv}>
+    <h1 style={{margin:20}}>Code verification</h1>
+    <input onChange={(e) =>setCode(e.target.value)} placeholder="Enter your code" style = {styles.input}></input>
+    <button
+    onClick={async() =>await verifyCode()}
+    style={styles.registerButton}>Verify code</button>
     </div>
   );
+}
+
+const styles = {
+  mainDiv:{
+    display: 'flex',
+    flexDirection: 'column',
+    padding:30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  input:{
+    width:500,
+    height:50,
+    margin:10,
+    fontSize:15,
+    borderRadius:5,
+    fontFamily: 'Arial'
+  },
+  registerButton:{
+    width: 500,
+    height:50,
+    backgroundColor:"purple",
+    color:'white',
+    borderRadius:10,
+    borderWidth:1,
+    borderColor:"white",
+    fontWeight:'bold',
+    fontFamily:'Sans-Serif',
+  }
+
 }
