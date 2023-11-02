@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 const SERVER_IP = 'http://localhost:5005';
-import PhoneAuth from"../../../PhoneAuth"
+import PhoneAuth from"./PhoneAuth"
 export default function SecondForm({ onNext, onUpdate }) {
   const [phone_number, setPhoneNumber] = useState("")
   const [password, setPassword] = useState("")

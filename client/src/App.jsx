@@ -3,20 +3,14 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import NotFound from "./pages/Error/NotFound";
-import Home from "./pages/Home/Home";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-<<<<<<< HEAD
-=======
 
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
->>>>>>> 9a4815d1dd4c4bfd6c9e9214b31ccf69e421f60e
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
-import PhoneAuth from "./PhoneAuth";
+import PhoneAuth from "./components/core/Form/PhoneAuth";
 
 function App() {
   const firebaseConfig = {
@@ -34,12 +28,10 @@ function App() {
   const analytics = getAnalytics(app);
   return (
     <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
-      <Navbar />
       {/* <PhoneAuth/> */}
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/form" element={<Form />} />
-        <Route path="/form" element={<PhoneAuth />} />
+        <Route path="/" element={<PhoneAuth />} />
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
@@ -47,11 +39,6 @@ function App() {
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-<<<<<<< HEAD
-      <Footer/>
-=======
-      <Footer />
->>>>>>> 9a4815d1dd4c4bfd6c9e9214b31ccf69e421f60e
     </div>
   );
 }
