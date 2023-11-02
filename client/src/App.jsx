@@ -3,12 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import NotFound from "./pages/Error/NotFound";
-<<<<<<< HEAD
-=======
-import Home from "./pages/Home/Home";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
->>>>>>> 59886e73efc187b3d8aaf4a014c3543843eae370
 
 
 import { initializeApp } from "firebase/app";
@@ -45,10 +40,6 @@ function App() {
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-<<<<<<< HEAD
-=======
-      <Footer />
->>>>>>> 59886e73efc187b3d8aaf4a014c3543843eae370
     </div>
   );
 }
