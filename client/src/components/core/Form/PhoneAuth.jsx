@@ -37,10 +37,17 @@ function SignInScreen() {
     firebase.initializeApp(config);
 
   return (
-    <div className='flex justify-center items-center min-h-screen bg-blue-100'>
+    <div className='flex justify-center items-center min-h-screen bg-blue-100 px-5'>
 
-      <div className='bg-white max-sm:px-2 py-20 px-10 border-0 rounded-2xl shadow-xl hover:shadow-2xl'>
 
+      <div className='bg-white max-sm:px-5 pt-10 pb-20 px-10 border-0 rounded-2xl text-center shadow-xl hover:shadow-2xl'>
+      <img
+            className="h-14 w-14 mx-auto my-auto"
+            src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"
+            alt=""
+          />
+      <p className=' font-medium text-md '>welcome to</p>
+      <p className='mb-14 font-bold text-xl'>Gujrat Police Feedback System</p>
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
       </div>
 
