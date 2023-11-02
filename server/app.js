@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const districtRoutes = require("./routes/districtRoutes");
+const divisionRoutes = require("./routes/divisonRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("./db/cloudinary");
+
 require("dotenv").config();
 
 app.use(
@@ -23,6 +26,11 @@ app.use(
     tempFileDir: "/tmp/",
   })
 );
+
+//routes
+
+app.use("/districts", districtRoutes);
+app.use("/divisions", divisionRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);
