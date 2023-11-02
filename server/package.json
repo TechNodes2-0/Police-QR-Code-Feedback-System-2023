@@ -12,6 +12,7 @@
     "dependencies": {
         "axios": "^1.5.0",
         "bcrypt": "^5.1.0",
+        "bcryptjs": "^2.4.3",
         "cloudinary": "^1.37.3",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
@@ -22,5 +23,4 @@
         "multer-storage-cloudinary": "^4.0.0",
         "nodemon": "^2.0.22"
     }
-    
 }

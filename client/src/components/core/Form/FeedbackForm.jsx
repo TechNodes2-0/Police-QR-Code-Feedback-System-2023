@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
-import { useAuth } from "../../../context/AuthContext";
-
+import { useAuth } from '../../../context/AuthContext';
+import axios from "axios"
 const icons = {
   verySatisfied: <FaSmile />,
   satisfied: <FaMeh />,
@@ -55,12 +55,12 @@ const questions = {
       key: "communication",
     },
     {
-      question: "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
+      question:
+        "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
       key: "trust",
     },
     {
-      question:
-        "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
+      question: "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
       key: "reporting",
     },
   ],
@@ -81,8 +81,7 @@ const questions = {
       key: "communication",
     },
     {
-      question:
-        "તમારું સમુદાય પોલીસ પર કેટલીક આસથા છે, આ વિશે તમને કેવી રીતે કરવી છે?",
+      question: "તમારું સમુદાય પોલીસ પર કેટલીક આસથા છે, આ વિશે તમને કેવી રીતે કરવી છે?",
       key: "trust",
     },
     {
@@ -96,8 +95,7 @@ const questions = {
 export default function FeedbackForm() {
   const { user, signOut } = useAuth();
   const [feedbackData, setFeedbackData] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState("en");
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [selectedLanguage, setSelectedLanguage] = useState("en"); // Default language is English
 
   const handleIconSelect = (question, value) => {
     setFeedbackData((prevData) => ({
@@ -125,7 +123,7 @@ export default function FeedbackForm() {
               className={`flex-col justify-around items-center text-sm mx-2 ${
                 feedbackData[questionKey] === value
                   ? "text-yellow-500"
-                  : "text-gray-900"
+                  : "text-gray-300"
               }`}
             >
               <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
@@ -140,91 +138,89 @@ export default function FeedbackForm() {
     );
   };
 
-  const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 3);
-  };
-
-  const handlePrevious = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex - 3);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+  
+    try {
+      // Prepare the feedback data
+      const FormfeedbackData = {
+        stationID:"65434a628dd05cd95662e37a",
+        mobileNumber: user.phoneNumber, // Use the user's phone number
+        questions: questions[selectedLanguage].map((q) => ({
+          question: q.question,
+          answer: feedbackData[q.key],
+        })),
+      };
+  
+      // Make a POST request to your server
+      const response = await axios.post("http://localhost:3000/feedback/postfeedback", FormfeedbackData);
+  
+      if (response.data.success) {
+        // Handle successful feedback submission
+        console.log("Feedback submitted successfully");
+        // You can also reset the feedback form or show a success message.
+      } else {
+        // Handle error in feedback submission
+        console.error("Failed to submit feedback");
+        // You can show an error message to the user.
+      }
+    } catch (error) {
+      // Handle any unexpected errors
+      console.error("An error occurred:", error);
+      // You can show an error message to the user.
+    }
   };
-
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
-    setCurrentQuestionIndex(0); // Reset the question index when changing the language
   };
 
   return (
-    <div className="bg-blue-100 min-h-screen">
-      <div className="max-w-2xl mx-auto p-4 pt-5">
-        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
-          <div>
-            <label className="mr-2">Select Language:</label>
-            <select
-              className="bg-white border-0"
-              value={selectedLanguage}
-              onChange={handleLanguageChange}
-            >
-              <option value="en">English</option>
-              <option value="hi">Hindi</option>
-              <option value="gu">Gujarati</option>
-            </select>
+    <div className="max-w-xl mx-auto p-4 pt-20">
+           <div className="relative flex justify-end">
+  <button
+    onClick={signOut}
+    className="bg-red-500 mt-4 mr-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
+  >
+    Log Out
+  </button>
+</div>
+      <h1 className="text-2xl font-bold mb-4">Police Services Feedback</h1>
+      <div className="mb-4">
+        <label className="mr-2">Select Language:</label>
+        <select value={selectedLanguage} onChange={handleLanguageChange}>
+          <option value="en">English</option>
+          <option value="hi">Hindi</option>
+          <option value="gu">Gujarati</option>
+        </select>
+      </div>
+      <div>
+      {user ? (
+        <div className="mb-4">
+     
+          <p>User ID: {user.uid}</p>
+          <p>Phone Number: {user.phoneNumber}</p>
+     
+        </div>
+      ) : (
+    <h2>[please login</h2>
+      )}
+    </div>
+      <form onSubmit={handleSubmit}>
+        {questions[selectedLanguage].map((q) => (
+          <div className="mb-4 space-y-2" key={q.key}>
+            <h2 className="text-md font-medium mb-2">{q.question}</h2>
+            {renderIcons(q.key)}
           </div>
+        ))}
+        <div className="text-center">
           <button
-            onClick={signOut}
-            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
+            type="submit"
+            className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-3 px-6 rounded"
           >
-            Log Out
+            Submit your Feedback
           </button>
         </div>
-        <div className="bg-white p-10 border-0 rounded-xl shadow-xl">
-          <h1 className="text-2xl font-bold mb-4">Give your feedback</h1>
-          <form onSubmit={handleSubmit}>
-            {questions[selectedLanguage]
-              .slice(currentQuestionIndex, currentQuestionIndex + 3)
-              .map((q) => (
-                <div className="mb-4 space-y-2" key={q.key}>
-                  <h2 className="text-md font-medium mb-2">{q.question}</h2>
-                  {renderIcons(q.key)}
-                </div>
-              ))}
-
-            <div className="text-center my-5">
-              {currentQuestionIndex > 0 && (
-                <button
-                  onClick={handlePrevious}
-                  className={` border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
-                >
-                  Previous
-                </button>
-              )}
-
-              {currentQuestionIndex + 3 <
-                questions[selectedLanguage].length && (
-                <button
-                  onClick={handleNext}
-                  className={` border-2 rounded-full  text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
-                >
-                  Next
-                </button>
-              )}
-            </div>
-            <div className="text-center">
-              {currentQuestionIndex > 0 && (
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
-                >
-                  Submit your Feedback
-                </button>
-              )}
-            </div>
-          </form>
-        </div>
-      </div>
+      </form>
     </div>
   );
 }
