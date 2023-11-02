@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
-import { useAuth } from '../../../context/AuthContext';
+import { useAuth } from "../../../context/AuthContext";
 const icons = {
   verySatisfied: <FaSmile />,
   satisfied: <FaMeh />,
@@ -54,12 +54,12 @@ const questions = {
       key: "communication",
     },
     {
-      question:
-        "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
+      question: "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
       key: "trust",
     },
     {
-      question: "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
+      question:
+        "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
       key: "reporting",
     },
   ],
@@ -80,7 +80,8 @@ const questions = {
       key: "communication",
     },
     {
-      question: "તમારું સમુદાય પોલીસ પર કેટલીક આસથા છે, આ વિશે તમને કેવી રીતે કરવી છે?",
+      question:
+        "તમારું સમુદાય પોલીસ પર કેટલીક આસથા છે, આ વિશે તમને કેવી રીતે કરવી છે?",
       key: "trust",
     },
     {
@@ -139,7 +140,6 @@ export default function FeedbackForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
   };
 
   const handleLanguageChange = (event) => {
@@ -147,52 +147,54 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4 pt-20">
-           <div className="relative flex justify-end">
-  <button
-    onClick={signOut}
-    className="bg-red-500 mt-4 mr-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
-  >
-    Log Out
-  </button>
-</div>
-      <h1 className="text-2xl font-bold mb-4">Police Services Feedback</h1>
-      <div className="mb-4">
-        <label className="mr-2">Select Language:</label>
-        <select value={selectedLanguage} onChange={handleLanguageChange}>
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-          <option value="gu">Gujarati</option>
-        </select>
-      </div>
-      <div>
-      {user ? (
-        <div className="mb-4">
-     
-          <p>User ID: {user.uid}</p>
-          <p>Phone Number: {user.phoneNumber}</p>
-     
-        </div>
-      ) : (
-    <h2>[please login</h2>
-      )}
-    </div>
-      <form onSubmit={handleSubmit}>
-        {questions[selectedLanguage].map((q) => (
-          <div className="mb-4 space-y-2" key={q.key}>
-            <h2 className="text-md font-medium mb-2">{q.question}</h2>
-            {renderIcons(q.key)}
+    <div className="bg-blue-100">
+      <div className="max-w-2xl mx-auto p-4 pt-5">
+        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
+          <div>
+            <label className="mr-2">Select Language:</label>
+            <select className="bg-white border-0" value={selectedLanguage} onChange={handleLanguageChange}>
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+              <option value="gu">Gujarati</option>
+            </select>
           </div>
-        ))}
-        <div className="text-center">
           <button
-            type="submit"
-            className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-3 px-6 rounded"
+            onClick={signOut}
+            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
           >
-            Submit your Feedback
+            Log Out
           </button>
         </div>
-      </form>
+        <div className="bg-white p-10 border-0 rounded-xl shadow-xl">
+          <h1 className="text-2xl font-bold mb-4">Give your feedbacks</h1>
+          {/* <div>
+        {user ? (
+          <div className="mb-4">
+            <p>User ID: {user.uid}</p>
+            <p>Phone Number: {user.phoneNumber}</p>
+          </div>
+        ) : (
+          <h2>[please login</h2>
+        )}
+      </div> */}
+          <form onSubmit={handleSubmit}>
+            {questions[selectedLanguage].map((q) => (
+              <div className="mb-4 space-y-2" key={q.key}>
+                <h2 className="text-md font-medium mb-2">{q.question}</h2>
+                {renderIcons(q.key)}
+              </div>
+            ))}
+            <div className="text-center">
+              <button
+                type="submit"
+                className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-3 px-6 rounded"
+              >
+                Submit your Feedback
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
