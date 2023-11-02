@@ -16,7 +16,7 @@ import PhoneAuth from "./components/core/Form/PhoneAuth";
 import Login from "./pages/Login/login";
 import Admin from "./pages/Admin/Admin";
 import DefaultLayout from "./layout/DefaultLayout";
-
+import ECommerce from "./pages/Dashboard/ECommerce";
 function App() {
 
  
@@ -32,6 +32,7 @@ function App() {
         <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         <Route path="/" element={<PhoneAuth />} />
         <Route path="/login" element={<Login/>} />
+        {/*Don't Touch this Route*/}
         <Route path="/dashboard" element={<DefaultLayout />} />
         {/* ------------Test--------- */}
         <Route path="/test">
