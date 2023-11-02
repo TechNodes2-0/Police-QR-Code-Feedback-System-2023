@@ -157,7 +157,7 @@ export default function FeedbackForm() {
   
       if (response.data.success) {
         // Handle successful feedback submission
-        console.log("Feedback submitted successfully");
+        alert("Feedback submitted successfully");
         // You can also reset the feedback form or show a success message.
       } else {
         // Handle error in feedback submission
