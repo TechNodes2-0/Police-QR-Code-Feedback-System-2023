@@ -5,14 +5,50 @@ const QRCode = require("../models/qrCodeModel"); // Import your QRCode model
 // Create a new QR Code
 const addQRCode = async (req, res) => {
   try {
-    const { station, qrCodeImageURL, creator } = req.body;
+    const { station, creator } = req.body;
+    console.log(station, station);
+    const qrCodeImageFile = req.files.qrCodeImageFile; // Assuming you have a field named 'qrCodeImage' in your request for QR code image
+    const posterImageFile = req.files.posterImageFile; // Assuming you have a field named 'posterImage' in your request for poster image
+
+    // Check if the file types are supported
+    const supportedTypes = ["jpg", "jpeg", "png"];
+    const qrCodeImageFileType = qrCodeImageFile.name
+      .split(".")[1]
+      .toLowerCase();
+    const posterImageFileType = posterImageFile.name
+      .split(".")[1]
+      .toLowerCase();
+
+    console.log(qrCodeImageFileType, posterImageFileType);
+    if (
+      !isFileTypeSupported(qrCodeImageFileType, supportedTypes) ||
+      !isFileTypeSupported(posterImageFileType, supportedTypes)
+    ) {
+      return res.status(400).json({
+        success: false,
+        message: "File format not supported",
+      });
+    }
+
+    // Upload QR code image to Cloudinary
+    const qrCodeImageResponse = await uploadFileToCloudinary(
+      qrCodeImageFile,
+      "QRCodeImages"
+    );
+
+    // Upload poster image to Cloudinary
+    const posterImageResponse = await uploadFileToCloudinary(
+      posterImageFile,
+      "PosterImages"
+    );
 
     const newQRCode = await QRCode.create({
       station,
       qrCodeImageURL,
       creator,
     });
-    res.status(200).json({
+    console.log(newQRCode);
+    res.status(201).json({
       success: true,
       message: "QR Code added successfully",
       data: newQRCode,
