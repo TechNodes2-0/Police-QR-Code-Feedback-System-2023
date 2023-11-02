@@ -35,7 +35,7 @@ export default function Form() {
       <div className="form-container m-10 gap-3 flex flex-col">
         <div className="form body">
           {currentStage === 1 && (
-            <FirstForm onNext={handleNext} onUpdate={handleUserInfoUpdate} />
+                  <SecondForm onNext={handleNext} onUpdate={handleUserInfoUpdate} />
           )}
           {currentStage === 2 && (
             <SecondForm onNext={handleNext} onUpdate={handleUserInfoUpdate} />

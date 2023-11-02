@@ -14,6 +14,7 @@ import { getAnalytics } from "firebase/analytics";
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 import PhoneAuth from "./PhoneAuth";
+import FeedbackForm from "./components/core/Form/FeedbackForm";
 
 function App() {
   const firebaseConfig = {
@@ -37,6 +38,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/form" element={<Form />} />
         <Route path="/form" element={<PhoneAuth />} />
+        <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
