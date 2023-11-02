@@ -121,7 +121,7 @@ export default function FeedbackForm() {
               className={`flex-col justify-around items-center text-sm mx-2 ${
                 feedbackData[questionKey] === value
                   ? "text-yellow-500"
-                  : "text-gray-300"
+                  : "text-gray-900"
               }`}
             >
               <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
