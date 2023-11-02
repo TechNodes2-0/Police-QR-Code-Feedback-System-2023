@@ -158,7 +158,7 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="bg-blue-100">
+    <div className="bg-blue-100 min-h-screen">
       <div className="max-w-2xl mx-auto p-4 pt-5">
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
           <div>
@@ -181,7 +181,7 @@ export default function FeedbackForm() {
           </button>
         </div>
         <div className="bg-white p-10 border-0 rounded-xl shadow-xl">
-          <h1 className="text-2xl font-bold mb-4">Give your feedbacks</h1>
+          <h1 className="text-2xl font-bold mb-4">Give your feedback</h1>
           <form onSubmit={handleSubmit}>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
