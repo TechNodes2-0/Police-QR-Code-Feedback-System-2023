@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
 import { useAuth } from "../../../context/AuthContext";
+
 const icons = {
   verySatisfied: <FaSmile />,
   satisfied: <FaMeh />,
@@ -95,7 +96,8 @@ const questions = {
 export default function FeedbackForm() {
   const { user, signOut } = useAuth();
   const [feedbackData, setFeedbackData] = useState({});
-  const [selectedLanguage, setSelectedLanguage] = useState("en"); // Default language is English
+  const [selectedLanguage, setSelectedLanguage] = useState("en");
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
   const handleIconSelect = (question, value) => {
     setFeedbackData((prevData) => ({
@@ -138,12 +140,21 @@ export default function FeedbackForm() {
     );
   };
 
+  const handleNext = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 3);
+  };
+
+  const handlePrevious = () => {
+    setCurrentQuestionIndex((prevIndex) => prevIndex - 3);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
+    setCurrentQuestionIndex(0); // Reset the question index when changing the language
   };
 
   return (
@@ -152,7 +163,11 @@ export default function FeedbackForm() {
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
           <div>
             <label className="mr-2">Select Language:</label>
-            <select className="bg-white border-0" value={selectedLanguage} onChange={handleLanguageChange}>
+            <select
+              className="bg-white border-0"
+              value={selectedLanguage}
+              onChange={handleLanguageChange}
+            >
               <option value="en">English</option>
               <option value="hi">Hindi</option>
               <option value="gu">Gujarati</option>
@@ -167,30 +182,45 @@ export default function FeedbackForm() {
         </div>
         <div className="bg-white p-10 border-0 rounded-xl shadow-xl">
           <h1 className="text-2xl font-bold mb-4">Give your feedbacks</h1>
-          {/* <div>
-        {user ? (
-          <div className="mb-4">
-            <p>User ID: {user.uid}</p>
-            <p>Phone Number: {user.phoneNumber}</p>
-          </div>
-        ) : (
-          <h2>[please login</h2>
-        )}
-      </div> */}
           <form onSubmit={handleSubmit}>
-            {questions[selectedLanguage].map((q) => (
-              <div className="mb-4 space-y-2" key={q.key}>
-                <h2 className="text-md font-medium mb-2">{q.question}</h2>
-                {renderIcons(q.key)}
-              </div>
-            ))}
+            {questions[selectedLanguage]
+              .slice(currentQuestionIndex, currentQuestionIndex + 3)
+              .map((q) => (
+                <div className="mb-4 space-y-2" key={q.key}>
+                  <h2 className="text-md font-medium mb-2">{q.question}</h2>
+                  {renderIcons(q.key)}
+                </div>
+              ))}
+
+            <div className="text-center my-5">
+              {currentQuestionIndex > 0 && (
+                <button
+                  onClick={handlePrevious}
+                  className={` border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
+                >
+                  Previous
+                </button>
+              )}
+
+              {currentQuestionIndex + 3 <
+                questions[selectedLanguage].length && (
+                <button
+                  onClick={handleNext}
+                  className={` border-2 rounded-full  text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
+                >
+                  Next
+                </button>
+              )}
+            </div>
             <div className="text-center">
-              <button
-                type="submit"
-                className="bg-blue-500 hover-bg-blue-700 text-white font-bold py-3 px-6 rounded"
-              >
-                Submit your Feedback
-              </button>
+              {currentQuestionIndex > 0 && (
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
+                >
+                  Submit your Feedback
+                </button>
+              )}
             </div>
           </form>
         </div>
