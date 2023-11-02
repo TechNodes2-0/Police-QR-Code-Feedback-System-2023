@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
 import { useAuth } from "../../../context/AuthContext";
+import axios from "axios"
 
 const icons = {
   verySatisfied: <FaSmile />,
@@ -148,14 +149,44 @@ export default function FeedbackForm() {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 3);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
 
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
     setCurrentQuestionIndex(0); // Reset the question index when changing the language
   };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      // Prepare the feedback data
+      const FormfeedbackData = {
+        stationID:"65434a7f8dd05cd95662e37f",
+        mobileNumber: user.phoneNumber, // Use the user's phone number
+        questions: questions[selectedLanguage].map((q) => ({
+          question: q.question,
+          answer: feedbackData[q.key],
+        })),
+      };
+  
+      // Make a POST request to your server
+      const response = await axios.post("http://localhost:3000/feedback/postfeedback", FormfeedbackData);
+  
+      if (response.data.success) {
+        // Handle successful feedback submission
+        console.log("Feedback submitted successfully");
+        // You can also reset the feedback form or show a success message.
+      } else {
+        // Handle error in feedback submission
+        console.error("Failed to submit feedback");
+        // You can show an error message to the user.
+      }
+    } catch (error) {
+      // Handle any unexpected errors
+      console.error("An error occurred:", error);
+      // You can show an error message to the user.
+    }
+  }
 
   return (
     <div className="bg-blue-100 min-h-screen">

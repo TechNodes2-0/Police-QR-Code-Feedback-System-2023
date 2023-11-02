@@ -13,6 +13,7 @@ import QRCodeGenerator from "./test/QRCodeGenerator";
 import { onAuthStateChanged, signOut,getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
+import Login from "./pages/Login/login";
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         <Route path="/" element={<PhoneAuth />} />
+        <Route path="/login" element={<Login/>} />
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
