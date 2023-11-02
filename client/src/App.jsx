@@ -6,6 +6,14 @@ import NotFound from "./pages/Error/NotFound";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+<<<<<<< HEAD
+=======
+
+
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+
+>>>>>>> 9a4815d1dd4c4bfd6c9e9214b31ccf69e421f60e
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 import PhoneAuth from "./PhoneAuth";
@@ -39,7 +47,11 @@ function App() {
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
       </Routes>
+<<<<<<< HEAD
       <Footer/>
+=======
+      <Footer />
+>>>>>>> 9a4815d1dd4c4bfd6c9e9214b31ccf69e421f60e
     </div>
   );
 }
