@@ -1,5 +1,4 @@
 import React from "react";
-import login from "../../assets/login.png";
 
 function Login() {
   return (
