@@ -6,6 +6,21 @@ const addPoliceStation = async (req, res) => {
   try {
     const { Location, Contact, HeadName, DivisionID, StationName } = req.body;
 
+    // Check if a police station with the same name and DivisionID already exists
+    const existingPoliceStation = await PoliceStation.findOne({
+      StationName,
+      DivisionID,
+    });
+
+    if (existingPoliceStation) {
+      return res.status(400).json({
+        success: false,
+        message:
+          "Police Station with the same name and Division already exists",
+      });
+    }
+
+    // If the police station does not exist, create a new one
     const newPoliceStation = await PoliceStation.create({
       StationName,
       DivisionID,
@@ -13,6 +28,7 @@ const addPoliceStation = async (req, res) => {
       Contact,
       Location,
     });
+
     res.status(200).json({
       success: true,
       message: "Police Station added successfully",
@@ -30,7 +46,7 @@ const addPoliceStation = async (req, res) => {
 // Get all police stations
 const getAllPoliceStation = async (req, res) => {
   try {
-    const policeStations = await PoliceStation.find();
+    const policeStations = await PoliceStation.find().populate("DivisionID");
     res.status(200).json({
       success: true,
       message: "Police Station Data fetched Successfully",

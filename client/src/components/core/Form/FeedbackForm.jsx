@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
-
+import { useAuth } from '../../../context/AuthContext';
 const icons = {
   verySatisfied: <FaSmile />,
   satisfied: <FaMeh />,
@@ -92,6 +92,7 @@ const questions = {
 };
 
 export default function FeedbackForm() {
+  const { user, signOut } = useAuth();
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en"); // Default language is English
 
@@ -138,7 +139,7 @@ export default function FeedbackForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can send the feedbackData to your backend or perform other actions here
+
   };
 
   const handleLanguageChange = (event) => {
@@ -146,8 +147,16 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4 text-center">Police Services Feedback</h1>
+    <div className="max-w-xl mx-auto p-4 pt-20">
+           <div className="relative flex justify-end">
+  <button
+    onClick={signOut}
+    className="bg-red-500 mt-4 mr-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
+  >
+    Log Out
+  </button>
+</div>
+      <h1 className="text-2xl font-bold mb-4">Police Services Feedback</h1>
       <div className="mb-4">
         <label className="mr-2">Select Language:</label>
         <select value={selectedLanguage} onChange={handleLanguageChange}>
@@ -156,6 +165,18 @@ export default function FeedbackForm() {
           <option value="gu">Gujarati</option>
         </select>
       </div>
+      <div>
+      {user ? (
+        <div className="mb-4">
+     
+          <p>User ID: {user.uid}</p>
+          <p>Phone Number: {user.phoneNumber}</p>
+     
+        </div>
+      ) : (
+    <h2>[please login</h2>
+      )}
+    </div>
       <form onSubmit={handleSubmit}>
         {questions[selectedLanguage].map((q) => (
           <div className="mb-4 space-y-2" key={q.key}>
