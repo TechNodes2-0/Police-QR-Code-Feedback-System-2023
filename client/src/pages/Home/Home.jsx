@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <div className="bg-blue-100 min-h-screen flex justify-evenly max-sm:justify-end items-center max-sm:flex-col-reverse pt-20">
+    <div className="bg-blue-100 min-h-screen flex justify-evenly max-sm:justify-end items-center max-sm:flex-col-reverse">
       <div className="p-5 flex-col justify-center items-center text-center font-sans">
         <div className="my-8">
           <p className="my-1">Welcome to Anubhuti!</p>
