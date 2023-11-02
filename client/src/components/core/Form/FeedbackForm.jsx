@@ -279,9 +279,9 @@ export default function FeedbackForm() {
       <div className="max-w-2xl mx-auto p-4 pt-5">
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
           <div>
-            <label className="mr-2">Select Language:</label>
+            <label className="mr-2 text-sm sm:text-base lg:text-md">Select Language:</label>
             <select
-              className="bg-white border-0"
+              className="bg-white border-0 text-sm sm:text-base lg:text-md"
               value={selectedLanguage}
               onChange={handleLanguageChange}
             >
@@ -290,21 +290,21 @@ export default function FeedbackForm() {
               <option value="gu">Gujarati</option>
             </select>
           </div>
-          <button
+          {/* <button
             onClick={signOut}
-            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded"
+            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded text-sm sm:text-base lg:text-lg"
           >
             Log Out
-          </button>
+          </button> */}
         </div>
-        <div className="bg-white p-10 border-0 rounded-xl shadow-xl">
-          <h1 className="text-2xl font-bold mb-4">Give your feedback</h1>
+        <div className="bg-white p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">Give your feedback</h1>
           <form onSubmit={handleSubmit}>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
                 <div className="mb-4 space-y-2" key={q.key}>
-                  <h2 className="text-md font-medium mb-2">{q.question}</h2>
+                  <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">{q.question}</h2>
                   {renderOptions(q.key, q.options)}
                 </div>
               ))}
@@ -313,7 +313,7 @@ export default function FeedbackForm() {
               {currentQuestionIndex > 0 && (
                 <button
                   onClick={handlePrevious}
-                  className={` border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
+                  className={`border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
                 >
                   Previous
                 </button>
@@ -323,7 +323,7 @@ export default function FeedbackForm() {
                 questions[selectedLanguage].length && (
                 <button
                   onClick={handleNext}
-                  className={` border-2 rounded-full  text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5`}
+                  className={`border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
                 >
                   Next
                 </button>
@@ -333,7 +333,7 @@ export default function FeedbackForm() {
               {currentQuestionIndex > 0 && (
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded text-sm sm:text-base lg:text-lg"
                 >
                   Submit your Feedback
                 </button>
