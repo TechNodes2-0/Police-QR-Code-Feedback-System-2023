@@ -1,51 +1,78 @@
 import React, { useState } from "react";
-
+const SERVER_IP = 'http://localhost:5005';
+import PhoneAuth from"../../../PhoneAuth"
 export default function SecondForm({ onNext, onUpdate }) {
-  const [username, setUsername] = useState("");
-  const [mobile, setMobile] = useState("");
-
-  const handleNext = () => {
-    // Check if username and mobile are filled before proceeding to the next stage
-    if (username && mobile) {
-      // Update user information
-      onUpdate({ name: username, number: mobile });
-      onNext();
-    } else {
-      alert("Please fill in both username and mobile fields.");
+  const [phone_number, setPhoneNumber] = useState("")
+  const [password, setPassword] = useState("")
+  const [codeSent, setCodeSent] = useState(false)
+  const [code, setCode] = useState("")
+  async function sendCode(){
+    await fetch(SERVER_IP+'/api/send-code',{
+    method: 'POST',
+    headers: {
+      'Accept':'application/json',
+      'Content-Type':'application/json'
+    },
+    body: JSON.stringify({phone_number:phone_number,password:"123456"})
+    }).then(response => {
+    console.log(response);
+    if(response.ok === true) {
+      alert("Verification code sent successfully")
+      setCodeSent(true);
     }
-  };
+    else
+    alert("Oh no we have an error")
+  })
+  }
+  async function verifyCode(){
+    await fetch(SERVER_IP+'/api/verify-code',{
+      method: 'POST',
+      headers: {
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify({phone_number:phone_number, code:code})
+      }).then(response => {
+      console.log(response);
+      if(response.ok === true) {
+        alert("Number verified successfully")
+      }
+      else
+      alert("Oh no we have an error")
+    })
+    }
 
-  return (
-    <div className="w-11/13  max-w-maxContent flex-col items-center justify-between gap-3 border-black">
-      <label htmlFor="username" className="block text-lg font-semibold">
-        Username:
-      </label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        className="border border-gray-300 rounded p-2 w-full mt-2"
-      />
-
-      <label htmlFor="mobile" className="block text-lg font-semibold mt-4">
-        Mobile Number:
-      </label>
-      <input
-        type="text"
-        id="mobile"
-        name="mobile"
-        value={mobile}
-        onChange={(e) => setMobile(e.target.value)}
-        className="border border-gray-300 rounded p-2 w-full mt-2"
-      />
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-        onClick={handleNext}
-      >
-        Next
-      </button>
-    </div>
-  );
-}
+    return (
+<PhoneAuth/>
+    );
+  }
+  
+  const styles = {
+    mainDiv:{
+      display: 'flex',
+      flexDirection: 'column',
+      padding:30,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    input:{
+      width:500,
+      height:50,
+      margin:10,
+      fontSize:15,
+      borderRadius:5,
+      fontFamily: 'Arial'
+    },
+    registerButton:{
+      width: 500,
+      height:50,
+      backgroundColor:"purple",
+      color:'white',
+      borderRadius:10,
+      borderWidth:1,
+      borderColor:"white",
+      fontWeight:'bold',
+      fontFamily:'Sans-Serif',
+    }
+  
+  }
