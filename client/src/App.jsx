@@ -5,11 +5,6 @@ import NotFound from "./pages/Error/NotFound";
 import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 4195661adf988598b219abb51536ddfd9c0bd74e
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 function App() {
@@ -26,11 +21,7 @@ function App() {
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
       </Routes>
-<<<<<<< HEAD
       <Footer/>
-=======
-      <Footer />
->>>>>>> 4195661adf988598b219abb51536ddfd9c0bd74e
     </div>
   );
 }

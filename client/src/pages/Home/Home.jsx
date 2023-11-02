@@ -6,7 +6,9 @@ const Home = () => {
       <div className="p-5 flex-col justify-center items-center text-center font-sans">
         <div className="my-8">
           <p className="my-1">Welcome to Anubhuti!</p>
-          <p className="text-3xl max-sm:text-2xl font-bold">Gujarat Police feedback system</p>
+          <p className="text-3xl max-sm:text-2xl font-bold">
+            Gujarat Police feedback system
+          </p>
         </div>
 
         <div className="bg-white mx-auto w-64 p-10 border-0 rounded-xl shadow-xl">
@@ -17,8 +19,11 @@ const Home = () => {
             alt=""
           />
         </div>
-
-        <button className="w-64 px-5 py-2 my-5 border-0 rounded-xl transition duration-200 shadow-lg text-white font-semibold hover:bg-blue-900 bg-blue-600">Give Your Feedback</button>
+        <Link to='/form'>
+          <button className="w-64 px-5 py-2 my-5 border-0 rounded-xl transition duration-200 shadow-lg text-white font-semibold hover:bg-blue-900 bg-blue-600">
+            Give Your Feedback
+          </button>
+        </Link>
       </div>
       <div className="text-center font-semibold text-3xl flex-col justify-center items-center">
         <img
