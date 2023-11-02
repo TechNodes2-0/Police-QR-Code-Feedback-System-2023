@@ -8,8 +8,9 @@ const {
 const createQRCode = async (req, res) => {
   try {
     const { station, creator } = req.body;
-    const qrCodeImageFile = req.files.qrCodeImage; // Assuming you have a field named 'qrCodeImage' in your request for QR code image
-    const posterImageFile = req.files.posterImage; // Assuming you have a field named 'posterImage' in your request for poster image
+    console.log(station, station);
+    const qrCodeImageFile = req.files.qrCodeImageFile; // Assuming you have a field named 'qrCodeImage' in your request for QR code image
+    const posterImageFile = req.files.posterImageFile; // Assuming you have a field named 'posterImage' in your request for poster image
 
     // Check if the file types are supported
     const supportedTypes = ["jpg", "jpeg", "png"];
@@ -20,6 +21,7 @@ const createQRCode = async (req, res) => {
       .split(".")[1]
       .toLowerCase();
 
+    console.log(qrCodeImageFileType, posterImageFileType);
     if (
       !isFileTypeSupported(qrCodeImageFileType, supportedTypes) ||
       !isFileTypeSupported(posterImageFileType, supportedTypes)
@@ -48,7 +50,7 @@ const createQRCode = async (req, res) => {
       posterImageURL: posterImageResponse.secure_url,
       creator,
     });
-
+    console.log(newQRCode);
     res.status(201).json({
       success: true,
       message: "QR code created successfully",
