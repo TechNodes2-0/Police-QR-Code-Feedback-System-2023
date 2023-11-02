@@ -15,6 +15,7 @@ import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
 import Login from "./pages/Login/login";
 import Admin from "./pages/Admin/Admin";
+import DefaultLayout from "./layout/DefaultLayout";
 
 function App() {
 
@@ -31,7 +32,7 @@ function App() {
         <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         <Route path="/" element={<PhoneAuth />} />
         <Route path="/login" element={<Login/>} />
-        <Route path="/dashboard" element={<Admin />} />
+        <Route path="/dashboard" element={<DefaultLayout />} />
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
