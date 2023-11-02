@@ -3,8 +3,6 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 
 import NotFound from "./pages/Error/NotFound";
-import Footer from "./components/Footer";
-
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
@@ -34,7 +32,6 @@ function App() {
       {/* <PhoneAuth/> */}
       <Routes>
         <Route path="/form" element={<Form />} />
-        <Route path="/form" element={<PhoneAuth />} />
         <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         <Route path="/" element={<PhoneAuth />} />
         {/* ------------Test--------- */}
