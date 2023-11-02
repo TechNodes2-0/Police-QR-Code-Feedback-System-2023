@@ -1,31 +1,29 @@
+import { Link } from "react-router-dom";
+
 function Footer() {
   return (
-    <div className="bg-black text-white px-5 py-10 flex flex-col">
-      <div className=" flex flex-col md:flex-row justify-around">
-        <div className="flex flex-col font-bold cursor-default max-w-xs break-normal my-auto">
-          <img
-            className="mx-auto w-20"
-            src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"
-            alt=""
-          />
-
-          <h1 className="my-auto text-2xl">Gujrat Police</h1>
+<footer className="bg-white rounded-lg shadow m-4">
+    <div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
+        <div className="sm:flex sm:items-center sm:justify-between">
+            <Link to='/' className="flex items-center mb-4 sm:mb-0">
+                <img src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png" className="h-8 mr-3" alt="Flowbite Logo" />
+                <span className="self-center text-2xl font-semibold whitespace-nowrap ">Gujrat Police</span>
+            </Link>
+            <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                <li>
+                    <a href="#" className="mr-4 hover:underline md:mr-6 ">Home</a>
+                </li>
+                <li>
+                    <a href="#" className="mr-4 hover:underline md:mr-6">Dashboard</a>
+                </li>
+            </ul>
         </div>
-
-        <div className="text-sm py-5">
-          <div className="capitalize">
-            <div className="my-2 mx-3 hover:text-gray-400">Home</div>
-            <div className="my-2 mx-3 hover:text-gray-400">about</div>
-            <div className="my-2 mx-3 hover:text-gray-400">contact us</div>
-            <div className="my-2 mx-3 hover:text-gray-400">Dashboard</div>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col text-center mt-10">
-        <p>made with ❤️ by devloper for devlopers.</p>
-        <p className="md:text-right"> © 2023 All Rights Reserved </p>
-      </div>
+        <hr className="my-6 border-gray-200 sm:mx-auto lg:my-8" />
+        <span className="block text-sm text-gray-500 sm:text-center">© 2023 <Link to="/" className="hover:underline">Gujrat Police</Link>. All Rights Reserved.</span>
     </div>
+</footer>
+
+
   );
 }
 
