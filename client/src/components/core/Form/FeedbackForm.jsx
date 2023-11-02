@@ -1,15 +1,6 @@
 import React, { useState } from "react";
-import { FaSmile, FaMeh, FaFrown, FaSadCry } from "react-icons/fa";
 import { useAuth } from "../../../context/AuthContext";
-import axios from "axios"
-
-const icons = {
-  verySatisfied: <FaSmile />,
-  satisfied: <FaMeh />,
-  neutral: <FaMeh />,
-  dissatisfied: <FaFrown />,
-  veryDissatisfied: <FaSadCry />,
-};
+import axios from "axios";
 
 const questions = {
   en: [
@@ -17,26 +8,61 @@ const questions = {
       question:
         "How would you rate your overall satisfaction with the police services in your community?",
       key: "satisfaction",
+      options: [
+        { value: "Yes", label: "Yes" },
+        { value: "satisfied", label: "Satisfied" },
+        { value: "neutral", label: "Neutral" },
+        { value: "dissatisfied", label: "Dissatisfied" },
+        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+      ],
     },
     {
       question:
         "How would you rate the responsiveness of the police in addressing community concerns?",
       key: "responsiveness",
+      options: [
+        { value: "verySatisfied", label: "Very Satisfied" },
+        { value: "satisfied", label: "Satisfied" },
+        { value: "neutral", label: "Neutral" },
+        { value: "dissatisfied", label: "Dissatisfied" },
+        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+      ],
     },
     {
       question:
         "Do you think the police effectively communicate with the community and keep residents informed about safety issues and initiatives?",
       key: "communication",
+      options: [
+        { value: "verySatisfied", label: "Very Satisfied" },
+        { value: "satisfied", label: "Satisfied" },
+        { value: "neutral", label: "Neutral" },
+        { value: "dissatisfied", label: "Dissatisfied" },
+        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+      ],
     },
     {
       question:
         "How would you rate the level of trust you have in the police in your community?",
       key: "trust",
+      options: [
+        { value: "verySatisfied", label: "Very Satisfied" },
+        { value: "satisfied", label: "Satisfied" },
+        { value: "neutral", label: "Neutral" },
+        { value: "dissatisfied", label: "Dissatisfied" },
+        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+      ],
     },
     {
       question:
         "How satisfied are you with the process for reporting incidents or complaints against the police?",
       key: "reporting",
+      options: [
+        { value: "verySatisfied", label: "Very Satisfied" },
+        { value: "satisfied", label: "Satisfied" },
+        { value: "neutral", label: "Neutral" },
+        { value: "dissatisfied", label: "Dissatisfied" },
+        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+      ],
     },
   ],
   hi: [
@@ -44,54 +70,127 @@ const questions = {
       question:
         "आपके समुदाय में पुलिस सेवाओं के साथ आपके कुल संतोष को आप किस प्रकार से मूल्यांकित करेंगे?",
       key: "satisfaction",
+      options: [
+        { value: "verySatisfied", label: "बहुत संतुष्ट" },
+        { value: "satisfied", label: "संतुष्ट" },
+        { value: "neutral", label: "न्यूट्रल" },
+        { value: "dissatisfied", label: "असंतुष्ट" },
+        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+      ],
     },
     {
       question:
-        "पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की जवाबदेही को आप कैसे मूल्यांकित करेंगे?",
+        "पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की प्रतिक्रिया को आप कैसे मूल्यांकित करेंगे?",
       key: "responsiveness",
+      options: [
+        { value: "verySatisfied", label: "बहुत संतुष्ट" },
+        { value: "satisfied", label: "संतुष्ट" },
+        { value: "neutral", label: "न्यूट्रल" },
+        { value: "dissatisfied", label: "असंतुष्ट" },
+        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+      ],
     },
     {
       question:
         "क्या आपको लगता है कि पुलिस समुदाय के साथ प्रभावी रूप से संवाद करती है और निवासियों को सुरक्षा मुद्दों और पहल के बारे में सूचित करती है?",
       key: "communication",
+      options: [
+        { value: "verySatisfied", label: "बहुत संतुष्ट" },
+        { value: "satisfied", label: "संतुष्ट" },
+        { value: "neutral", label: "न्यूट्रल" },
+        { value: "dissatisfied", label: "असंतुष्ट" },
+        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+      ],
     },
     {
       question: "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
       key: "trust",
+      options: [
+        { value: "verySatisfied", label: "बहुत संतुष्ट" },
+        { value: "satisfied", label: "संतुष्ट" },
+        { value: "neutral", label: "न्यूट्रल" },
+        { value: "dissatisfied", label: "असंतुष्ट" },
+        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+      ],
     },
     {
       question:
         "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
       key: "reporting",
+      options: [
+        { value: "verySatisfied", label: "बहुत संतुष्ट" },
+        { value: "satisfied", label: "संतुष्ट" },
+        { value: "neutral", label: "न्यूट्रल" },
+        { value: "dissatisfied", label: "असंतुष्ट" },
+        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+      ],
     },
+    // Add more questions and options as needed
   ],
+
   gu: [
     {
       question:
-        "તમારી જમીન સમુદાયમાં પોલીસ સેવાઓ સાથે તમારી મુલાકાતની કુલ સંતોષ તમે કેવી રીતે મूલ્યાંકિત કરો છો?",
+        "તમારી જમીન સમુદાયમાં પોલીસ સેવાઓ સાથે તમારી મુલાકાતની કુલ સંતોષ તમે કેવી રીતે મૂલ્યાંકિત કરો છો?",
       key: "satisfaction",
+      options: [
+        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
+        { value: "satisfied", label: "આનંદિત" },
+        { value: "neutral", label: "મૂળભૂત" },
+        { value: "dissatisfied", label: "અસંતુષ્ટ" },
+        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+      ],
     },
     {
       question:
         "કેમ પોલીસ સમુદાયના ચિંતાઓ નો સમાધાન કરવા માં પોલીસની પ્રતિસાદકારતાનો રેટ કેમ આપો છો?",
       key: "responsiveness",
+      options: [
+        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
+        { value: "satisfied", label: "આનંદિત" },
+        { value: "neutral", label: "મૂળભૂત" },
+        { value: "dissatisfied", label: "અસંતુષ્ટ" },
+        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+      ],
     },
     {
       question:
-        "શું તમારું લાગણીઓ અને પ્રયાસો વિશે સમુદાયને સફાઈથી મામ રાખવા અને નિવાસીઓને સુરક્ષા વિચારો અને યોजનાઓ વિશે સાચાણ પર પોલીસ દ્વારા પ્રભાવશાળી રીતે સંવાદ કરે છે?",
+        "શું તમારું લાગણીઓ અને પ્રયાસો વિશે સમુદાયને સફાઈથી મામ રાખવા અને નિવાસીઓને સુરક્ષા વિચારો અને યોજનાઓ વિશે સાચાણ પર પોલીસ દ્વારા પ્રભાવશાળી રીતે સંવાદ કરે છે?",
       key: "communication",
+      options: [
+        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
+        { value: "satisfied", label: "આનંદિત" },
+        { value: "neutral", label: "મૂળભૂત" },
+        { value: "dissatisfied", label: "અસંતુષ્ટ" },
+        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+      ],
     },
     {
       question:
-        "તમારું સમુદાય પોલીસ પર કેટલીક આસથા છે, આ વિશે તમને કેવી રીતે કરવી છે?",
+        "તમારું સમુદાય પોલીસ પર કેટલીક આસ્થા છે, આ વિશે તમને કેમ લાગે છે?",
       key: "trust",
+      options: [
+        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
+        { value: "satisfied", label: "આનંદિત" },
+        { value: "neutral", label: "મૂળભૂત" },
+        { value: "dissatisfied", label: "અસંતુષ્ટ" },
+        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+      ],
     },
     {
       question:
         "પોલીસ વિરુદ્ધ ઘટનાઓ અથવા શિકાયતો ની રિપોર્ટ કરવાની પ્રક્રિયા પર તમારું કેટલું આનંદ છે?",
       key: "reporting",
+      options: [
+        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
+        { value: "satisfied", label: "આનંદિત" },
+        { value: "neutral", label: "મૂળભૂત" },
+        { value: "dissatisfied", label: "અસંતુષ્ટ" },
+        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+      ],
     },
   ],
+  // Add more questions and options as needed
 };
 
 export default function FeedbackForm() {
@@ -100,45 +199,38 @@ export default function FeedbackForm() {
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
 
-  const handleIconSelect = (question, value) => {
+  const handleOptionSelect = (question, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
       [question]: value,
     }));
   };
 
-  const renderIcons = (questionKey) => {
-    const currentQuestions = questions[selectedLanguage];
-
-    return (
-      <div className="flex">
-        {Object.keys(icons).map((value) => (
-          <label key={value} className="cursor-pointer">
-            <input
-              type="radio"
-              name={questionKey}
-              value={value}
-              checked={feedbackData[questionKey] === value}
-              onChange={() => handleIconSelect(questionKey, value)}
-              className="hidden"
-            />
-            <span
-              className={`flex-col justify-around items-center text-sm mx-2 ${
-                feedbackData[questionKey] === value
-                  ? "text-yellow-500"
-                  : "text-gray-900"
-              }`}
-            >
-              <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
-                {icons[value]}
-                <br />
-                {value}
-              </div>
-            </span>
-          </label>
-        ))}
-      </div>
-    );
+  const renderOptions = (questionKey, options) => {
+    return options.map((option) => (
+      <label key={option.value} className="cursor-pointer">
+        <input
+          type="radio"
+          name={questionKey}
+          value={option.value}
+          checked={feedbackData[questionKey] === option.value}
+          onChange={() => handleOptionSelect(questionKey, option.value)}
+          className="hidden"
+        />
+        <span
+          className={`flex-col justify-around items-center text-sm mx-2 ${
+            feedbackData[questionKey] === option.value
+              ? "text-yellow-500"
+              : "text-gray-900"
+          }`}
+        >
+          <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
+            <br />
+            {option.label}
+          </div>
+        </span>
+      </label>
+    ));
   };
 
   const handleNext = () => {
@@ -149,44 +241,38 @@ export default function FeedbackForm() {
     setCurrentQuestionIndex((prevIndex) => prevIndex - 3);
   };
 
-
   const handleLanguageChange = (event) => {
     setSelectedLanguage(event.target.value);
-    setCurrentQuestionIndex(0); // Reset the question index when changing the language
+    setCurrentQuestionIndex(0);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      // Prepare the feedback data
       const FormfeedbackData = {
-        stationID:"65434a7f8dd05cd95662e37f",
-        mobileNumber: user.phoneNumber, // Use the user's phone number
+        stationID: "65434a7f8dd05cd95662e37f",
+        mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
           answer: feedbackData[q.key],
         })),
       };
-  
-      // Make a POST request to your server
-      const response = await axios.post("http://localhost:3000/feedback/postfeedback", FormfeedbackData);
-  
+
+      const response = await axios.post(
+        "http://localhost:3000/feedback/postfeedback",
+        FormfeedbackData
+      );
+
       if (response.data.success) {
-        // Handle successful feedback submission
         console.log("Feedback submitted successfully");
-        // You can also reset the feedback form or show a success message.
       } else {
-        // Handle error in feedback submission
         console.error("Failed to submit feedback");
-        // You can show an error message to the user.
       }
     } catch (error) {
-      // Handle any unexpected errors
       console.error("An error occurred:", error);
-      // You can show an error message to the user.
-    }
-  }
+    }
+  };
 
   return (
     <div className="bg-blue-100 min-h-screen">
@@ -219,7 +305,7 @@ export default function FeedbackForm() {
               .map((q) => (
                 <div className="mb-4 space-y-2" key={q.key}>
                   <h2 className="text-md font-medium mb-2">{q.question}</h2>
-                  {renderIcons(q.key)}
+                  {renderOptions(q.key, q.options)}
                 </div>
               ))}
 
