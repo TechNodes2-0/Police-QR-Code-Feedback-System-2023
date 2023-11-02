@@ -6,10 +6,25 @@ const addDivision = async (req, res) => {
   try {
     const { DivisionName, DistrictID } = req.body;
 
+    // Check if a division with the same name and DistrictID already exists
+    const existingDivision = await Division.findOne({
+      DivisionName,
+      DistrictID,
+    });
+
+    if (existingDivision) {
+      return res.status(400).json({
+        success: false,
+        message: "Division with the same name and District already exists",
+      });
+    }
+
+    // If the division does not exist, create a new one
     const newDivision = await Division.create({
       DivisionName,
       DistrictID,
     });
+
     res.status(200).json({
       success: true,
       message: "Division added successfully",
@@ -27,7 +42,7 @@ const addDivision = async (req, res) => {
 // Get all divisions
 const getAllDivisions = async (req, res) => {
   try {
-    const divisions = await Division.find();
+    const divisions = await Division.find().populate("DistrictID");
     res.status(200).json({
       success: true,
       message: "Division Data fetched Successfully",

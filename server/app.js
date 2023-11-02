@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const districtRoutes = require("./routes/districtRoutes");
-const 
+const divisionRoutes = require("./routes/divisonRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -30,7 +30,7 @@ app.use(
 //routes
 
 app.use("/districts", districtRoutes);
-app.use("/divisions", districtRoutes);
+app.use("/divisions", divisionRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);
