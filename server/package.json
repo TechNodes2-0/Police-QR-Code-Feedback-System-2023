@@ -21,8 +21,6 @@
         "mongoose": "^7.2.0",
         "multer-storage-cloudinary": "^4.0.0",
         "nodemon": "^2.0.22"
-    },
-    "engines": {
-        "node": ">=16 <17 "
     }
+    
 }
