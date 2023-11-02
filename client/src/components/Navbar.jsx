@@ -13,8 +13,8 @@ function Navbar() {
         <div className="flex font-bold cursor-default select-none">
           <Link to="/">
           <img
-            className="h-5 w-5 mx-2 my-auto"
-            src="https://img.icons8.com/?size=512&id=104233&format=png"
+            className="h-6 w-5 mx-2 my-auto"
+            src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"
             alt=""
           />
           </Link>
@@ -25,12 +25,6 @@ function Navbar() {
             <Link to="/" className="mx-3 hover:text-gray-800">
               Home
             </Link>
-            <a to="/about" className="mx-3 hover:text-gray-800">
-              about
-            </a>
-            <a to="/contact" className="mx-3 hover:text-gray-800 ">
-            contact us
-            </a>
             <div className="mx-3 hover:text-gray-800 ">Dashboard</div>
           </div>
         </div>
