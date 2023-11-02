@@ -1,0 +1,23 @@
+[
+    {
+      "name": "satisfaction",
+      "question": "How satisfied are you with the service?"
+    },
+    {
+      "name": "responsiveness",
+      "question": "How responsive were the police officers?"
+    },
+    {
+      "name": "communication",
+      "question": "How was the communication with the police?"
+    },
+    {
+      "name": "trust",
+      "question": "How much do you trust the police?"
+    },
+    {
+      "name": "reporting",
+      "question": "How satisfied are you with the reporting process?"
+    }
+  ]
+  
