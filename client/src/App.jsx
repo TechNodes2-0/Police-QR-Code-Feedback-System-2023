@@ -7,7 +7,8 @@ import Home from "./pages/Home/Home";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 import PhoneAuth from "./PhoneAuth";
