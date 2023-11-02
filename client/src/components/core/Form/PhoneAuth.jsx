@@ -37,9 +37,13 @@ function SignInScreen() {
     firebase.initializeApp(config);
 
   return (
-    <div>
+    <div className='flex justify-center items-center min-h-screen bg-blue-100'>
+
+      <div className='bg-white max-sm:px-2 py-20 px-10 border-0 rounded-2xl shadow-xl hover:shadow-2xl'>
 
       <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+      </div>
+
     </div>
   );
 }
