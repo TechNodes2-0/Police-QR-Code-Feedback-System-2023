@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
-function SecondForm() {
+export default function SecondForm({ onNext, onUpdate }) {
   const [username, setUsername] = useState("");
   const [mobile, setMobile] = useState("");
 
   const handleNext = () => {
     // Check if username and mobile are filled before proceeding to the next stage
     if (username && mobile) {
+      // Update user information
+      onUpdate({ name: username, number: mobile });
       onNext();
     } else {
       alert("Please fill in both username and mobile fields.");
@@ -38,10 +40,12 @@ function SecondForm() {
         onChange={(e) => setMobile(e.target.value)}
         className="border border-gray-300 rounded p-2 w-full mt-2"
       />
-
-
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
+        onClick={handleNext}
+      >
+        Next
+      </button>
     </div>
   );
 }
-
-export default SecondForm;
