@@ -9,7 +9,7 @@ const questions = {
         "How would you rate your overall satisfaction with the police services in your community?",
       key: "satisfaction",
       options: [
-        { value: "Yes", label: "Yes" },
+        { value: "verySatisfied", label: "verySatisfied" },
         { value: "satisfied", label: "Satisfied" },
         { value: "neutral", label: "Neutral" },
         { value: "dissatisfied", label: "Dissatisfied" },
