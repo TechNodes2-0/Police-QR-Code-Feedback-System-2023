@@ -118,15 +118,17 @@ export default function FeedbackForm() {
               className="hidden"
             />
             <span
-              className={`block text-2xl mx-2 ${
+              className={`flex-col justify-around items-center text-sm mx-2 ${
                 feedbackData[questionKey] === value
                   ? "text-yellow-500"
                   : "text-gray-300"
               }`}
             >
-              {icons[value]}
-              <br />
-              {value}
+              <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
+                {icons[value]}
+                <br />
+                {value}
+              </div>
             </span>
           </label>
         ))}
@@ -145,7 +147,7 @@ export default function FeedbackForm() {
 
   return (
     <div className="max-w-xl mx-auto p-4">
-      <h1 className="text-3xl font-bold mb-4 text-center">Police Services Feedback</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">Police Services Feedback</h1>
       <div className="mb-4">
         <label className="mr-2">Select Language:</label>
         <select value={selectedLanguage} onChange={handleLanguageChange}>
@@ -157,7 +159,7 @@ export default function FeedbackForm() {
       <form onSubmit={handleSubmit}>
         {questions[selectedLanguage].map((q) => (
           <div className="mb-4 space-y-2" key={q.key}>
-            <h2 className="text-2xl font-medium mb-2">{q.question}</h2>
+            <h2 className="text-md font-medium mb-2">{q.question}</h2>
             {renderIcons(q.key)}
           </div>
         ))}
