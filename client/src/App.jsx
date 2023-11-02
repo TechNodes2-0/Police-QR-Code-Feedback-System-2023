@@ -14,6 +14,7 @@ import { onAuthStateChanged, signOut,getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
 import Login from "./pages/Login/login";
+import Admin from "./pages/Admin/Admin";
 
 function App() {
 
@@ -21,7 +22,7 @@ function App() {
   
 
   return (
-    <div className="flex min-h-screen w-screen flex-col bg-richblack-900 font-inter">
+    <div className="flex min-h-screen w-screen flex-col bg-blue-100 font-inter">
       {/* <PhoneAuth/> */}
      
      
@@ -30,6 +31,7 @@ function App() {
         <Route path="/feedback" element={<FeedbackForm/>} ></Route>
         <Route path="/" element={<PhoneAuth />} />
         <Route path="/login" element={<Login/>} />
+        <Route path="/dashboard" element={<Admin />} />
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
