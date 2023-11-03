@@ -18,11 +18,6 @@ function DefaultLayout() {
   }
   return (
     <div className="">
-      <div className="py-2 relative right-0 w-full flex justify-end px-5">
-        <button  onClick={handleLogout} className="border-0 rounded-lg py-1 px-3 translate transition duration-200 bg-blue-2 hover:bg-blue-3 hover:shadow-xl text-white font-bold">
-          logout
-        </button>
-      </div>
       <div className="dark:bg-boxdark-2 dark:text-bodydark">
         <div className="flex h-screen overflow-hidden">
           <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
