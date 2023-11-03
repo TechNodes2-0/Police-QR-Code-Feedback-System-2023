@@ -130,7 +130,30 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                   xmlns="http://www.w3.org/2000/svg"
                 ></svg>
               </Link>
-            
+              <Link
+                to="/Admin/dashboard/Table"
+                className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover-bg-meta-4 ${
+                  (pathname.includes("Table")) &&
+                  "bg-graydark dark:bg-meta-4"
+                }`}
+                // onClick={(e) => {
+                //   e.preventDefault();
+                //   sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                // }}
+              >
+                <IoIosHome size={18} /> {/* Use the IoIosHome icon */}
+                Table
+                <svg
+                  className={`absolute right-4 top-1/2 -translate-y-1/2 fill-current ${
+                    open && "rotate-180"
+                  }`}
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                ></svg>
+              </Link>
             </>
           );
         }}

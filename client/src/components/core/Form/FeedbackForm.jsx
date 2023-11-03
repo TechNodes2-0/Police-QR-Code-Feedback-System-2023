@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
@@ -195,7 +195,7 @@ export default function FeedbackForm() {
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
+  const [selectedStation, setSelectedStation] = useState('');
   const handleOptionSelect = (question, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
@@ -234,12 +234,28 @@ export default function FeedbackForm() {
     setCurrentQuestionIndex(0);
   };
 
+  const [policeStations, setPoliceStations] = useState([]);
+
+  // Fetch police stations from the API
+  useEffect(() => {
+    const fetchPoliceStations = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/police-stations`);
+        setPoliceStations(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPoliceStations();
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
       const FormfeedbackData = {
-        stationID: "65434a7f8dd05cd95662e37f",
+        stationID:selectedStation,
         mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
@@ -289,6 +305,29 @@ export default function FeedbackForm() {
             Give your feedback
           </h1>
           <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+  <label htmlFor="stationID" className="sr-only">
+   stationID
+  </label>
+  <select
+                id="stationID"
+                name="stationID"
+                placeholder="Select a Police Station"
+                value={selectedStation}
+                onChange={(e) => setSelectedStation(e.target.value)}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              >
+                <option value="" disabled>
+                  Select a Police Station
+                </option>
+                {policeStations?.map((station) => (
+                  <option key={station._id} value={station._id}>
+                    {station.StationName }
+                  </option>
+                ))}
+              </select>
+
+</div>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (

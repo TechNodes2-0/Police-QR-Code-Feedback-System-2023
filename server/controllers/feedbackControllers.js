@@ -29,7 +29,7 @@ const saveFeedback = async (req, res) => {
 // Controller function to get feedback
 const getFeedback = async (req, res) => {
   try {
-    const feedbackEntries = await Feedback.find();
+    const feedbackEntries = await Feedback.find().populate('stationID');
 
     res.status(200).json({
       success: true,

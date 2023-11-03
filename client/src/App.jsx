@@ -24,6 +24,7 @@ import PhoneAuth from "./components/core/Form/PhoneAuth";
 import AdminDashboard from "./Admin/AdminDashboard";
 import AdminRoutes from "./components/Routes/AdminRoutes";
 import AdminProfile from "./Admin/AdminProfile"
+import Table from "./components/Table";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,6 +43,7 @@ function App() {
 
       <Routes>
         <Route path="/form" element={<Form />} />
+        
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
         <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
@@ -62,6 +64,7 @@ function App() {
         <Route path="dashboard" element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
           <Route path="profile" element={<AdminProfile/>}></Route>
+          <Route path="Table" element={<Table/>}></Route>
         </Route>
        
         </Route>
