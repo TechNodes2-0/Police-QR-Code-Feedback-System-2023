@@ -1,4 +1,4 @@
-import React from 'react';
+import React ,{useState,useEffect}from 'react';
 import axios from 'axios';
 
 import { useFormik } from 'formik';
@@ -12,8 +12,8 @@ function RegistrationForm() {
     name: '',
     email: '',
     password: '',
-    phoneno: '',
-    Address: '',
+  stationID:'',
+    Position: '',
     SecurityAnswer:''
   };
 
@@ -24,10 +24,8 @@ function RegistrationForm() {
       .email('Invalid email address')
       .required('Email is required'),
     password: Yup.string().required('Password is required'),
-    phoneno: Yup.string()
-      .matches(/^\d{10}$/, 'Invalid phone number')
-      .required('Phone number is required'),
-    Address: Yup.string().required('Address is required'),
+   
+    Position: Yup.string().required('Position is required'),
   });
 
   // Formik configuration
@@ -59,6 +57,21 @@ function RegistrationForm() {
       }
     },
   });
+  const [policeStations, setPoliceStations] = useState([]);
+
+  // Fetch police stations from the API
+  useEffect(() => {
+    const fetchPoliceStations = async () => {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/police-stations`);
+        setPoliceStations(response.data.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchPoliceStations();
+  }, []);
 
   return (
     <>     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
@@ -128,42 +141,49 @@ function RegistrationForm() {
   )}
 </div>
 <div className="mb-4">
-  <label htmlFor="phoneno" className="sr-only">
-    Phone
+  <label htmlFor="Position" className="sr-only">
+    Position
   </label>
   <input
-    type="text"
-    id="phoneno"
-    name="phoneno"
-    autoComplete="phone"
-    placeholder="Phone No."
-    {...formik.getFieldProps('phoneno')}
+    type="Position"
+    id="Position"
+    name="Position"
+    autoComplete="new-Position"
+    placeholder="Position"
+    {...formik.getFieldProps('Position')}
     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
   />
-  {formik.touched.phoneno && formik.errors.phoneno && (
-    <p className="mt-2 text-sm text-red-600">{formik.errors.phoneno}</p>
+  {formik.touched.Position && formik.errors.Position && (
+    <p className="mt-2 text-sm text-red-600">{formik.errors.Position}</p>
+  )}
+</div>
+<div className="mb-4">
+  <label htmlFor="stationID" className="sr-only">
+   stationID
+  </label>
+  <select
+                id="stationID"
+                name="stationID"
+                placeholder="Select a Police Station"
+                {...formik.getFieldProps('stationID')}
+                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              >
+                <option value="" disabled>
+                  Select a Police Station
+                </option>
+                {policeStations?.map((station) => (
+                  <option key={station._id} value={station._id}>
+                    {station.StationName }
+                  </option>
+                ))}
+              </select>
+  {formik.touched.stationID && formik.errors.stationID && (
+    <p className="mt-2 text-sm text-red-600">{formik.errors.stationID}</p>
   )}
 </div>
 <div className="mb-4">
   <label htmlFor="Address" className="sr-only">
-    Address
-  </label>
-  <input
-    type="text"
-    id="Address"
-    name="Address"
-    autoComplete="Address"
-    placeholder="Address"
-    {...formik.getFieldProps('Address')}
-    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-  />
-  {formik.touched.Address && formik.errors.Address && (
-    <p className="mt-2 text-sm text-red-600">{formik.errors.Address}</p>
-  )}
-</div>
-<div className="mb-4">
-  <label htmlFor="Address" className="sr-only">
-    Address
+  SecuityAnswer
   </label>
   <input
     type="text"

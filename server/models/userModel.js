@@ -15,15 +15,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    phone: {
-      type: String,
-      required: true,
-    },
-   
-    address: {
-      type: String,
-      required: true,
-    },
     role: {
       type: Number,
       default: 0,
@@ -32,6 +23,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
 
+    },
+    position: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref:'position', // Add a field for position
+      required: true,
+    },
+  
+    stationID: {
+      type: mongoose.Schema.Types.ObjectId,// Add a field for station ID
+      ref:'PoliceStation',
+      required: true,
     },
   },
   { timestamps: true }

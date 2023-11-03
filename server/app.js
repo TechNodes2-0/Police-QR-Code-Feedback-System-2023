@@ -6,6 +6,7 @@ const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const qrCodesRoutes = require("./routes/qrCodesRoutes");
+const positionRoutes=require("./routes/positionRoutes")
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -39,6 +40,7 @@ app.use("/police-stations", policeStationRoutes);
 app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/qrcodes", qrCodesRoutes);
+app.use("/position",positionRoutes)
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);

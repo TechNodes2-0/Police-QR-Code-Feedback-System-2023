@@ -23,6 +23,7 @@ import PhoneAuth from "./components/core/Form/PhoneAuth";
 // import Login from "./pages/Login/login";
 import AdminDashboard from "./Admin/AdminDashboard";
 import AdminRoutes from "./components/Routes/AdminRoutes";
+import AdminProfile from "./Admin/AdminProfile"
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -60,7 +61,9 @@ function App() {
         
         <Route path="dashboard" element={<DefaultLayout />}>
           <Route index element={<ECommerce />} />
+          <Route path="profile" element={<AdminProfile/>}></Route>
         </Route>
+      
         </Route>
       </Routes>
     </div>
