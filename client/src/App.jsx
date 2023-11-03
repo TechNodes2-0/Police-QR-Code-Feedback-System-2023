@@ -32,7 +32,7 @@ function App() {
   return loading ? (
     <Loader />
   ) : (
-    <div className="flex min-h-screen w-screen flex-col bg-blue-100 font-inter">
+    <div className="flex min-h-screen w-screen flex-col bg-[#E0F2FE] font-inter">
       {/* <PhoneAuth/> */}
 
       <Routes>

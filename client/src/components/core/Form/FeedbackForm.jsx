@@ -220,8 +220,8 @@ export default function FeedbackForm() {
         <span
           className={`flex-col justify-around items-center text-sm mx-2 ${
             feedbackData[questionKey] === option.value
-              ? "text-yellow-500"
-              : "text-gray-900"
+              ? "text-[#ecc94b]"
+              : "text-[#111827]"
           }`}
         >
           <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
@@ -275,7 +275,7 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="bg-blue-100 min-h-screen">
+    <div className="bg-lightblue min-h-screen">
       <div className="max-w-2xl mx-auto p-4 pt-5">
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
           <div>
