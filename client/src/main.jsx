@@ -5,11 +5,12 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 
 import {AdminProvider} from './context/AdminAuth'
-
+import { AuthProvider } from "./context/AuthContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
    <AdminProvider>
-   <App />
+    <AuthProvider>   <App /></AuthProvider>
+
    </AdminProvider>
   
   

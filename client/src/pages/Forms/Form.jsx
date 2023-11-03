@@ -3,7 +3,7 @@ import FirstForm from "../../components/core/Form/Firstform";
 import SecondForm from "../../components/core/Form/Secondform";
 import OTPForm from "../../components/core/Form/OTPForm";
 import FeedbackForm from "../../components/core/Form/FeedbackForm"; // Import your FeedbackForm component
-import InfoDisplay from "../../components/core/Form/InfoDisplay"; // Import your InfoDisplay component
+import InfoDisplay from "../../components/core/Form/InfoDisplay";   // Import your InfoDisplay component
 
 export default function Form() {
   const [currentStage, setCurrentStage] = useState(1);

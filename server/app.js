@@ -4,7 +4,8 @@ const authRoutes = require("./routes/authRoute");
 const districtRoutes = require("./routes/districtRoutes");
 const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
-const feedbackRoutes= require("./routes/feedbackRoutes")
+const feedbackRoutes = require("./routes/feedbackRoutes");
+const qrCodesRoutes = require("./routes/qrCodesRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -35,7 +36,9 @@ app.use("/api/v1/auth", authRoutes);
 app.use("/districts", districtRoutes);
 app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);
+app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
+app.use("/qrcodes", qrCodesRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);
