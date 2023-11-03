@@ -126,8 +126,8 @@ function QRCodeGenerator() {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-      <div className="max-w-2xl p-6 bg-white rounded-lg shadow-lg">
+    <div className="bg-gray-100 min-h-screen flex items-center justify-center py-10">
+      <div className="max-w-2xl p-6 bg-white rounded-xl shadow-xl">
         <div className="mb-6 text-2xl font-bold text-center">
           Generate QR Code Poster
         </div>
@@ -145,51 +145,48 @@ function QRCodeGenerator() {
           onChange={(e) => handleFileUpload(e.target.files[0])}
         />
         <button
-          className="px-4 py-2 bg-blue-500 text-white rounded"
+          className="px-4 py-2 translate transition duration-200 bg-blue-2 hover:bg-blue-3 hover:shadow-xl text-white rounded w-full"
           onClick={generateQRCode}
         >
           Generate QR Code
         </button>
         {showPoster && (
-          <div className="mt-6 text-center flex flex-col justify-center items-center">
-            <div className="mb-4 p-6 bg-blue-500 text-white rounded-lg poster-item">
+          <div className="mt-6 text-center">
+            <div className="border rounded-xl shadow-xl mb-4 p-6 bg-blue-500 text-black poster-item">
               <div className="flex items-center mb-4">
-                <span className="text-4xl inline-block">
+                <span className="font-semibold text-2xl">
                   Give feedback by Scanning this QR Code
                 </span>
-                <FaRegHandPointDown className="text-4xl inline-block ml-2" />
+                <FaRegHandPointDown className="text-2xl ml-2" />
               </div>
               <div className="flex flex-col justify-center items-start">
-                <div className="text-white text-xl mb-2">
-                  <span className="mx-2 font-bold">Station :</span>{" "}
-                  {selectedStation}
+                <div className="text-black text-lg mb-2">
+                  <span className="font-bold">Station :</span> {selectedStation}
                 </div>
-                <div className="text-white text-xl mb-2">
-                  <span className="mx-2 font-bold">Phone:</span> Your Phone
-                  Number
+                <div className="text-black text-lg mb-2">
+                  <span className="font-bold">Phone:</span> Your Phone Number
                 </div>
-                <div className="text-white text-xl mb-4">
-                  <span className="mx-2 font-bold">Location:</span> Your
-                  Location
+                <div className="text-black text-lg mb-4">
+                  <span className="font-bold">Location:</span> Your Location
                 </div>
               </div>
               <img
                 src={qrCodeImage}
                 alt="QR Code"
-                className="mx-auto h-[200px]"
+                className="mx-auto w-3/4 max-w-xs"
               />
             </div>
 
-            <div className="flex flex-col justify-center items-center">
+            <div className="flex flex-col items-center">
               <button
-                className="px-4 py-2 bg-blue-500 text-white rounded m-2"
+                className="w-full px-4 py-2 translate transition duration-200 bg-blue-2 hover:bg-blue-3 hover:shadow-xl text-white rounded m-2"
                 onClick={downloadQRCode}
               >
                 Download QR Code
               </button>
               <button
-                className={`px-4 py-2 ${
-                  imageSelected ? "bg-blue-500" : "bg-gray-500"
+                className={`w-full px-4 py-2 translate transition duration-200 ${
+                  imageSelected ? "bg-blue-2 hover:bg-blue-3" : "bg-grayy"
                 } text-white rounded m-2`}
                 onClick={downloadPoster}
                 disabled={!imageSelected}
