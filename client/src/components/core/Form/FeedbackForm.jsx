@@ -6,62 +6,60 @@ const questions = {
   en: [
     {
       question:
-        "1. How would you rate your overall satisfaction with the police services in your community?",
-      key: "satisfaction",
+        "After How much time you are heard in Police Station?",
+      key: "time",
       options: [
-        { value: "verySatisfied", label: "verySatisfied" },
-        { value: "satisfied", label: "Satisfied" },
-        { value: "neutral", label: "Neutral" },
-        { value: "dissatisfied", label: "Dissatisfied" },
-        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+        { value: "Less than 10 minutes", label: "Less than 10 minutes" },
+        { value: "Between 10 and 15 minutes", label: "Between 10 and 15 minutes" },
+        { value: "More than 15 minutes", label: "More than 15 minutes" },
       ],
     },
     {
       question:
-        "2. How would you rate the responsiveness of the police in addressing community concerns?",
-      key: "responsiveness",
-      options: [
-        { value: "verySatisfied", label: "Very Satisfied" },
-        { value: "satisfied", label: "Satisfied" },
-        { value: "neutral", label: "Neutral" },
-        { value: "dissatisfied", label: "Dissatisfied" },
-        { value: "veryDissatisfied", label: "Very Dissatisfied" },
-      ],
-    },
-    {
-      question:
-        "3. Do you think the police effectively communicate with the community and keep residents informed about safety issues and initiatives?",
+        "How would you describe your overall experience when communicating with the police at the station?",
       key: "communication",
       options: [
-        { value: "verySatisfied", label: "Very Satisfied" },
-        { value: "satisfied", label: "Satisfied" },
-        { value: "neutral", label: "Neutral" },
-        { value: "dissatisfied", label: "Dissatisfied" },
-        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+        { value: "Excellent", label: "Excellent" },
+        { value: "Good", label: "Good" },
+        { value: "Satisfactory", label: "Satisfactory" },
+        { value: "Poor", label: "Poor" },
+        { value: "Very Poor", label: "Very Poor" },
       ],
     },
     {
       question:
-        "4. How would you rate the level of trust you have in the police in your community?",
-      key: "trust",
+        "How would you rate the overall cleanliness and maintenance of the police station premises?",
+      key: "communication",
       options: [
-        { value: "verySatisfied", label: "Very Satisfied" },
-        { value: "satisfied", label: "Satisfied" },
-        { value: "neutral", label: "Neutral" },
-        { value: "dissatisfied", label: "Dissatisfied" },
-        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+        { value: "🌟🌟🌟🌟🌟", label: "🌟🌟🌟🌟🌟" },
+        { value: "🌟🌟🌟🌟", label: "🌟🌟🌟🌟" },
+        { value: "🌟🌟🌟", label: "🌟🌟🌟" },
+        { value: "🌟🌟", label: "🌟🌟" },
+        { value: "🌟", label: "🌟" },
       ],
     },
     {
       question:
-        "5. How satisfied are you with the process for reporting incidents or complaints against the police?",
+        "Do you think the police effectively keep residents informed about safety issues and initiatives?",
+      key: "awareness",
+      options: [
+        { value: "Very Effective", label: "Very Effective" },
+        { value: "Effective", label: "Effective" },
+        { value: "Neutral", label: "Neutral" },
+        { value: "Ineffective", label: "Ineffective" },
+        { value: "Very Ineffective", label: "Very Ineffective" },
+      ],
+    },
+    {
+      question:
+        "How would you rate the level of trust you have in the police based on your experience?",
       key: "reporting",
       options: [
-        { value: "verySatisfied", label: "Very Satisfied" },
-        { value: "satisfied", label: "Satisfied" },
-        { value: "neutral", label: "Neutral" },
-        { value: "dissatisfied", label: "Dissatisfied" },
-        { value: "veryDissatisfied", label: "Very Dissatisfied" },
+        { value: "Very Trusting", label: "Very Satisfied" },
+        { value: "Trusting", label: "Trusting" },
+        { value: "Neutral", label: "Neutral" },
+        { value: "Distrustful", label: "Distrustful" },
+        { value: "Very Distrustful", label: "Very Distrustful" },
       ],
     },
   ],
