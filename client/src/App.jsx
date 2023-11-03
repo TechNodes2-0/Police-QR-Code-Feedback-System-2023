@@ -42,7 +42,9 @@ function App() {
       <Routes>
         <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm />}></Route>
-        <Route path="/feedback-portal" element={<PhoneAuth />} />
+        {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
+        <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
+
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
 
