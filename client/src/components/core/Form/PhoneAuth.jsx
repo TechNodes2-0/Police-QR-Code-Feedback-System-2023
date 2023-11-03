@@ -40,7 +40,7 @@ function SignInScreen() {
     <div className='flex justify-center items-center min-h-screen py-5 bg-blue-100 border-black border-2 px-5'>
 
 
-      <div className='bg-lightblue max-sm:px-5 pt-5 pb-14 px-10 border-0 rounded-2xl text-center shadow-xl hover:shadow-2xl'>
+      <div className='bg-white max-sm:px-5 pt-5 pb-14 px-10 border-0 rounded-2xl text-center shadow-xl hover:shadow-2xl'>
       <img
             className="h-14 w-14 mx-auto my-auto"
             src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"

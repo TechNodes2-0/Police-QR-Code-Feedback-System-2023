@@ -275,13 +275,13 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div className="bg-lightblue min-h-screen">
+    <div className="bg-blue-100 min-h-screen">
       <div className="max-w-2xl mx-auto p-4 pt-5">
-        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
+        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-[#FFFFFF] border-0 rounded-xl shadow-xl">
           <div>
             <label className="mr-2 text-sm sm:text-base lg:text-md">Select Language:</label>
             <select
-              className="bg-white border-0 text-sm sm:text-base lg:text-md"
+              className="bg-[#FFFFFF] border-0 text-sm sm:text-base lg:text-md"
               value={selectedLanguage}
               onChange={handleLanguageChange}
             >
@@ -292,12 +292,12 @@ export default function FeedbackForm() {
           </div>
           {/* <button
             onClick={signOut}
-            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded text-sm sm:text-base lg:text-lg"
+            className="bg-red-500 my-4 hover:bg-red-700 text-[#FFFFFF] font-semibold py-2 px-2 rounded text-sm sm:text-base lg:text-lg"
           >
             Log Out
           </button> */}
         </div>
-        <div className="bg-white p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
+        <div className="bg-[#FFFFFF] p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
           <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">Give your feedback</h1>
           <form onSubmit={handleSubmit}>
             {questions[selectedLanguage]
@@ -333,7 +333,7 @@ export default function FeedbackForm() {
               {currentQuestionIndex > 0 && (
                 <button
                   type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded text-sm sm:text-base lg:text-lg"
+                  className="bg-blue-500 hover:bg-blue-700 text-[#FFFFFF] font-bold py-3 px-6 rounded text-sm sm:text-base lg:text-lg"
                 >
                   Submit your Feedback
                 </button>
