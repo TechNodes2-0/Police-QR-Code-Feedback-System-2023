@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+const authRoutes = require("./routes/authRoute");
 const districtRoutes = require("./routes/districtRoutes");
 const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
@@ -15,7 +16,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: ["http://localhost:5173","http://127.0.0.1:5173","http://127.0.0.1:5174"],
     credentials: true,
   })
 );
@@ -31,7 +32,7 @@ app.use(
 );
 
 //routes
-
+app.use("/api/v1/auth", authRoutes);
 app.use("/districts", districtRoutes);
 app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);

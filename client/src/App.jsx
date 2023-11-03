@@ -6,6 +6,9 @@ import NotFound from "./pages/Error/NotFound";
 
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+
+import Signup from "./Auth/Signup"
+import Login from "./Auth/Login"
 import firebase from "firebase/compat/app";
 import Loader from "../src/components/common/index";
 import { Toaster } from "react-hot-toast";
@@ -17,8 +20,9 @@ import QRCodeGenerator from "./test/QRCodeGenerator";
 import { onAuthStateChanged, signOut, getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
-import Login from "./pages/Login/login";
-import Admin from "./pages/Admin/Admin";
+// import Login from "./pages/Login/login";
+import AdminDashboard from "./Admin/AdminDashboard";
+import AdminRoutes from "./components/Routes/AdminRoutes";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -42,9 +46,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
         
-        <Route path="/dashboard" element={<DefaultLayout />}>
-          <Route index element={<ECommerce />} />
-        </Route>
+     
 
         {/* ------------Test--------- */}
         <Route path="/test">
@@ -52,6 +54,14 @@ function App() {
         </Route>
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
+        <Route path='/Signup'element={<Signup/>}/>
+    <Route path='/Login'element={<Login/>}/>
+        <Route  path="/Admin" element={<AdminRoutes/>}>
+        
+        <Route path="dashboard" element={<DefaultLayout />}>
+          <Route index element={<ECommerce />} />
+        </Route>
+        </Route>
       </Routes>
     </div>
   );
