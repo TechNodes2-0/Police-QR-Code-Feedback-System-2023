@@ -1,16 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
 const questions = {
   en: [
     {
-      question:
-        "After How much time you are heard in Police Station?",
+      question: "After How much time you are heard in Police Station?",
       key: "time",
       options: [
         { value: "Less than 10 minutes", label: "Less than 10 minutes" },
-        { value: "Between 10 and 15 minutes", label: "Between 10 and 15 minutes" },
+        {
+          value: "Between 10 and 15 minutes",
+          label: "Between 10 and 15 minutes",
+        },
         { value: "More than 15 minutes", label: "More than 15 minutes" },
       ],
     },
@@ -29,7 +31,7 @@ const questions = {
     {
       question:
         "How would you rate the overall cleanliness and maintenance of the police station premises?",
-      key: "communication",
+      key: "rating",
       options: [
         { value: "🌟🌟🌟🌟🌟", label: "🌟🌟🌟🌟🌟" },
         { value: "🌟🌟🌟🌟", label: "🌟🌟🌟🌟" },
@@ -195,7 +197,7 @@ export default function FeedbackForm() {
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedStation, setSelectedStation] = useState('');
+  const [selectedStation, setSelectedStation] = useState("");
   const handleOptionSelect = (question, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
@@ -240,7 +242,9 @@ export default function FeedbackForm() {
   useEffect(() => {
     const fetchPoliceStations = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/police-stations`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/police-stations`
+        );
         setPoliceStations(response.data.data);
       } catch (error) {
         console.error(error);
@@ -255,7 +259,7 @@ export default function FeedbackForm() {
 
     try {
       const FormfeedbackData = {
-        stationID:selectedStation,
+        stationID: selectedStation,
         mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
@@ -305,11 +309,11 @@ export default function FeedbackForm() {
             Give your feedback
           </h1>
           <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-  <label htmlFor="stationID" className="sr-only">
-   stationID
-  </label>
-  <select
+            <div className="mb-4">
+              <label htmlFor="stationID" className="sr-only">
+                stationID
+              </label>
+              <select
                 id="stationID"
                 name="stationID"
                 placeholder="Select a Police Station"
@@ -322,12 +326,11 @@ export default function FeedbackForm() {
                 </option>
                 {policeStations?.map((station) => (
                   <option key={station._id} value={station._id}>
-                    {station.StationName }
+                    {station.StationName}
                   </option>
                 ))}
               </select>
-
-</div>
+            </div>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
@@ -347,7 +350,9 @@ export default function FeedbackForm() {
                 {currentQuestionIndex > 0 && (
                   <button
                     onClick={handlePrevious}
-                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                    className={
+                      "border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg"
+                    }
                   >
                     Previous
                   </button>
@@ -357,7 +362,9 @@ export default function FeedbackForm() {
                   questions[selectedLanguage].length && (
                   <button
                     onClick={handleNext}
-                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                    className={
+                      "border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg"
+                    }
                   >
                     Next
                   </button>
