@@ -81,8 +81,8 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
         {(handleClick, open) => {
           return (
             <>
-           <NavLink
-                  to="profile"
+           <Link
+                  to="/Admin/dashboard/profile"
                   className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4 ${
                     pathname.includes('profile') && 'bg-graydark dark:bg-meta-4'
                   }`}
@@ -105,17 +105,17 @@ function Sidebar({ sidebarOpen, setSidebarOpen }) {
                     />
                   </svg>
                   Profile
-                </NavLink>
+                </Link>
                <Link
-                to="#"
+                to="/Admin/dashboard"
                 className={`group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover-bg-meta-4 ${
                   (pathname === "/" || pathname.includes("dashboard")) &&
                   "bg-graydark dark:bg-meta-4"
                 }`}
-                onClick={(e) => {
-                  e.preventDefault();
-                  sidebarExpanded ? handleClick() : setSidebarExpanded(true);
-                }}
+                // onClick={(e) => {
+                //   e.preventDefault();
+                //   sidebarExpanded ? handleClick() : setSidebarExpanded(true);
+                // }}
               >
                 <IoIosHome size={18} /> {/* Use the IoIosHome icon */}
                 Dashboard

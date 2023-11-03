@@ -63,7 +63,7 @@ function App() {
           <Route index element={<ECommerce />} />
           <Route path="profile" element={<AdminProfile/>}></Route>
         </Route>
-      
+       
         </Route>
       </Routes>
     </div>

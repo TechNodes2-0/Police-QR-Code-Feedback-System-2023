@@ -90,16 +90,18 @@ const registerController = async (req, res) => {
     });
     res.status(200).send({
       success: true,
-      message: "login successfully",
+      message: "login dwd successfully",
       user: {
         _id: user._id,
         name: user.name,
         email: user.email,
         phone: user.phone,
         adddress: user.address,
-        role:user.role
+        role:user.role,
+   
       },
       token,
+      user
     });
   } catch (error) {
     console.log(error);
