@@ -18,11 +18,7 @@ import { onAuthStateChanged, signOut, getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
 import Login from "./pages/Login/login";
-<<<<<<< HEAD
-import Map from "./pages/map/Map";
-=======
 import Admin from "./pages/Admin/Admin";
->>>>>>> 8d62af7f27833c8bb9479c4720ccc012ba13a400
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -43,10 +39,6 @@ function App() {
         <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         <Route path="/" element={<PhoneAuth />} />
-<<<<<<< HEAD
-        <Route path="/login" element={<Login/>} />
-        <Route path="/map" element={<Map/>} />
-=======
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
         
@@ -54,7 +46,6 @@ function App() {
           <Route index element={<ECommerce />} />
         </Route>
 
->>>>>>> 8d62af7f27833c8bb9479c4720ccc012ba13a400
         {/* ------------Test--------- */}
         <Route path="/test">
           <Route index element={<QRCodeGenerator />} />
