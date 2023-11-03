@@ -6,7 +6,6 @@ const PoliceStationOptions = ({
   setSelectedStation,
 }) => {
   // Create a state variable to hold the selected option
-  const [selectedOption, setSelectedOption] = useState("");
 
   // Define a function to handle the selection change
   const handleSelectChange = (e) => {

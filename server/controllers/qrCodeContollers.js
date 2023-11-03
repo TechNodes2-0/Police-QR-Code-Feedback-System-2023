@@ -38,7 +38,7 @@ const createQRCode = async (req, res) => {
 
     const newQRCode = await QRCode.create({
       _id: customId,
-      station,
+      station: station,
       qrCodeImageURL: qrCodeImageResponse.secure_url,
       creator,
     });
