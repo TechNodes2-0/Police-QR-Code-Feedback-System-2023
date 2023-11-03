@@ -7,13 +7,16 @@ import NotFound from "./pages/Error/NotFound";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import firebase from 'firebase/compat/app';
-
+import Signup from "./Auth/Signup"
+import Login from "./Auth/Login"
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
 import { onAuthStateChanged, signOut,getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
-import Login from "./pages/Login/login";
+// import Login from "./pages/Login/login";
+import AdminDashboard from "./Admin/AdminDashboard";
+import AdminRoutes from "./components/Routes/AdminRoutes";
 
 function App() {
 
@@ -36,6 +39,11 @@ function App() {
         </Route>
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
+        <Route path='/Signup'element={<Signup/>}/>
+    <Route path='/Login'element={<Login/>}/>
+        <Route  path="/Dashboard" element={<AdminRoutes/>}>
+        <Route path='admin'element={<AdminDashboard/>}/>
+        </Route>
       </Routes>
     </div>
   );
