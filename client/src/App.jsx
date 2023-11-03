@@ -7,8 +7,8 @@ import NotFound from "./pages/Error/NotFound";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import Signup from "./Auth/Signup"
-import Login from "./Auth/Login"
+import Signup from "./Auth/Signup";
+import Login from "./Auth/Login";
 import firebase from "firebase/compat/app";
 import Loader from "../src/components/common/index";
 import { Toaster } from "react-hot-toast";
@@ -42,11 +42,9 @@ function App() {
       <Routes>
         <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm />}></Route>
-        <Route path="/" element={<PhoneAuth />} />
+        <Route path="/feedback-portal" element={<PhoneAuth />} />
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
-        
-     
 
         {/* ------------Test--------- */}
         <Route path="/test">
@@ -54,13 +52,12 @@ function App() {
         </Route>
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
-        <Route path='/Signup'element={<Signup/>}/>
-    <Route path='/Login'element={<Login/>}/>
-        <Route  path="/Admin" element={<AdminRoutes/>}>
-        
-        <Route path="dashboard" element={<DefaultLayout />}>
-          <Route index element={<ECommerce />} />
-        </Route>
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Admin" element={<AdminRoutes />}>
+          <Route path="dashboard" element={<DefaultLayout />}>
+            <Route index element={<ECommerce />} />
+          </Route>
         </Route>
       </Routes>
     </div>

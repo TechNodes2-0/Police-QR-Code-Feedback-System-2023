@@ -81,7 +81,7 @@ function QRCodeGenerator() {
       const response = await axios.post(
         "http://localhost:3000/qrcodes/generate/",
         {
-          url: `${import.meta.env.VITE_WEBSITE_DOMAIN + customId}`,
+          url: `${import.meta.env.VITE_WEBSITE_DOMAIN_QRCODE + customId}`,
         }
       );
 
