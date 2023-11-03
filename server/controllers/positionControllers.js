@@ -45,7 +45,25 @@ const listPositions = async (req, res) => {
       res.status(500).json({ success: false, message: 'Error listing positions', error });
     }
   };
+  const getPositionById = async (req, res) => {
+    try {
+      const positionId = req.params.id; // Assuming the position ID is passed as a parameter
+  
+      const foundPosition = await position.findById(positionId);
+  
+      if (!foundPosition) {
+        return res.status(404).json({ success: false, message: 'Position not found' });
+      }
+  
+      res.status(200).json({ success: true, data: foundPosition });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ success: false, message: 'Error retrieving position', error });
+    }
+  };
+  
 module.exports = {
   insertPositions,
-  listPositions
+  listPositions,
+  getPositionById
 };
