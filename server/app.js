@@ -35,7 +35,6 @@ app.use(
 app.use("/districts", districtRoutes);
 app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);
-app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/qrcodes", qrCodesRoutes);
 

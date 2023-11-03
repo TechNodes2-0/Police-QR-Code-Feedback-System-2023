@@ -1,4 +1,8 @@
 const QRCode = require("../models/qrCodeModel");
+const QRCodeGenerator = require("qrcode");
+const { promisify } = require("util");
+const toDataURL = promisify(QRCodeGenerator.toDataURL);
+
 const cloudinary = require("cloudinary").v2;
 const {
   isFileTypeSupported,
@@ -7,25 +11,19 @@ const {
 // Create a new QR code
 const createQRCode = async (req, res) => {
   try {
-    const { station, creator } = req.body;
-    console.log(station, station);
-    const qrCodeImageFile = req.files.qrCodeImageFile; // Assuming you have a field named 'qrCodeImage' in your request for QR code image
-    const posterImageFile = req.files.posterImageFile; // Assuming you have a field named 'posterImage' in your request for poster image
+    const { customId, station, creator } = req.body;
 
-    // Check if the file types are supported
+    // Now, you can access the individual fields and their values
+
+    const qrCodeImageFile = req.files.qrCodeImageFile;
+
+    // Check if the file type is supported
     const supportedTypes = ["jpg", "jpeg", "png"];
     const qrCodeImageFileType = qrCodeImageFile.name
       .split(".")[1]
       .toLowerCase();
-    const posterImageFileType = posterImageFile.name
-      .split(".")[1]
-      .toLowerCase();
 
-    console.log(qrCodeImageFileType, posterImageFileType);
-    if (
-      !isFileTypeSupported(qrCodeImageFileType, supportedTypes) ||
-      !isFileTypeSupported(posterImageFileType, supportedTypes)
-    ) {
+    if (!isFileTypeSupported(qrCodeImageFileType, supportedTypes)) {
       return res.status(400).json({
         success: false,
         message: "File format not supported",
@@ -38,20 +36,13 @@ const createQRCode = async (req, res) => {
       "QRCodeImages"
     );
 
-    // Upload poster image to Cloudinary
-    const posterImageResponse = await uploadFileToCloudinary(
-      posterImageFile,
-      "PosterImages"
-    );
-
     const newQRCode = await QRCode.create({
+      _id: customId,
       station,
       qrCodeImageURL: qrCodeImageResponse.secure_url,
-      posterImageURL: posterImageResponse.secure_url,
       creator,
     });
-    console.log(qrCodeImageResponse.secure_url, posterImageResponse.secure_url);
-    console.log(newQRCode);
+
     res.status(201).json({
       success: true,
       message: "QR code created successfully",
@@ -172,10 +163,27 @@ const deleteQRCode = async (req, res) => {
   }
 };
 
+const generateQRCode = async (req, res) => {
+  const url = req.body.url;
+
+  if (url.length === 0) {
+    return res.status(400).send("Empty Data");
+  }
+
+  try {
+    const qrCodeDataURL = await toDataURL(url);
+    res.send(qrCodeDataURL);
+  } catch (err) {
+    console.error("Failed to generate QR code:", err);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
 module.exports = {
   createQRCode,
   getAllQRCodes,
   getQRCodeById,
   updateQRCode,
   deleteQRCode,
+  generateQRCode,
 };

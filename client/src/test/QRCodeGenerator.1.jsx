@@ -5,23 +5,15 @@ import { FaRegHandPointDown } from "react-icons/fa";
 import html2canvas from "html2canvas";
 import PoliceStationOptions from "./components/PoliceStationOptions";
 
-function QRCodeGenerator() {
-  function randomIdGenerator() {
-    const randomString = generateRandomString(10);
-    const currentDate = new Date();
-    const formattedDate = currentDate
-      .toISOString()
-      .slice(0, 10)
-      .replace(/-/g, "");
-    return randomString + formattedDate;
-  }
+export function QRCodeGenerator() {
+  const [qrCodeValue, setQrCodeValue] = useState("");
   const [qrCodeImage, setQrCodeImage] = useState(null);
   const [showPoster, setShowPoster] = useState(false);
   const [uploadedImage, setUploadedImage] = useState(null);
   const [imageSelected, setImageSelected] = useState(false);
   const [station, setStation] = useState([]);
   const [selectedStation, setSelectedStation] = useState("");
-  const [customId, setCustomId] = useState(randomIdGenerator());
+
   useEffect(() => {
     const fetchPoliceStation = async () => {
       try {
@@ -50,14 +42,25 @@ function QRCodeGenerator() {
     return unique_id.slice(0, length + 1).replace(/-/g, "");
   }
 
+  function randomIdGenerator() {
+    const randomString = generateRandomString(10);
+    const currentDate = new Date();
+    const formattedDate = currentDate
+      .toISOString()
+      .slice(0, 10)
+      .replace(/-/g, "");
+    return randomString + formattedDate;
+  }
+
   const handleImageUpload = async () => {
     if (uploadedImage) {
       try {
         const formData = new FormData();
-        formData.append("customId", customId);
+        // formData.append("_id", customId);
         formData.append("qrCodeImageFile", uploadedImage);
         formData.append("creator", "6544707c081f2699151310f9");
         formData.append("station", selectedStation);
+        const customId = randomIdGenerator();
 
         const response = await axios.post(
           "http://localhost:3000/qrcodes/",
@@ -81,7 +84,7 @@ function QRCodeGenerator() {
       const response = await axios.post(
         "http://localhost:3000/qrcodes/generate/",
         {
-          url: `${import.meta.env.WEBSITE_DOMAIN + customId}`,
+          url: qrCodeValue,
         }
       );
 
@@ -132,6 +135,13 @@ function QRCodeGenerator() {
           Generate QR Code Poster
         </div>
         <div className="mb-4">
+          <input
+            type="text"
+            placeholder="Enter URL"
+            className="w-full p-2 rounded border"
+            value={qrCodeValue}
+            onChange={(e) => setQrCodeValue(e.target.value)}
+          />
           <PoliceStationOptions
             options={station}
             selectedStation={selectedStation}
@@ -203,5 +213,3 @@ function QRCodeGenerator() {
     </div>
   );
 }
-
-export default QRCodeGenerator;

@@ -21,6 +21,7 @@
         "jsonwebtoken": "^9.0.1",
         "mongoose": "^7.2.0",
         "multer-storage-cloudinary": "^4.0.0",
-        "nodemon": "^2.0.22"
+        "nodemon": "^2.0.22",
+        "qrcode": "^1.5.3"
     }
 }
