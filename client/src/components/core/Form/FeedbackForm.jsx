@@ -190,7 +190,6 @@ const questions = {
       ],
     },
   ],
-  // Add more questions and options as needed
 };
 
 export default function FeedbackForm() {
@@ -296,7 +295,7 @@ export default function FeedbackForm() {
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
                 <div
-                  className="my-10 py-5 border-0 p-2 rounded-xl  shadow-md hover:shadow-xl"
+                  className="my-10 py-5 border-0 max-sm:px-2 px-10  rounded-xl  shadow-md hover:shadow-xl"
                   key={q.key}
                 >
                   <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">
