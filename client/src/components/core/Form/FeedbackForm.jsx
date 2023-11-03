@@ -6,7 +6,7 @@ const questions = {
   en: [
     {
       question:
-        "How would you rate your overall satisfaction with the police services in your community?",
+        "1. How would you rate your overall satisfaction with the police services in your community?",
       key: "satisfaction",
       options: [
         { value: "verySatisfied", label: "verySatisfied" },
@@ -18,7 +18,7 @@ const questions = {
     },
     {
       question:
-        "How would you rate the responsiveness of the police in addressing community concerns?",
+        "2. How would you rate the responsiveness of the police in addressing community concerns?",
       key: "responsiveness",
       options: [
         { value: "verySatisfied", label: "Very Satisfied" },
@@ -30,7 +30,7 @@ const questions = {
     },
     {
       question:
-        "Do you think the police effectively communicate with the community and keep residents informed about safety issues and initiatives?",
+        "3. Do you think the police effectively communicate with the community and keep residents informed about safety issues and initiatives?",
       key: "communication",
       options: [
         { value: "verySatisfied", label: "Very Satisfied" },
@@ -42,7 +42,7 @@ const questions = {
     },
     {
       question:
-        "How would you rate the level of trust you have in the police in your community?",
+        "4. How would you rate the level of trust you have in the police in your community?",
       key: "trust",
       options: [
         { value: "verySatisfied", label: "Very Satisfied" },
@@ -54,7 +54,7 @@ const questions = {
     },
     {
       question:
-        "How satisfied are you with the process for reporting incidents or complaints against the police?",
+        "5. How satisfied are you with the process for reporting incidents or complaints against the police?",
       key: "reporting",
       options: [
         { value: "verySatisfied", label: "Very Satisfied" },
@@ -68,7 +68,7 @@ const questions = {
   hi: [
     {
       question:
-        "आपके समुदाय में पुलिस सेवाओं के साथ आपके कुल संतोष को आप किस प्रकार से मूल्यांकित करेंगे?",
+        "1. आपके समुदाय में पुलिस सेवाओं के साथ आपके कुल संतोष को आप किस प्रकार से मूल्यांकित करेंगे?",
       key: "satisfaction",
       options: [
         { value: "verySatisfied", label: "बहुत संतुष्ट" },
@@ -80,7 +80,7 @@ const questions = {
     },
     {
       question:
-        "पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की प्रतिक्रिया को आप कैसे मूल्यांकित करेंगे?",
+        "2. पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की प्रतिक्रिया को आप कैसे मूल्यांकित करेंगे?",
       key: "responsiveness",
       options: [
         { value: "verySatisfied", label: "बहुत संतुष्ट" },
@@ -92,7 +92,7 @@ const questions = {
     },
     {
       question:
-        "क्या आपको लगता है कि पुलिस समुदाय के साथ प्रभावी रूप से संवाद करती है और निवासियों को सुरक्षा मुद्दों और पहल के बारे में सूचित करती है?",
+        "3. क्या आपको लगता है कि पुलिस समुदाय के साथ प्रभावी रूप से संवाद करती है और निवासियों को सुरक्षा मुद्दों और पहल के बारे में सूचित करती है?",
       key: "communication",
       options: [
         { value: "verySatisfied", label: "बहुत संतुष्ट" },
@@ -103,7 +103,7 @@ const questions = {
       ],
     },
     {
-      question: "आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
+      question: "4. आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
       key: "trust",
       options: [
         { value: "verySatisfied", label: "बहुत संतुष्ट" },
@@ -115,7 +115,7 @@ const questions = {
     },
     {
       question:
-        "क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
+        "5. क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
       key: "reporting",
       options: [
         { value: "verySatisfied", label: "बहुत संतुष्ट" },
@@ -131,7 +131,7 @@ const questions = {
   gu: [
     {
       question:
-        "તમારી જમીન સમુદાયમાં પોલીસ સેવાઓ સાથે તમારી મુલાકાતની કુલ સંતોષ તમે કેવી રીતે મૂલ્યાંકિત કરો છો?",
+        "1. તમારી જમીન સમુદાયમાં પોલીસ સેવાઓ સાથે તમારી મુલાકાતની કુલ સંતોષ તમે કેવી રીતે મૂલ્યાંકિત કરો છો?",
       key: "satisfaction",
       options: [
         { value: "verySatisfied", label: "ખૂબ આનંદિત" },
@@ -143,7 +143,7 @@ const questions = {
     },
     {
       question:
-        "કેમ પોલીસ સમુદાયના ચિંતાઓ નો સમાધાન કરવા માં પોલીસની પ્રતિસાદકારતાનો રેટ કેમ આપો છો?",
+        "2. કેમ પોલીસ સમુદાયના ચિંતાઓ નો સમાધાન કરવા માં પોલીસની પ્રતિસાદકારતાનો રેટ કેમ આપો છો?",
       key: "responsiveness",
       options: [
         { value: "verySatisfied", label: "ખૂબ આનંદિત" },
@@ -155,7 +155,7 @@ const questions = {
     },
     {
       question:
-        "શું તમારું લાગણીઓ અને પ્રયાસો વિશે સમુદાયને સફાઈથી મામ રાખવા અને નિવાસીઓને સુરક્ષા વિચારો અને યોજનાઓ વિશે સાચાણ પર પોલીસ દ્વારા પ્રભાવશાળી રીતે સંવાદ કરે છે?",
+        "3. શું તમારું લાગણીઓ અને પ્રયાસો વિશે સમુદાયને સફાઈથી મામ રાખવા અને નિવાસીઓને સુરક્ષા વિચારો અને યોજનાઓ વિશે સાચાણ પર પોલીસ દ્વારા પ્રભાવશાળી રીતે સંવાદ કરે છે?",
       key: "communication",
       options: [
         { value: "verySatisfied", label: "ખૂબ આનંદિત" },
@@ -167,7 +167,7 @@ const questions = {
     },
     {
       question:
-        "તમારું સમુદાય પોલીસ પર કેટલીક આસ્થા છે, આ વિશે તમને કેમ લાગે છે?",
+        "4. તમારું સમુદાય પોલીસ પર કેટલીક આસ્થા છે, આ વિશે તમને કેમ લાગે છે?",
       key: "trust",
       options: [
         { value: "verySatisfied", label: "ખૂબ આનંદિત" },
@@ -179,7 +179,7 @@ const questions = {
     },
     {
       question:
-        "પોલીસ વિરુદ્ધ ઘટનાઓ અથવા શિકાયતો ની રિપોર્ટ કરવાની પ્રક્રિયા પર તમારું કેટલું આનંદ છે?",
+        "5. પોલીસ વિરુદ્ધ ઘટનાઓ અથવા શિકાયતો ની રિપોર્ટ કરવાની પ્રક્રિયા પર તમારું કેટલું આનંદ છે?",
       key: "reporting",
       options: [
         { value: "verySatisfied", label: "ખૂબ આનંદિત" },
@@ -190,7 +190,6 @@ const questions = {
       ],
     },
   ],
-  // Add more questions and options as needed
 };
 
 export default function FeedbackForm() {
@@ -208,28 +207,19 @@ export default function FeedbackForm() {
 
   const renderOptions = (questionKey, options) => {
     return options.map((option) => (
-      <label key={option.value} className="cursor-pointer">
-        <input
-          type="radio"
-          name={questionKey}
-          value={option.value}
-          checked={feedbackData[questionKey] === option.value}
-          onChange={() => handleOptionSelect(questionKey, option.value)}
-          className="hidden"
-        />
-        <span
-          className={`flex-col justify-around items-center text-sm mx-2 ${
-            feedbackData[questionKey] === option.value
-              ? "text-yellow-500"
-              : "text-gray-900"
-          }`}
-        >
-          <div className="flex flex-col items-center justify-center mx-1 border-2 rounded-xl p-2 w-26">
-            <br />
-            {option.label}
-          </div>
-        </span>
-      </label>
+      <div key={option.value} className="mb-2">
+        <label className="block text-sm font-medium text-gray-700">
+          <input
+            type="radio"
+            name={questionKey}
+            value={option.value}
+            checked={feedbackData[questionKey] === option.value}
+            onChange={() => handleOptionSelect(questionKey, option.value)}
+            className="mr-2"
+          />
+          {option.label}
+        </label>
+      </div>
     ));
   };
 
@@ -265,6 +255,9 @@ export default function FeedbackForm() {
       );
 
       if (response.data.success) {
+        // Handle successful feedback submission
+        alert("Feedback submitted successfully");
+        // You can also reset the feedback form or show a success message.
         console.log("Feedback submitted successfully");
       } else {
         console.error("Failed to submit feedback");
@@ -276,12 +269,14 @@ export default function FeedbackForm() {
 
   return (
     <div className="bg-blue-100 min-h-screen">
-      <div className="max-w-2xl mx-auto p-4 pt-5">
-        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-white border-0 rounded-xl shadow-xl">
+      <div className="max-w-4xl mx-auto p-4 pt-5">
+        <div className="mb-4 flex justify-between items-center py-2 px-5 bg-[#FFFFFF] border-0 rounded-xl shadow-xl">
           <div>
-            <label className="mr-2 text-sm sm:text-base lg:text-md">Select Language:</label>
+            <label className="mr-2 text-sm sm:text-base lg:text-md">
+              Select Language:
+            </label>
             <select
-              className="bg-white border-0 text-sm sm:text-base lg:text-md"
+              className="bg-[#FFFFFF] border-0 text-sm sm:text-base lg:text-md"
               value={selectedLanguage}
               onChange={handleLanguageChange}
             >
@@ -290,54 +285,57 @@ export default function FeedbackForm() {
               <option value="gu">Gujarati</option>
             </select>
           </div>
-          {/* <button
-            onClick={signOut}
-            className="bg-red-500 my-4 hover:bg-red-700 text-white font-semibold py-2 px-2 rounded text-sm sm:text-base lg:text-lg"
-          >
-            Log Out
-          </button> */}
         </div>
-        <div className="bg-white p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">Give your feedback</h1>
+        <div className="bg-[#FFFFFF] p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">
+            Give your feedback
+          </h1>
           <form onSubmit={handleSubmit}>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
-                <div className="mb-4 space-y-2" key={q.key}>
-                  <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">{q.question}</h2>
+                <div
+                  className="my-10 py-5 border-0 max-sm:px-2 px-10  rounded-xl  shadow-md hover:shadow-xl"
+                  key={q.key}
+                >
+                  <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">
+                    {q.question}
+                  </h2>
                   {renderOptions(q.key, q.options)}
                 </div>
               ))}
 
-            <div className="text-center my-5">
-              {currentQuestionIndex > 0 && (
-                <button
-                  onClick={handlePrevious}
-                  className={`border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
-                >
-                  Previous
-                </button>
-              )}
+            <div className="flex justify-between max-sm:flex-col mt-10">
+              <div className="text-center ">
+                {currentQuestionIndex > 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                  >
+                    Previous
+                  </button>
+                )}
 
-              {currentQuestionIndex + 3 <
-                questions[selectedLanguage].length && (
-                <button
-                  onClick={handleNext}
-                  className={`border-2 rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
-                >
-                  Next
-                </button>
-              )}
-            </div>
-            <div className="text-center">
-              {currentQuestionIndex > 0 && (
-                <button
-                  type="submit"
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded text-sm sm:text-base lg:text-lg"
-                >
-                  Submit your Feedback
-                </button>
-              )}
+                {currentQuestionIndex + 3 <
+                  questions[selectedLanguage].length && (
+                  <button
+                    onClick={handleNext}
+                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                  >
+                    Next
+                  </button>
+                )}
+              </div>
+              <div className="text-center">
+                {currentQuestionIndex > 0 && (
+                  <button
+                    type="submit"
+                    className=" bg-blue-2 hover:bg-blue-3 text-[#FFFFFF] font-bold py-1 px-5 rounded-xl translate transition duration-200 hover:shadow-xl text-sm sm:text-base lg:text-lg"
+                  >
+                    Submit your Feedback
+                  </button>
+                )}
+              </div>
             </div>
           </form>
         </div>
