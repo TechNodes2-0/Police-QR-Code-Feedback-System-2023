@@ -1,16 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
 const questions = {
   en: [
     {
-      question:
-        "After How much time you are heard in Police Station?",
+      question: "After How much time you are heard in Police Station?",
       key: "time",
       options: [
         { value: "Less than 10 minutes", label: "Less than 10 minutes" },
-        { value: "Between 10 and 15 minutes", label: "Between 10 and 15 minutes" },
+        {
+          value: "Between 10 and 15 minutes",
+          label: "Between 10 and 15 minutes",
+        },
         { value: "More than 15 minutes", label: "More than 15 minutes" },
       ],
     },
@@ -29,7 +31,7 @@ const questions = {
     {
       question:
         "How would you rate the overall cleanliness and maintenance of the police station premises?",
-      key: "communication",
+      key: "cleanliness",
       options: [
         { value: "🌟🌟🌟🌟🌟", label: "🌟🌟🌟🌟🌟" },
         { value: "🌟🌟🌟🌟", label: "🌟🌟🌟🌟" },
@@ -53,9 +55,9 @@ const questions = {
     {
       question:
         "How would you rate the level of trust you have in the police based on your experience?",
-      key: "reporting",
+      key: "trust",
       options: [
-        { value: "Very Trusting", label: "Very Satisfied" },
+        { value: "Very Trusting", label: "Very Trusting" },
         { value: "Trusting", label: "Trusting" },
         { value: "Neutral", label: "Neutral" },
         { value: "Distrustful", label: "Distrustful" },
@@ -111,80 +113,63 @@ const questions = {
         { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
       ],
     },
-    {
-      question:
-        "5. क्या आप पुलिस के खिलाफ घटनाओं या शिकायतों की रिपोर्ट करने की प्रक्रिया से कितने संतुष्ट हैं?",
-      key: "reporting",
-      options: [
-        { value: "verySatisfied", label: "बहुत संतुष्ट" },
-        { value: "satisfied", label: "संतुष्ट" },
-        { value: "neutral", label: "न्यूट्रल" },
-        { value: "dissatisfied", label: "असंतुष्ट" },
-        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
-      ],
-    },
-    // Add more questions and options as needed
   ],
-
   gu: [
     {
       question:
-        "1. તમારી જમીન સમુદાયમાં પોલીસ સેવાઓ સાથે તમારી મુલાકાતની કુલ સંતોષ તમે કેવી રીતે મૂલ્યાંકિત કરો છો?",
-      key: "satisfaction",
+        "આપની પોલીસ સ્થળમાં કેટલીક સમય આપની સાથે મુલાકાત મેળવવામાં કેટલો સમય લાગ્યો?",
+      key: "time",
       options: [
-        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
-        { value: "satisfied", label: "આનંદિત" },
-        { value: "neutral", label: "મૂળભૂત" },
-        { value: "dissatisfied", label: "અસંતુષ્ટ" },
-        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+        { value: "10 મિનિટ થયા પર", label: "10 મિનિટ થયા પર" },
+        { value: "10 અને 15 મિનિટ વચ્છે", label: "10 અને 15 મિનિટ વચ્છે" },
+        { value: "15 મિનિટ થયા પર", label: "15 મિનિટ થયા પર" },
       ],
     },
     {
       question:
-        "2. કેમ પોલીસ સમુદાયના ચિંતાઓ નો સમાધાન કરવા માં પોલીસની પ્રતિસાદકારતાનો રેટ કેમ આપો છો?",
-      key: "responsiveness",
+        "પોલીસ સ્થળમાં પોલીસ સાથે સંપર્ક કરવામાં કેવું અનુભવ આવ્યું છે?",
+      key: "communication1",
       options: [
-        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
-        { value: "satisfied", label: "આનંદિત" },
-        { value: "neutral", label: "મૂળભૂત" },
-        { value: "dissatisfied", label: "અસંતુષ્ટ" },
-        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+        { value: "શ્રેષ્ઠ", label: "શ્રેષ્ઠ" },
+        { value: "સારું", label: "સારું" },
+        { value: "સંતોષજનક", label: "સંતોષજનક" },
+        { value: "મધ્યમ", label: "મધ્યમ" },
+        { value: "ખરાબ", label: "ખરાબ" },
       ],
     },
     {
       question:
-        "3. શું તમારું લાગણીઓ અને પ્રયાસો વિશે સમુદાયને સફાઈથી મામ રાખવા અને નિવાસીઓને સુરક્ષા વિચારો અને યોજનાઓ વિશે સાચાણ પર પોલીસ દ્વારા પ્રભાવશાળી રીતે સંવાદ કરે છે?",
-      key: "communication",
+        "પોલીસ સ્થળમાંની સાફસફાઇ અને સારાં રાખવાનો આપેલું સ્તર તમે કેવું મૂલ્યાંકન આપો છો?",
+      key: "cleanliness",
       options: [
-        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
-        { value: "satisfied", label: "આનંદિત" },
-        { value: "neutral", label: "મૂળભૂત" },
-        { value: "dissatisfied", label: "અસંતુષ્ટ" },
-        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+        { value: "🌟🌟🌟🌟🌟", label: "🌟🌟🌟🌟🌟" },
+        { value: "🌟🌟🌟🌟", label: "🌟🌟🌟🌟" },
+        { value: "🌟🌟🌟", label: "🌟🌟🌟" },
+        { value: "🌟🌟", label: "🌟🌟" },
+        { value: "🌟", label: "🌟" },
       ],
     },
     {
       question:
-        "4. તમારું સમુદાય પોલીસ પર કેટલીક આસ્થા છે, આ વિશે તમને કેમ લાગે છે?",
+        "ક્યારેક પોલીસ સમાચારવાહક છે કે નાગરિકોને સુરક્ષા વિષયો અને પ્રયાસો વિશે પોલીસ અદ્યતન રીતે મેળવવામાં પ્રભાવશાળી છે કે નહીં?",
+      key: "awareness",
+      options: [
+        { value: "ખૂબ પ્રભાવશાળી", label: "ખૂબ પ્રભાવશાળી" },
+        { value: "પ્રભાવશાળી", label: "પ્રભાવશાળી" },
+        { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
+        { value: "અપ્રભાવશાળી", label: "અપ્રભાવશાળી" },
+        { value: "ખૂબ અપ્રભાવશાળી", label: "ખૂબ અપ્રભાવશાળી" },
+      ],
+    },
+    {
+      question: "તમે પોલીસને વિશ્વાસ કરનું કેવું છે, તમારું અનુભવ આ આધાર પર?",
       key: "trust",
       options: [
-        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
-        { value: "satisfied", label: "આનંદિત" },
-        { value: "neutral", label: "મૂળભૂત" },
-        { value: "dissatisfied", label: "અસંતુષ્ટ" },
-        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
-      ],
-    },
-    {
-      question:
-        "5. પોલીસ વિરુદ્ધ ઘટનાઓ અથવા શિકાયતો ની રિપોર્ટ કરવાની પ્રક્રિયા પર તમારું કેટલું આનંદ છે?",
-      key: "reporting",
-      options: [
-        { value: "verySatisfied", label: "ખૂબ આનંદિત" },
-        { value: "satisfied", label: "આનંદિત" },
-        { value: "neutral", label: "મૂળભૂત" },
-        { value: "dissatisfied", label: "અસંતુષ્ટ" },
-        { value: "veryDissatisfied", label: "ખૂબ અસંતુષ્ટ" },
+        { value: "ખૂબ વિશ્વાસ", label: "ખૂબ વિશ્વાસ" },
+        { value: "વિશ્વાસ", label: "વિશ્વાસ" },
+        { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
+        { value: "અવિશ્વાસ", label: "અવિશ્વાસ" },
+        { value: "ખૂબ અવિશ્વાસ", label: "ખૂબ અવિશ્વાસ" },
       ],
     },
   ],
@@ -195,7 +180,7 @@ export default function FeedbackForm() {
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedStation, setSelectedStation] = useState('');
+  const [selectedStation, setSelectedStation] = useState("");
   const handleOptionSelect = (question, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
@@ -209,7 +194,7 @@ export default function FeedbackForm() {
         <label className="block text-sm font-medium text-gray-700">
           <input
             type="radio"
-            name={questionKey}
+            name={`${questionKey}_${option.value}`}
             value={option.value}
             checked={feedbackData[questionKey] === option.value}
             onChange={() => handleOptionSelect(questionKey, option.value)}
@@ -222,11 +207,17 @@ export default function FeedbackForm() {
   };
 
   const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex + 3);
+    setCurrentQuestionIndex((prevIndex) =>
+      prevIndex + 3 < questions[selectedLanguage].length
+        ? prevIndex + 3
+        : prevIndex
+    );
   };
 
   const handlePrevious = () => {
-    setCurrentQuestionIndex((prevIndex) => prevIndex - 3);
+    setCurrentQuestionIndex((prevIndex) =>
+      prevIndex - 3 >= 0 ? prevIndex - 3 : prevIndex
+    );
   };
 
   const handleLanguageChange = (event) => {
@@ -240,7 +231,9 @@ export default function FeedbackForm() {
   useEffect(() => {
     const fetchPoliceStations = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/police-stations`);
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}/police-stations`
+        );
         setPoliceStations(response.data.data);
       } catch (error) {
         console.error(error);
@@ -255,7 +248,7 @@ export default function FeedbackForm() {
 
     try {
       const FormfeedbackData = {
-        stationID:selectedStation,
+        stationID: selectedStation,
         mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
@@ -305,11 +298,11 @@ export default function FeedbackForm() {
             Give your feedback
           </h1>
           <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-  <label htmlFor="stationID" className="sr-only">
-   stationID
-  </label>
-  <select
+            <div className="mb-4">
+              <label htmlFor="stationID" className="sr-only">
+                stationID
+              </label>
+              <select
                 id="stationID"
                 name="stationID"
                 placeholder="Select a Police Station"
@@ -322,12 +315,11 @@ export default function FeedbackForm() {
                 </option>
                 {policeStations?.map((station) => (
                   <option key={station._id} value={station._id}>
-                    {station.StationName }
+                    {station.StationName}
                   </option>
                 ))}
               </select>
-
-</div>
+            </div>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
@@ -347,7 +339,9 @@ export default function FeedbackForm() {
                 {currentQuestionIndex > 0 && (
                   <button
                     onClick={handlePrevious}
-                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                    className={
+                      "border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg"
+                    }
                   >
                     Previous
                   </button>
@@ -357,7 +351,9 @@ export default function FeedbackForm() {
                   questions[selectedLanguage].length && (
                   <button
                     onClick={handleNext}
-                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                    className={
+                      "border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg"
+                    }
                   >
                     Next
                   </button>
