@@ -11,6 +11,11 @@ const qrCodeSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please provide a QR code image URL."],
   },
+  posterImageURL: {
+    // Renamed to be more descriptive
+    type: String,
+    required: [true, "Please provide a Poster  image URL."],
+  },
   creationDate: { type: Date, default: Date.now }, // Set a default creation date
   creator: {
     type: mongoose.Schema.Types.ObjectId,

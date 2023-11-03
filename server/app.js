@@ -3,7 +3,8 @@ const app = express();
 const districtRoutes = require("./routes/districtRoutes");
 const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
-const feedbackRoutes= require("./routes/feedbackRoutes")
+const feedbackRoutes = require("./routes/feedbackRoutes");
+const qrCodesRoutes = require("./routes/qrCodesRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -14,7 +15,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","http://127.0.0.1:5173"],
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
     credentials: true,
   })
 );
@@ -34,7 +35,9 @@ app.use(
 app.use("/districts", districtRoutes);
 app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);
+app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
+app.use("/qrcodes", qrCodesRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);
