@@ -39,7 +39,7 @@ function EcommerceLoginPage() {
         setAdminAuth({ ... adminAuth,user, token });
         localStorage.setItem('adminAuth',JSON.stringify(response.data));
         toast.success('Logged In Successfully');
-        Navigate(location.state ||'/Admin/dashboard');
+        Navigate('/Admin/dashboard');
       }
 
 
