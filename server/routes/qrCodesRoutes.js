@@ -6,10 +6,12 @@ const {
   getQRCodeById,
   updateQRCode,
   deleteQRCode,
+  generateQRCode,
 } = require("../controllers/qrCodeContollers");
 
 // Create a new QR code
 router.post("/", createQRCode);
+router.post("/generate", generateQRCode);
 
 // Get all QR codes
 router.get("/", getAllQRCodes);

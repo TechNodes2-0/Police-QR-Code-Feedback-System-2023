@@ -7,8 +7,8 @@ import NotFound from "./pages/Error/NotFound";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
-import Signup from "./Auth/Signup"
-import Login from "./Auth/Login"
+import Signup from "./Auth/Signup";
+import Login from "./Auth/Login";
 import firebase from "firebase/compat/app";
 import Loader from "../src/components/common/index";
 import { Toaster } from "react-hot-toast";
@@ -43,11 +43,11 @@ function App() {
       <Routes>
         <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm />}></Route>
-        <Route path="/" element={<PhoneAuth />} />
+        {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
+        <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
+
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
-        
-     
 
         {/* ------------Test--------- */}
         <Route path="/test">
