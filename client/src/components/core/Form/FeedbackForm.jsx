@@ -273,7 +273,9 @@ export default function FeedbackForm() {
       <div className="max-w-4xl mx-auto p-4 pt-5">
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-[#FFFFFF] border-0 rounded-xl shadow-xl">
           <div>
-            <label className="mr-2 text-sm sm:text-base lg:text-md">Select Language:</label>
+            <label className="mr-2 text-sm sm:text-base lg:text-md">
+              Select Language:
+            </label>
             <select
               className="bg-[#FFFFFF] border-0 text-sm sm:text-base lg:text-md"
               value={selectedLanguage}
@@ -286,45 +288,55 @@ export default function FeedbackForm() {
           </div>
         </div>
         <div className="bg-[#FFFFFF] p-10 max-sm:px-5 border-0 rounded-xl shadow-xl">
-          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">Give your feedback</h1>
+          <h1 className="text-2xl sm:text-3xl lg:text-3xl font-bold mb-4">
+            Give your feedback
+          </h1>
           <form onSubmit={handleSubmit}>
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
-                <div className="my-10 py-5 border-0 p-2 rounded-xl  shadow-md hover:shadow-xl" key={q.key}>
-                  <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">{q.question}</h2>
+                <div
+                  className="my-10 py-5 border-0 p-2 rounded-xl  shadow-md hover:shadow-xl"
+                  key={q.key}
+                >
+                  <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">
+                    {q.question}
+                  </h2>
                   {renderOptions(q.key, q.options)}
                 </div>
               ))}
 
-            <div className="text-center my-5">
-              {currentQuestionIndex > 0 && (
-                <button
-                  onClick={handlePrevious}
-                  className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
-                >
-                  Previous
-                </button>
-              )}
+            <div className="flex justify-between max-sm:flex-col mt-10">
+              <div className="text-center ">
+                {currentQuestionIndex > 0 && (
+                  <button
+                    onClick={handlePrevious}
+                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl   rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                  >
+                    Previous
+                  </button>
+                )}
 
-              {currentQuestionIndex + 3 < questions[selectedLanguage].length && (
-                <button
-                  onClick={handleNext}
-                  className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
-                >
-                  Next
-                </button>
-              )}
-            </div>
-            <div className="text-center">
-              {currentQuestionIndex > 0 && (
-                <button
-                  type="submit"
-                  className=" bg-blue-2 hover:bg-blue-3 text-[#FFFFFF] font-bold py-3 px-6 rounded-xl translate transition duration-200 hover:shadow-xl text-sm sm:text-base lg:text-lg"
-                >
-                  Submit your Feedback
-                </button>
-              )}
+                {currentQuestionIndex + 3 <
+                  questions[selectedLanguage].length && (
+                  <button
+                    onClick={handleNext}
+                    className={`border-2 border-grayy hover:border-black-2 hover:shadow-xl  rounded-full text-black transition duration-200 hover:bg-gray-100 font-bold py-1 px-5 text-sm sm:text-base lg:text-lg`}
+                  >
+                    Next
+                  </button>
+                )}
+              </div>
+              <div className="text-center">
+                {currentQuestionIndex > 0 && (
+                  <button
+                    type="submit"
+                    className=" bg-blue-2 hover:bg-blue-3 text-[#FFFFFF] font-bold py-1 px-5 rounded-xl translate transition duration-200 hover:shadow-xl text-sm sm:text-base lg:text-lg"
+                  >
+                    Submit your Feedback
+                  </button>
+                )}
+              </div>
             </div>
           </form>
         </div>
