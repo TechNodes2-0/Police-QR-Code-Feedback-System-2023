@@ -68,20 +68,20 @@ function EcommerceLoginPage() {
   return (
     <>
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8">
+      <div className="max-w-md w-full space-y-8 bg-white p-10 max-sm:px-3 border-0 rounded-xl shadow-xl">
         <div>
           <img
-            className="mx-auto h-12 w-auto"
-            src="online-shop.png"  // Replace with your logo image path
+            className="mx-auto h-16 w-auto"
+            src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"  // Replace with your logo image path
             alt="E-commerce Logo"
           />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+          <h2 className="mt-6 text-center text-3xl max-sm:text-xl font-extrabold text-gray-900">
             Sign in to your account
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <input type="hidden" name="remember" value="true" />
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-xl shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
                 Email address
@@ -116,7 +116,7 @@ function EcommerceLoginPage() {
             </div>
           </div>
 {<h1 className='text-red-500'>{errMsg}</h1>}
-          <div className="flex items-center justify-between">
+          <div className="flex max-xs:flex-col max-sm:items-left items-center justify-between">
             <div className="flex items-center">
               <input
                 id="remember-me"
@@ -126,7 +126,7 @@ function EcommerceLoginPage() {
               />
               <label
                 htmlFor="remember-me"
-                className="ml-2 block text-sm text-gray-900"
+                className="ml-2 block text-sm max-sm:text-xs text-gray-900"
               >
                 Remember me
               </label>
@@ -135,17 +135,17 @@ function EcommerceLoginPage() {
             <div className="text-sm">
               <Link
                 to="/forgotpassword"
-                className="font-medium text-indigo-600 hover:text-indigo-500"
+                className="font-medium max-sm:text-xs text-blue-600 hover:text-indigo-500"
               >
                 Forgot your password?
               </Link>
             </div>
           </div>
 
-          <div>
+          <div className='text-center'>
             <button
               type="submit"
-              className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              className="border-2 w-full rounded-xl  py-2 mx-auto bg-primary hover:bg-blue-600 text-md text-white font-bold hover:-translate-y-1 duration-200 hover:shadow-xl"
             >
               Sign in
             </button>
