@@ -8,7 +8,7 @@ const feedbackSchema = new mongoose.Schema({
   },
   userIDHash: {
     type: String, // Hashed mobile number or user identifier
-    required: true,
+   
   },
   feedbackTime: {
     type: Date,
@@ -17,7 +17,7 @@ const feedbackSchema = new mongoose.Schema({
   stationID: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "PoliceStation",
-    required: true,
+    
   },
   questions: [
     {

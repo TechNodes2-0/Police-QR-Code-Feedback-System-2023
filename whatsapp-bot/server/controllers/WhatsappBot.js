@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import twilio from "twilio";
+import Feedback from "../models/feedbackModel";
+
 import { FeedbackQuestions, Welcome, Greetings, StationNames, StationIDs } from "../Feedback";
 // import {Feedback} from "./models/feedbackModel";
 dotenv.config();
@@ -124,6 +126,8 @@ class WhatsappBot {
           twiml.message(Greetings[`${User.lan}`]);
           
           console.log(User);
+          
+
         }
       }
 

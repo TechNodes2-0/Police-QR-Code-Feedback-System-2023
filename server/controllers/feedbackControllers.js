@@ -103,9 +103,39 @@ const updateFeedback = async (req, res) => {
       });
     }
   };
+  const getFeedbackCountForOption = async (req, res) => {
+    try {
+      const { question, option } = req.query;
+  
+      const feedbackCount = await Feedback.find({'questions.question': question})
+  
+      // .where('questions.answer').equals(option)
+      .countDocuments();
+
+      const  firstFeedback = await Feedback.findOne({});
+      const{questions}=firstFeedback;
+  console.log(feedbackCount)
+      res.status(200).json({
+        success: true,
+        message: `Number of feedback entries with the option '${option}' selected for the question '${question}': ${feedbackCount}`,
+        data: feedbackCount,
+        questions,
+        firstFeedback,
+        option
+      });
+    } catch (err) {
+      res.status(500).json({
+        success: false,
+        message: "Failed to fetch feedback count for the option",
+        error: err.message,
+      });
+    }
+  };
+  
 module.exports = {
   saveFeedback,
   getFeedback,
   updateFeedback,
-  deleteFeedback
+  deleteFeedback,
+  getFeedbackCountForOption
 };
