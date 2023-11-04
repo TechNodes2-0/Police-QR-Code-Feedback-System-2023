@@ -4,8 +4,7 @@
     "description": "A whatspp bot that uses twilio ",
     "main": "index.js",
     "scripts": {
-        "start": "babel-node server/server.js",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "start": "babel-node server/server.js"
     },
     "author": "Ekpang Michael",
     "license": "ISC",
@@ -13,6 +12,7 @@
         "cors": "^2.8.5",
         "dotenv": "^8.0.0",
         "express": "^4.16.3",
+        "mongoose": "^8.0.0",
         "twilio": "^4.6.0"
     },
     "devDependencies": {
