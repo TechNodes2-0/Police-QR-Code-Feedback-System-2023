@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import ReactApexChart from 'react-apexcharts';
+import React, { useState } from "react";
+import ReactApexChart from "react-apexcharts";
 
 const options = {
-  colors: ['#3C50E0', '#80CAEE'],
+  colors: ["#3C50E0", "#80CAEE"],
   chart: {
-    fontFamily: 'Satoshi, sans-serif',
-    type: 'bar',
+    fontFamily: "Satoshi, sans-serif",
+    type: "bar",
     height: 335,
     stacked: true,
     toolbar: {
@@ -22,7 +22,7 @@ const options = {
         plotOptions: {
           bar: {
             borderRadius: 0,
-            columnWidth: '25%',
+            columnWidth: "25%",
           },
         },
       },
@@ -32,23 +32,23 @@ const options = {
     bar: {
       horizontal: false,
       borderRadius: 0,
-      columnWidth: '25%',
-      borderRadiusApplication: 'end',
-      borderRadiusWhenStacked: 'last',
+      columnWidth: "25%",
+      borderRadiusApplication: "end",
+      borderRadiusWhenStacked: "last",
     },
   },
   dataLabels: {
     enabled: false,
   },
   xaxis: {
-    categories: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+    categories: ["M", "T", "W", "T", "F", "S", "S"],
   },
   legend: {
-    position: 'top',
-    horizontalAlign: 'left',
-    fontFamily: 'Satoshi',
+    position: "top",
+    horizontalAlign: "left",
+    fontFamily: "Satoshi",
     fontWeight: 500,
-    fontSize: '14px',
+    fontSize: "14px",
     markers: {
       radius: 99,
     },
@@ -62,11 +62,11 @@ function ChartTwo() {
   const [state, setState] = useState({
     series: [
       {
-        name: 'Sales',
+        name: "Respones",
         data: [44, 55, 41, 67, 22, 43, 65],
       },
       {
-        name: 'Revenue',
+        name: "PoliceStation",
         data: [13, 23, 20, 8, 13, 27, 15],
       },
     ],
@@ -77,7 +77,7 @@ function ChartTwo() {
       <div className="mb-4 justify-between gap-4 sm-flex">
         <div>
           <h4 className="text-xl font-semibold text-black dark-text-white">
-            Profit this week
+            Response of This week
           </h4>
         </div>
         <div>
@@ -87,8 +87,11 @@ function ChartTwo() {
               id="#"
               className="relative z-20 inline-flex appearance-none bg-transparent py-1 pl-3 pr-8 text-sm font-medium outline-none"
             >
-              <option value="">This Week</option>
-              <option value="">Last Week</option>
+              <option value="">Question1</option>
+              <option value="">Question2</option>
+              <option value="">Question3</option>
+              <option value="">Question4</option>
+              <option value="">Question5</option>
             </select>
             <span className="absolute top-1/2 right-3 z-10 -translate-y-1/2">
               <svg
