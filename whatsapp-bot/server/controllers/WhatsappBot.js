@@ -122,6 +122,7 @@ class WhatsappBot {
           };
           User.Feedback.push(feed);
           twiml.message(Greetings[`${User.lan}`]);
+          
           console.log(User);
         }
       }
