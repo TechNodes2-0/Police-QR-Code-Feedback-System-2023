@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const feedbackSchema = new mongoose.Schema({
-  feedbackId: {
-    type: String, // You can use ObjectId or a custom ID format
-   
-    unique: true,
-  },
   userIDHash: {
     type: String, // Hashed mobile number or user identifier
     required: true,
@@ -14,9 +9,9 @@ const feedbackSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  stationID :{
+  stationID: {
     type: mongoose.Schema.Types.ObjectId,
-    ref:'PoliceStation',
+    ref: "PoliceStation",
     required: true,
   },
   questions: [

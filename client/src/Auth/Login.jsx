@@ -38,7 +38,7 @@ function EcommerceLoginPage() {
         const { user, token } = response.data;
         setAdminAuth({ ... adminAuth,user, token });
         localStorage.setItem('adminAuth',JSON.stringify(response.data));
-        toast.success('Logged In Successfully');
+        toast.success('Login Successfull')
         Navigate('/Admin/dashboard');
       }
 

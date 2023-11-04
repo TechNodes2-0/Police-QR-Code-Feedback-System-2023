@@ -2,6 +2,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import {toast } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCbxIXw-pXevk9nmq2MEonu86uemZCjvCk',
@@ -28,6 +30,7 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
+     
     });
 
     return unsubscribe;
