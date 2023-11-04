@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import twilio from "twilio";
-import { FeedbackQuestions, Welcome, Greetings } from "../Feedback";
+import { FeedbackQuestions, Welcome, Greetings, StationNames, StationIDs } from "../Feedback";
+// import {Feedback} from "./models/feedbackModel";
 dotenv.config();
 
 const SID = process.env.SID;
@@ -10,11 +11,13 @@ twilio(SID, KEY);
 const { MessagingResponse } = twilio.twiml;
 const User = {
   Phone_No: null,
+  Station_ID: null,
   lan: null,
   Feedback: [],
 };
 let Ques = 0;
-let flag = false;
+let stationflag = false;
+let lanflag = false;
 const language = ["gu", "hi", "en"];
 /**
  * @class WhatsappBot
@@ -35,9 +38,15 @@ class WhatsappBot {
     const q = parseInt(req.body.Body.trim());
     if(q == -1){
       Ques = 0;
-      flag = false;
+      lanflag = false;
+      stationflag = false;
       User.lan = null;
       User.Feedback = [];
+    }else if(q == -2){
+      console.log("Ques : " + Ques);
+      console.log("lanflag : " + lanflag);
+      console.log("stationflag : " + stationflag);
+      console.log("User : " + User);
     }
 
     try {
@@ -49,19 +58,33 @@ class WhatsappBot {
         }
       }
 
-      
-      if (Ques == 0 && !flag) {
-        const select_lan =
-          "Please select your preferred language by typing the corresponding number: \n1.ગુજરાતી \n2.हिंदी \n3.English";
-        messages.push(Welcome.gu, select_lan);
-        await sendMessagesInOrder(messages, 500);
-        flag = true;
-      } else if (isNaN(q)) {
+      if (Ques == 0 && !stationflag) {
+        console.log("Station Selection ");
+        const select_station =
+          "Please select your Police Station by typing the corresponding number: ";
+        const options =
+          StationNames.join("\n");  
+        messages.push(Welcome.gu, select_station, options);
+        await sendMessagesInOrder(messages, 100);
+        stationflag = true;
+      }  // } else if (isNaN(q)) {
+      //   twiml.message(
+      //     "Sorry, but we can only process numerical values. *Please enter a valid number.*"
+      //   );
+      //   // await sendMessagesInOrder(messages, 100);
+      // }
+      else if (Ques == 0 && !lanflag) {
+        console.log("Language Selection ");
+        User.Station_ID = StationIDs[q - 1];
+        lanflag = true;
         twiml.message(
-          "Sorry, but we can only process numerical values. *Please enter a valid number.*"
+          "Please select your preferred language by typing the corresponding number: \n1.ગુજરાતી \n2.हिंदी \n3.English"
         );
-        // await sendMessagesInOrder(messages, 500);
-      } else if (Ques == 0 && flag) {
+        res.set("Content-Type", "text/xml");
+        return res.status(200).send(twiml.toString());
+      } 
+      else if (Ques == 0 && stationflag && lanflag) {
+        console.log("Feedback Start ");
         User.lan = language[q - 1];
         const options =
           FeedbackQuestions[`${User.lan}`][Ques].options.join("\n"); // Join the options as a string one After Onther in Next Line
@@ -69,11 +92,18 @@ class WhatsappBot {
         messages.push(
           Welcome[`${User.lan}`],
           FeedbackQuestions[`${User.lan}`][Ques++].question,
-          options
-        );
-        await sendMessagesInOrder(messages, 500);
-      } else if (Ques < FeedbackQuestions[`${User.lan}`].length) {
-        User.Feedback[Ques - 1] = q;
+        )
+        messages.push(options);
+        await sendMessagesInOrder(messages, 100);
+      } 
+      else if (Ques < FeedbackQuestions[`${User.lan}`].length) {
+        // console.log("Sending Ques: "+ Ques);
+        const feed = {
+          question: FeedbackQuestions[`${User.lan}`][Ques - 1].question,
+          answer: FeedbackQuestions[`${User.lan}`][Ques - 1].options[q-1],
+        };
+        // console.log("Sending Ques: " + Ques);
+        User.Feedback.push(feed);
         // twiml.message(FeedbackQuestions[Ques].question);
         const options =
           FeedbackQuestions[`${User.lan}`][Ques].options.join("\n"); // Join the options as a string one After Onther in Next Line
@@ -82,10 +112,14 @@ class WhatsappBot {
           FeedbackQuestions[`${User.lan}`][Ques++].question,
           options
         );
-        await sendMessagesInOrder(messages, 500);
+        await sendMessagesInOrder(messages, 100);
       } else {
         if (Ques == FeedbackQuestions[`${User.lan}`].length) {
-          User.Feedback[FeedbackQuestions[`${User.lan}`].length - 1] = q;
+          const feed = {
+            question: FeedbackQuestions[`${User.lan}`][Ques - 1].question,
+            answer: FeedbackQuestions[`${User.lan}`][Ques - 1].options[q-1],
+          };
+          User.Feedback.push(feed);
           twiml.message(Greetings[`${User.lan}`]);
           console.log(User);
         }
