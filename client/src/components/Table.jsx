@@ -291,7 +291,7 @@ const Table = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {Feedback?.map((feedback) => (
+                  {filteredFeedback?.map((feedback) => (
                     <>
                       <tr className="border-b  text-black  dark:border-gray-700">
                         <th
