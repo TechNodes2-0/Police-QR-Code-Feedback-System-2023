@@ -26,7 +26,7 @@ import AdminRoutes from "./components/Routes/AdminRoutes";
 import AdminProfile from "./Admin/AdminProfile";
 import Table from "./components/Table";
 import { ToastContainer } from "react-toastify";
-
+import Home from "./pages/Home/Home";
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -44,6 +44,7 @@ function App() {
 
       <Routes>
         <Route path="/form" element={<Form />} />
+        <Route path="/Home" element={<Home />} />
 
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
