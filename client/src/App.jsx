@@ -1,5 +1,6 @@
 import { Suspense, lazy, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import alanBtn from "@alan-ai/alan-sdk-web";
 import "./App.css";
 
 import NotFound from "./pages/Error/NotFound";
@@ -34,6 +35,17 @@ function App() {
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+  }, []);
+
+  useEffect(() => {
+    alanBtn({
+      key: "e00326f4c695631a53845e284342e9622e956eca572e1d8b807a3e2338fdd0dc/testing",
+      onCommand: (commandData) => {
+        if (commandData.command === "go:back") {
+          // Call the client code that will react to the received command
+        }
+      },
+    });
   }, []);
 
   return loading ? (

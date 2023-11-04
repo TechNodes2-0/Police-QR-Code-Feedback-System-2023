@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@alan-ai/alan-sdk-web": "^1.8.54",
     "react-toastify": "^9.1.3"
   }
 }
