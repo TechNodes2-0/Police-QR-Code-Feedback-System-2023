@@ -29,10 +29,10 @@ const Table = () => {
 
   return (
     <div>
-      <section className="bg-blue text-black p-3 sm:p-5">
+      <section className="bg-blue text-white p-3 sm:p-5">
         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
           {/* Start coding here */}
-          <div className="bg-white  relative shadow-md sm:rounded-lg overflow-hidden">
+          <div className="bg-black  relative shadow-md sm:rounded-lg overflow-hidden">
             <div className="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
               <div className="w-full md:w-1/2">
                 <form className="flex items-center">
@@ -58,7 +58,7 @@ const Table = () => {
                     <input
                       type="text"
                       id="simple-search"
-                      className="bg-gray-50 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                      className="bg-gray-50 border border-gray-300 text-white-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Search"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
@@ -91,7 +91,7 @@ const Table = () => {
                   <button
                     id="actionsDropdownButton"
                     data-dropdown-toggle="actionsDropdown"
-                    className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-black rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -111,7 +111,7 @@ const Table = () => {
                   </button>
                   <div
                     id="actionsDropdown"
-                    className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
+                    className="hidden z-10 w-44 bg-black rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
                   >
                     <ul
                       className="py-1 text-sm text-gray-700 dark:text-gray-200"
@@ -138,7 +138,7 @@ const Table = () => {
                   <button
                     id="filterDropdownButton"
                     data-dropdown-toggle="filterDropdown"
-                    className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                    className="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-black rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -171,7 +171,7 @@ const Table = () => {
                   </button>
                   <div
                     id="filterDropdown"
-                    className="z-10 hidden w-48 p-3 bg-white rounded-lg shadow dark:bg-gray-700"
+                    className="z-10 hidden w-48 p-3 bg-black rounded-lg shadow dark:bg-gray-700"
                   >
                     <h6 className="mb-3 text-sm font-medium text-gray-900 dark:text-white">
                       Choose brand
@@ -293,74 +293,23 @@ const Table = () => {
                 <tbody>
                   {filteredFeedback?.map((feedback) => (
                     <>
-                      <tr className="border-b  text-black  dark:border-gray-700">
+                      <tr className="border-b  text-white  dark:border-gray-700">
                         <th
                           scope="row"
                           className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap "
                         >
                           {feedback?.stationID.StationName}
                         </th>
-                        <td className="px-4 py-3 text-black ">
+                        <td className="px-4 py-3 text-white ">
                           <TimeAgo date={feedback?.feedbackTime} />
                         </td>
                         {feedback.questions.map((question) => (
-                          <td className="px-4 py-3 text-black">
+                          <td className="px-4 py-3 text-white">
                             {question.answer}
                           </td>
                         ))}
 
-                        <td className="px-4 py-3 flex items-center justify-end">
-                          <button
-                            id="apple-imac-27-dropdown-button"
-                            data-dropdown-toggle="apple-imac-27-dropdown"
-                            className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                            type="button"
-                          >
-                            <svg
-                              className="w-5 h-5"
-                              aria-hidden="true"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                            </svg>
-                          </button>
-                          <div
-                            id="apple-imac-27-dropdown"
-                            className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                          >
-                            <ul
-                              className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                              aria-labelledby="apple-imac-27-dropdown-button"
-                            >
-                              <li>
-                                <a
-                                  href="#"
-                                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                >
-                                  Show
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="#"
-                                  className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                                >
-                                  Edit
-                                </a>
-                              </li>
-                            </ul>
-                            <div className="py-1">
-                              <a
-                                href="#"
-                                className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                              >
-                                Delete
-                              </a>
-                            </div>
-                          </div>
-                        </td>
+                        
                       </tr>
                     </>
                   ))}
@@ -385,7 +334,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-black rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <span className="sr-only">Previous</span>
                     <svg
@@ -406,7 +355,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-black border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     1
                   </a>
@@ -414,7 +363,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-black border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     2
                   </a>
@@ -431,7 +380,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-black border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     ...
                   </a>
@@ -439,7 +388,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-black border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     100
                   </a>
@@ -447,7 +396,7 @@ const Table = () => {
                 <li>
                   <a
                     href="#"
-                    className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    className="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-black rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <span className="sr-only">Next</span>
                     <svg
