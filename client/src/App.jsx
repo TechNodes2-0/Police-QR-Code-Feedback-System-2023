@@ -11,7 +11,7 @@ import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
 import firebase from "firebase/compat/app";
 import Loader from "../src/components/common/index";
-import { Toaster } from "react-hot-toast";
+
 import ECommerce from "./pages/Dashboard/ECommerce";
 import DefaultLayout from "./layout/DefaultLayout";
 
@@ -23,8 +23,9 @@ import PhoneAuth from "./components/core/Form/PhoneAuth";
 // import Login from "./pages/Login/login";
 import AdminDashboard from "./Admin/AdminDashboard";
 import AdminRoutes from "./components/Routes/AdminRoutes";
-import AdminProfile from "./Admin/AdminProfile"
+import AdminProfile from "./Admin/AdminProfile";
 import Table from "./components/Table";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -43,7 +44,7 @@ function App() {
 
       <Routes>
         <Route path="/form" element={<Form />} />
-        
+
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
         <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
@@ -57,18 +58,17 @@ function App() {
         </Route>
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
-        <Route path='/Signup'element={<Signup/>}/>
-    <Route path='/Login'element={<Login/>}/>
-        <Route  path="/Admin" element={<AdminRoutes/>}>
-        
-        <Route path="dashboard" element={<DefaultLayout />}>
-          <Route index element={<ECommerce />} />
-          <Route path="profile" element={<AdminProfile/>}></Route>
-          <Route path="Table" element={<Table/>}></Route>
-        </Route>
-       
+        <Route path="/Signup" element={<Signup />} />
+        <Route path="/Login" element={<Login />} />
+        <Route path="/Admin" element={<AdminRoutes />}>
+          <Route path="dashboard" element={<DefaultLayout />}>
+            <Route index element={<ECommerce />} />
+            <Route path="profile" element={<AdminProfile />}></Route>
+            <Route path="Table" element={<Table />}></Route>
+          </Route>
         </Route>
       </Routes>
+      <ToastContainer />
     </div>
   );
 }
