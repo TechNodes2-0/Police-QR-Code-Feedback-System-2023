@@ -44,7 +44,7 @@ function App() {
 
       <Routes>
         <Route path="/form" element={<Form />} />
-        <Route path="/Home" element={<Home />} />
+        <Route path="/" element={<Home />} />
 
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
