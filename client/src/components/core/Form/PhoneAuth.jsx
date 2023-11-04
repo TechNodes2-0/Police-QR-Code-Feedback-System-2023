@@ -5,6 +5,7 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { useAuth } from "../../../context/AuthContext"; // Import the useAuth function
 
 // Configure Firebase.
 const config = {
@@ -51,18 +52,23 @@ function QRCodeDetails({ details }) {
 function SignInScreen() {
   firebase.initializeApp(config);
   const { qrCodeId } = useParams();
-  const [qrCodeDetails, setQrCodeDetails] = useState(null);
 
+  const [qrCodeDetails, setQrCodeDetails] = useState(null);
+  const { setStation } = useAuth();
   useEffect(() => {
     const fetchQRCodeDetails = async () => {
       const response = await axios.get(
         `http://localhost:3000/qrcodes/${qrCodeId}`
       );
       setQrCodeDetails(response?.data?.data);
+      localStorage.setItem("Policestation", JSON.stringify(response.data.data));
+      if (response?.data?.data?.station) {
+        setStation("vinayak");
+      }
       console.log(qrCodeDetails);
     };
     fetchQRCodeDetails();
-  }, []);
+  }, [qrCodeId, setStation]);
 
   return (
     <div className="flex justify-center items-center min-h-screen py-5 bg-blue-100 border-black border-2 px-5">
