@@ -1,0 +1,17 @@
+{
+  "name": "sms-feedback",
+  "version": "1.0.0",
+  "description": "Sms-Feedback Police System",
+  "main": "send_sms.js",
+  "scripts": {
+    "test": "start"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.0.0",
+    "express": "^4.16.3",
+    "twilio": "^4.6.0"
+  }
+}

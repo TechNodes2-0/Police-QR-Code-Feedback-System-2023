@@ -1,5 +1,7 @@
 import dotenv from "dotenv";
 import twilio from "twilio";
+import Feedback from "../models/feedbackModel";
+
 import { FeedbackQuestions, Welcome, Greetings, StationNames, StationIDs } from "../Feedback";
 // import {Feedback} from "./models/feedbackModel";
 dotenv.config();
@@ -35,7 +37,7 @@ class WhatsappBot {
   static async feedback(req, res, next) {
     User.Phone_No = req.body.From.slice(-10);
     const twiml = new MessagingResponse();
-    const q = parseInt(req.body.Body.trim());
+    const q = req.body.Body.trim();
     if(q == -1){
       Ques = 0;
       lanflag = false;
@@ -50,6 +52,7 @@ class WhatsappBot {
     }
 
     try {
+
       const messages = [];
       async function sendMessagesInOrder(messages, delay) {
         for (let index in messages) {
@@ -121,7 +124,10 @@ class WhatsappBot {
           };
           User.Feedback.push(feed);
           twiml.message(Greetings[`${User.lan}`]);
+          
           console.log(User);
+          
+
         }
       }
 
