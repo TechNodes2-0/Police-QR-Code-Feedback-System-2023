@@ -49,7 +49,15 @@ const Table = () => {
                     <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <input type="text" id="simple-search" className="bg-gray-50 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400  dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" value={searchTerm} onChange={(e)=>setSearchTerm(e.target.value)} required />
+                <input 
+        type="text" 
+        id="simple-search" 
+        className="bg-gray-50 border border-gray-300 text-black-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-primary-500 dark:focus:border-primary-500" 
+        placeholder="Search" 
+        value={searchTerm} 
+        onChange={(e) => setSearchTerm(e.target.value)} 
+        required 
+    />
               </div>
             </form>
           </div>
@@ -132,7 +140,7 @@ const Table = () => {
               </tr>
             </thead>
             <tbody>
-              {Feedback?.map((feedback)=>(
+              {filteredFeedback?.map((feedback)=>(
                 <>
                 <tr className="border-b  text-black  dark:border-gray-700">
                 <th scope="row" className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap ">{feedback?.stationID.StationName
