@@ -89,7 +89,10 @@ const Header = (props) => {
             </div>
           </form>
         </div>
+        <div className="flex items-center gap-3 2xsm:gap-7">
 
+          <DropdownUser />
+        </div>
       </div>
     </header>
   );
