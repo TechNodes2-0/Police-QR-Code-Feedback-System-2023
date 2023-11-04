@@ -30,10 +30,7 @@
     "react-icons": "^4.11.0",
     "react-redux": "^8.1.3",
     "react-router-dom": "^6.18.0",
-<<<<<<< HEAD
     "react-timeago": "^7.2.0",
-=======
->>>>>>> e2bc93c9da067e85d18a1560e661d78dfc35b48a
     "react-toastify": "^9.1.3",
     "uuidv4": "^6.2.13",
     "yup": "^1.3.2"
