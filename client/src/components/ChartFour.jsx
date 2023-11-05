@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
 
-function ChartThree() {
+function ChartFour() {
   const questions = [
     {
       question: "After How much time you are heard in Police Station?",
@@ -65,11 +65,11 @@ function ChartThree() {
     },
   ];
 
-  const selectedQuestionIndex = 0;
+  const selectedQuestionIndex = 1;
 
   const selectedQuestion = questions[selectedQuestionIndex];
   const selectedOptions = selectedQuestion.options;
-  const selectedResponses = [10, 15, 13, 55, 53]; // Dummy data for the pie chart
+  const selectedResponses = [27, 25, 20, 17, 15]; // Dummy data for the pie chart
 
   const options = {
     chart: {
@@ -126,7 +126,7 @@ function ChartThree() {
         </div>
         <div>
           <div className="relative z-20 inline-block">
-          <div>{questions[selectedQuestionIndex].question}</div>
+            <div>{questions[selectedQuestionIndex].question}</div>
             <span className="absolute top-1/2 right-3 z-10 pointer-events-none">
               <svg
                 width="10"
@@ -143,7 +143,7 @@ function ChartThree() {
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="ChartFour" className="mx-auto flex justify-center">
           <ReactApexChart
             options={options}
             series={selectedResponses}
@@ -173,4 +173,4 @@ function ChartThree() {
   );
 }
 
-export default ChartThree;
+export default ChartFour;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
@@ -176,14 +176,12 @@ const questions = {
 };
 
 export default function FeedbackForm() {
-  const { user, signOut } = useAuth();
+  const { user, signOut, station } = useAuth();
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedStation, setSelectedStation] = useState("");
+  // const [selectedStation, setSelectedStation] = useState("");
   const [textInput, setTextInput] = useState(""); // State variable for the text input
-
-
   const handleOptionSelect = (question, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
@@ -194,12 +192,6 @@ export default function FeedbackForm() {
   const handleTextInputChange = (e) => {
     const value = e.target.value;
     setTextInput(value);
-
-    // Include the text input value in your feedback data
-    setFeedbackData((prevData) => ({
-      ...prevData,
-      textInput: value,
-    }));
   };
 
   const renderOptions = (questionKey, options) => {
@@ -243,6 +235,7 @@ export default function FeedbackForm() {
 
   // Fetch police stations from the API
   useEffect(() => {
+    // selectedStation = policeStationsLocalStation;
     const fetchPoliceStations = async () => {
       try {
         const response = await axios.get(
@@ -254,20 +247,25 @@ export default function FeedbackForm() {
       }
     };
 
-    fetchPoliceStations();
+    // fetchPoliceStations();
   }, []);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      // Retrieve the 'station' from localStorage
+      const localstation = localStorage.getItem("Policestation");
+      const stationObject = JSON.parse(localstation);
+      const stationID = stationObject.station;
+      console.log(localstation);
       const FormfeedbackData = {
-        stationID: selectedStation,
+        stationID: stationID,
         mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
           answer: feedbackData[q.key],
         })),
+        feedback: textInput,
       };
 
       const response = await axios.post(
@@ -294,7 +292,7 @@ export default function FeedbackForm() {
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-[#FFFFFF] border-0 rounded-xl shadow-xl">
           <div>
             <label className="mr-2 text-sm sm:text-base lg:text-md">
-              Select Language:
+              {station}
             </label>
             <select
               className="bg-[#FFFFFF] border-0 text-sm sm:text-base lg:text-md"
@@ -312,29 +310,6 @@ export default function FeedbackForm() {
             Give your feedback
           </h1>
           <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="stationID" className="sr-only">
-                stationID
-              </label>
-              <select
-                id="stationID"
-                name="stationID"
-                placeholder="Select a Police Station"
-                value={selectedStation}
-                onChange={(e) => setSelectedStation(e.target.value)}
-                className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              >
-                <option value="" disabled>
-                  Select a Police Station
-                </option>
-                {policeStations?.map((station) => (
-                  <option key={station._id} value={station._id}>
-                    {station.StationName}
-                  </option>
-                ))}
-              </select>
-            </div>
-
             {questions[selectedLanguage]
               .slice(currentQuestionIndex, currentQuestionIndex + 3)
               .map((q) => (
@@ -347,27 +322,23 @@ export default function FeedbackForm() {
                   </h2>
                   {renderOptions(q.key, q.options)}
                 </div>
-              ))
-              
-              }
+              ))}
 
-              
-{currentQuestionIndex > 0 && (
-
-            <div className="my-10 py-5 border-0 max-sm:px-2 px-10  rounded-xl  shadow-md hover:shadow-xl">
-              <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">
-                Enter your text feedback:
-              </h2>
-              <input
-                type="text"
-                id="textInput"
-                name="textInput"
-                value={textInput}
-                onChange={handleTextInputChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              />
-            </div>
-)}
+            {currentQuestionIndex > 0 && (
+              <div className="my-10 py-5 border-0 max-sm:px-2 px-10  rounded-xl  shadow-md hover:shadow-xl">
+                <h2 className="text-md sm:text-lg lg:text-md font-medium mb-2">
+                  Enter your text feedback:
+                </h2>
+                <input
+                  type="text"
+                  id="textInput"
+                  name="textInput"
+                  value={textInput}
+                  onChange={handleTextInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                />
+              </div>
+            )}
 
             <div className="flex justify-between max-sm:flex-col mt-10">
               <div className="text-center ">

@@ -4,13 +4,14 @@ const PoliceStation = require("../models/policeStationModel");
 // Controller function to save feedback
 const saveFeedback = async (req, res) => {
   try {
-    const { mobileNumber, questions, stationID } = req.body;
+    const { mobileNumber, questions, stationID, feedback } = req.body;
     const userIDHash = await bcrypt.hash(mobileNumber, 10);
 
     const newFeedback = await Feedback.create({
       userIDHash,
       questions,
-      stationID
+      stationID,
+      feedback,
     });
 
     res.status(201).json({
@@ -30,7 +31,7 @@ const saveFeedback = async (req, res) => {
 // Controller function to get feedback
 const getFeedback = async (req, res) => {
   try {
-    const feedbackEntries = await Feedback.find().populate('stationID');
+    const feedbackEntries = await Feedback.find().populate("stationID");
 
     res.status(200).json({
       success: true,
