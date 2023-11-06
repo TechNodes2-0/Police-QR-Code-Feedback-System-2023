@@ -107,23 +107,39 @@ const deleteFeedback = async (req, res) => {
 };
 const getFeedbackCountForOption = async (req, res) => {
   try {
-    const { question, option } = req.query;
+   const { question} = req.query;
 
-    const feedbackCount = await Feedback.find({ 'questions.question': question })
+    const feedbackCount = await Feedback.aggregate(
+      [
+        {
+          $unwind: "$questions",
+        },
+        {
+          $match: {
+            "questions.question":
+              `${question}`,
+          },
+        },
+        {
+          $group: {
+            _id: "$questions.answer",
+            count: {
+              $sum: 1,
+            },
+          },
+        },
+      ]
+    )
 
-      // .where('questions.answer').equals(option)
-      .countDocuments();
-
-    const firstFeedback = await Feedback.findOne({});
-    const { questions } = firstFeedback;
+    
     console.log(feedbackCount)
     res.status(200).json({
       success: true,
-      message: `Number of feedback entries with the option '${option}' selected for the question '${question}': ${feedbackCount}`,
+      message: `Number of feedback entries with the selected for the question ${question} : `,
       data: feedbackCount,
-      questions,
-      firstFeedback,
-      option
+      // questions,
+      // firstFeedback,
+      // option
     });
   } catch (err) {
     res.status(500).json({
@@ -136,29 +152,49 @@ const getFeedbackCountForOption = async (req, res) => {
 
 const getFeedbackCountPerStation = async (req, res) => {
   try {
+    
     const feedbackCounts = await Feedback.aggregate([
+      {
+        $lookup: {
+          from: "policestations",
+          localField: "stationID",
+          foreignField: "_id",
+          as: "Feedback",
+        },
+      },
       {
         $group: {
           _id: "$stationID",
-          count: { $sum: 1 },
+          count: {
+            $sum: 1,
+          },
+          StationName: {
+            $first: "$Feedback.StationName",
+          },
         },
       },
+      {
+        $project:
+          /**
+           * specifications: The fields to
+           *   include or exclude.
+           */
+          {
+            _id: 1,
+            count: 1,
+            StationName: {
+              $arrayElemAt: ["$StationName", 0],
+            },
+          },
+      },
     ]);
-    const populatedFeedbackCounts = await Promise.all(
-      feedbackCounts.map(async (item) => {
-        const station = await PoliceStation.findById(item._id);
-        return {
-          _id: item._id,
-          count: item.count,
-          stationName: station ? station.StationName : 'Unknown', // Provide a default value if the station is not found
-        };
-      })
-    );
+    
 
     res.status(200).json({
       success: true,
       message: "Feedback counts per police station fetched successfully",
-      data: populatedFeedbackCounts
+      data: feedbackCounts,
+      
       
     });
   } catch (err) {
