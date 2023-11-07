@@ -17,8 +17,7 @@ require("dotenv").config();
 
 app.use(
   cors({
-    origin: ["http://localhost:5173","http://127.0.0.1:5173","http://127.0.0.1:5174","https://police-qr-code-feedback-system-2023.vercel.app"],
-    credentials: true,
+   
   })
 );
 
