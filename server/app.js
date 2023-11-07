@@ -12,6 +12,7 @@ const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("./db/cloudinary");
+const morgan =require('morgan')
 
 require("dotenv").config();
 
@@ -23,6 +24,7 @@ app.use(
 
 // Middleware
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.use(
   fileUpload({
