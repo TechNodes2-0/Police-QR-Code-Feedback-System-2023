@@ -3,8 +3,8 @@ import React from 'react';
 const CardTwo = ({Totalqrcodes}) => {
   return (
     <div className="rounded-sm border border-stroke bg-white py-6 px-7.5 shadow-default dark:border-strokedark dark:bg-boxdark">
-      <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full bg-meta-2 dark-bg-meta-4">
-      <img src="   https://cdn-icons-png.flaticon.com/512/1484/1484584.png " width="256" height="256" alt="" title="" class="img-small"></img>
+      <div className="flex h-11.5 w-11.5 items-center justify-center rounded-full  dark-bg-meta-4">
+      <img src="   https://cdn-icons-png.flaticon.com/512/9692/9692469.png " width="256" height="256" alt="" title="" class="img-small"/>
       </div>
 
       <div className="mt-4 flex items-end justify-between">

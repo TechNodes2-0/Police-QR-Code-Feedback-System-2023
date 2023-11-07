@@ -145,18 +145,21 @@ function ChartThree() {
     ],
   };
 
-  useEffect(async() => {
-  fetchData( `${import.meta.env.VITE_API_URL}/feedback/CountForOption`,{params:'After How much time you are heard in Police Station?'});
-  const queryParams = { question: 'After How much time you are heard in Police Station?' };
-  const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
-
-  const data = await fetchData(apiUrl, queryParams);
-
-  // Update the chart data with the new feedback count
-  const feedbackCount = data.data;
-  SetselectedResponses(feedbackCount.map((count) => count.count));
+  useEffect(() => {
+    const getData=async()=> {
+      fetchData( `${import.meta.env.VITE_API_URL}/feedback/CountForOption`,{params:'After How much time you are heard in Police Station?'});
+      const queryParams = { question: 'After How much time you are heard in Police Station?' };
+      const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
+    
+      const data =  fetchData(apiUrl, queryParams);
+    
+      // Update the chart data with the new feedback count
+      const feedbackCount = data.data;
+      SetselectedResponses(feedbackCount.map((count) => count.count));
+      
+    }
   
-  
+  getData();
   }, [])
   
   return (
