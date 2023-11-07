@@ -171,7 +171,7 @@ function ChartThree() {
           </h5>
         </div>
         <div>
-        <div className="relative z-20 inline-block text-black">
+        <div className="relative z-20  mt-4 inline-block text-black">
             <label htmlFor="questionDropdown" className="mr-2">
               Select a Question:
             </label>

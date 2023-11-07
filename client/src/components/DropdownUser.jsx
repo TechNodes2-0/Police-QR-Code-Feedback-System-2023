@@ -1,10 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link ,useNavigate} from 'react-router-dom';
 import { FaAngleDown } from 'react-icons/fa'; // Import the React icons
 
 import UserOne from '../images/user/user-01.png';
-
+import {useAdminAuth} from "../context/AdminAuth"
 const DropdownUser = () => {
+  const navigate=useNavigate();
+  const[adminAuth, setAdminAuth]=useAdminAuth();
+  const handleLogout=()=>{
+    setAdminAuth({
+      ... adminAuth,
+      user:null,
+      token:''
+    });
+    localStorage.removeItem("adminAuth");
+    console.log("logout successfully");
+    navigate("/Login");
+
+  }
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef(null);
@@ -126,7 +139,7 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <button onClick={handleLogout} className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
           <svg // You can replace this with the corresponding React icon
             className="fill-current"
             width="22"
