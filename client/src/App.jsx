@@ -2,27 +2,16 @@ import { Suspense, lazy, useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import alanBtn from "@alan-ai/alan-sdk-web";
 import "./App.css";
-
 import NotFound from "./pages/Error/NotFound";
-
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-
 import Signup from "./Auth/Signup";
 import Login from "./Auth/Login";
-import firebase from "firebase/compat/app";
 import Loader from "../src/components/common/index";
-
 import ECommerce from "./pages/Dashboard/ECommerce";
 import DefaultLayout from "./layout/DefaultLayout";
-
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
-import { onAuthStateChanged, signOut, getAuth } from "firebase/auth";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
-// import Login from "./pages/Login/login";
-import AdminDashboard from "./Admin/AdminDashboard";
 import AdminRoutes from "./components/Routes/AdminRoutes";
 import AdminProfile from "./Admin/AdminProfile";
 import Table from "./components/Table";

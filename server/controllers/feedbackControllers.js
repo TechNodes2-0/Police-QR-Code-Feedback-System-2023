@@ -6,11 +6,11 @@ const saveFeedback = async (req, res) => {
   try {
     const { mobileNumber, questions, stationID, feedback } = req.body;
     const userIDHash = await bcrypt.hash(mobileNumber, 10);
-
+    console.log(typeof stationID);
     const newFeedback = await Feedback.create({
       userIDHash,
       questions,
-      stationID,
+      stationID: stationID,
       feedback,
     });
 
@@ -107,32 +107,28 @@ const deleteFeedback = async (req, res) => {
 };
 const getFeedbackCountForOption = async (req, res) => {
   try {
-   const { question} = req.query;
+    const { question } = req.query;
 
-    const feedbackCount = await Feedback.aggregate(
-      [
-        {
-          $unwind: "$questions",
+    const feedbackCount = await Feedback.aggregate([
+      {
+        $unwind: "$questions",
+      },
+      {
+        $match: {
+          "questions.question": `${question}`,
         },
-        {
-          $match: {
-            "questions.question":
-              `${question}`,
+      },
+      {
+        $group: {
+          _id: "$questions.answer",
+          count: {
+            $sum: 1,
           },
         },
-        {
-          $group: {
-            _id: "$questions.answer",
-            count: {
-              $sum: 1,
-            },
-          },
-        },
-      ]
-    )
+      },
+    ]);
 
-    
-    console.log(feedbackCount)
+    console.log(feedbackCount);
     res.status(200).json({
       success: true,
       message: `Number of feedback entries with the selected for the question ${question} : `,
@@ -152,7 +148,6 @@ const getFeedbackCountForOption = async (req, res) => {
 
 const getFeedbackCountPerStation = async (req, res) => {
   try {
-    
     const feedbackCounts = await Feedback.aggregate([
       {
         $lookup: {
@@ -188,14 +183,11 @@ const getFeedbackCountPerStation = async (req, res) => {
           },
       },
     ]);
-    
 
     res.status(200).json({
       success: true,
       message: "Feedback counts per police station fetched successfully",
       data: feedbackCounts,
-      
-      
     });
   } catch (err) {
     res.status(500).json({
@@ -205,7 +197,7 @@ const getFeedbackCountPerStation = async (req, res) => {
     });
   }
 };
-const getFeedbackwithTime =async(req,res)=>{
+const getFeedbackwithTime = async (req, res) => {
   try {
     const feedbackCounts = await Feedback.aggregate([
       {
@@ -213,25 +205,23 @@ const getFeedbackwithTime =async(req,res)=>{
           _id: {
             year: { $year: "$feedbackTime" },
             month: { $month: "$feedbackTime" },
-            day: { $dayOfMonth: "$feedbackTime" }
+            day: { $dayOfMonth: "$feedbackTime" },
           },
-          count: { $sum: 1 }
-        }
+          count: { $sum: 1 },
+        },
       },
       {
         $sort: {
           "_id.year": 1,
           "_id.month": 1,
-          "_id.day": 1
-        }
-      }
-    ])
+          "_id.day": 1,
+        },
+      },
+    ]);
     res.status(200).json({
       success: true,
       message: "Feedback counts per day fetched successfully",
       data: feedbackCounts,
-      
-      
     });
   } catch (error) {
     res.status(500).json({
@@ -240,32 +230,34 @@ const getFeedbackwithTime =async(req,res)=>{
       error: err.message,
     });
   }
-}
+};
 const getAggregatedData = async (req, res) => {
   try {
     const aggregationResult = await Feedback.aggregate([
       {
-        $count: 'TotalFeedbacks',
+        $count: "TotalFeedbacks",
       },
       {
         $lookup: {
-          from: 'policestations', // Replace with the correct collection name
-          pipeline: [{ $count: 'TotalPosts' }],
-          as: 'PoliceStation',
+          from: "policestations", // Replace with the correct collection name
+          pipeline: [{ $count: "TotalPosts" }],
+          as: "PoliceStation",
         },
       },
       {
         $lookup: {
-          from: 'qrcodes', // Replace with the correct collection name
-          pipeline: [{ $count: 'TotalChatrooms' }],
-          as: 'TotalQrcodes',
+          from: "qrcodes", // Replace with the correct collection name
+          pipeline: [{ $count: "TotalChatrooms" }],
+          as: "TotalQrcodes",
         },
       },
       {
         $project: {
           TotalFeedbacks: 1,
-          TotalQrcodes: { $arrayElemAt: ['$TotalQrcodes.TotalChatrooms', 0] },
-          TotalPolicestation: { $arrayElemAt: ['$PoliceStation.TotalPosts', 0] },
+          TotalQrcodes: { $arrayElemAt: ["$TotalQrcodes.TotalChatrooms", 0] },
+          TotalPolicestation: {
+            $arrayElemAt: ["$PoliceStation.TotalPosts", 0],
+          },
         },
       },
     ]);
@@ -279,13 +271,13 @@ const getAggregatedData = async (req, res) => {
     } else {
       res.status(404).json({
         success: false,
-        message: 'No data found',
+        message: "No data found",
       });
     }
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: 'Failed to retrieve aggregated data',
+      message: "Failed to retrieve aggregated data",
       error: error.message,
     });
   }
@@ -298,11 +290,5 @@ module.exports = {
   getFeedbackCountForOption,
   getFeedbackCountPerStation,
   getFeedbackwithTime,
-  getAggregatedData
-
+  getAggregatedData,
 };
-
-
-
-
-
