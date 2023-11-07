@@ -18,7 +18,7 @@ export function QRCodeGenerator() {
     const fetchPoliceStation = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/police-stations"
+          `${import.meta.env.VITE_API_URL}/police-stations`
         );
         const policeStationData = response.data.data;
         setStation(policeStationData);
@@ -63,7 +63,7 @@ export function QRCodeGenerator() {
         const customId = randomIdGenerator();
 
         const response = await axios.post(
-          "http://localhost:3000/qrcodes/",
+          `${import.meta.env.VITE_API_URL}/qrcodes/`,
           formData,
           {
             headers: {
@@ -82,7 +82,7 @@ export function QRCodeGenerator() {
   const generateQRCode = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/qrcodes/generate/",
+        `${import.meta.env.VITE_API_URL}/qrcodes/generate/`,
         {
           url: qrCodeValue,
         }

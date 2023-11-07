@@ -58,7 +58,7 @@ function SignInScreen() {
   useEffect(() => {
     const fetchQRCodeDetails = async () => {
       const response = await axios.get(
-        `http://localhost:3000/qrcodes/${qrCodeId}`
+        `{import.meta.env.VITE_API_URL}/qrcodes/${qrCodeId}`
       );
       setQrCodeDetails(response?.data?.data);
       localStorage.setItem("Policestation", JSON.stringify(response.data.data));
