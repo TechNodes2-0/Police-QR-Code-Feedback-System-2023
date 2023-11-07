@@ -55,21 +55,12 @@ function App() {
       {/* <PhoneAuth/> */}
 
       <Routes>
-        <Route path="/form" element={<Form />} />
         <Route path="/" element={<Home />} />
-
+        <Route path="/form" element={<Form />} />
         <Route path="/feedback" element={<FeedbackForm />}></Route>
-        {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
         <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
-
         <Route path="/login" element={<Login />} />
-        {/*Don't Touch this Route*/}
-
-        {/* ------------Test--------- */}
-        <Route path="/test">
-          <Route index element={<QRCodeGenerator />} />
-        </Route>
-        {/* ------------Test End--------- */}
+        <Route path="/QRCode-Generator" element={<QRCodeGenerator />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />
