@@ -6,7 +6,7 @@ const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const qrCodesRoutes = require("./routes/qrCodesRoutes");
-const positionRoutes=require("./routes/positionRoutes")
+const positionRoutes = require("./routes/positionRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
@@ -16,11 +16,7 @@ const morgan =require('morgan')
 
 require("dotenv").config();
 
-app.use(
-  cors({
-   
-  })
-);
+app.use(cors({}));
 
 // Middleware
 app.use(express.json());
@@ -40,7 +36,7 @@ app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/qrcodes", qrCodesRoutes);
-app.use("/position",positionRoutes)
+app.use("/position", positionRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);
