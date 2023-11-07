@@ -241,7 +241,55 @@ const getFeedbackwithTime =async(req,res)=>{
     });
   }
 }
+const getAggregatedData = async (req, res) => {
+  try {
+    const aggregationResult = await Feedback.aggregate([
+      {
+        $count: 'TotalFeedbacks',
+      },
+      {
+        $lookup: {
+          from: 'policestations', // Replace with the correct collection name
+          pipeline: [{ $count: 'TotalPosts' }],
+          as: 'PoliceStation',
+        },
+      },
+      {
+        $lookup: {
+          from: 'qrcodes', // Replace with the correct collection name
+          pipeline: [{ $count: 'TotalChatrooms' }],
+          as: 'TotalQrcodes',
+        },
+      },
+      {
+        $project: {
+          TotalFeedbacks: 1,
+          TotalQrcodes: { $arrayElemAt: ['$TotalQrcodes.TotalChatrooms', 0] },
+          TotalPolicestation: { $arrayElemAt: ['$PoliceStation.TotalPosts', 0] },
+        },
+      },
+    ]);
 
+    if (aggregationResult && aggregationResult.length > 0) {
+      // If there are results, send the response
+      res.status(200).json({
+        success: true,
+        data: aggregationResult[0], // The first document in the result contains the aggregated data
+      });
+    } else {
+      res.status(404).json({
+        success: false,
+        message: 'No data found',
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Failed to retrieve aggregated data',
+      error: error.message,
+    });
+  }
+};
 module.exports = {
   saveFeedback,
   getFeedback,
@@ -249,7 +297,8 @@ module.exports = {
   deleteFeedback,
   getFeedbackCountForOption,
   getFeedbackCountPerStation,
-  getFeedbackwithTime
+  getFeedbackwithTime,
+  getAggregatedData
 
 };
 
