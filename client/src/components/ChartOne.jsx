@@ -1,125 +1,205 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
+import axios from 'axios'
+import DateConvert from './Date';
 
-const options = {
-  legend: {
-    show: false,
-    position: 'top',
-    horizontalAlign: 'left',
-  },
-  colors: ['#3C50E0', '#80CAEE'],
-  chart: {
-    fontFamily: 'Satoshi, sans-serif',
-    height: 335,
-    type: 'area',
-    dropShadow: {
-      enabled: true,
-      color: '#623CEA14',
-      top: 10,
-      blur: 4,
-      left: 0,
-      opacity: 0.1,
-    },
-    toolbar: {
+function formatDateObjects(dates) {
+  return dates.map((dateObj) => {
+    // Extract year, month, and day from the dateObj
+    const { year, month, day } = dateObj;
+
+    // Convert month number to its corresponding name (e.g., 1 to 'Jan')
+    const monthNames = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    const formattedMonth = monthNames[month - 1];
+
+    // Format the day with the appropriate suffix (e.g., 1st, 2nd, 3rd, 4th, etc.)
+    const formattedDay = `${day}${getDaySuffix(day)}`;
+
+    // Combine the formatted parts to create the "4th Nov" format
+    return `${formattedDay} ${formattedMonth}`;
+  });
+}
+function getDaySuffix(day) {
+  if (day >= 11 && day <= 13) {
+    return 'th';
+  }
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+const ChartOne = () => {
+  const [selectedResponses,SetselectedResponses] = useState([10, 15, 13, 55, 53]);
+  const[formatedDate,SetformatedDate]=useState([]);
+  const[dates,Setdates]=useState([
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+  ])
+  const fetchData = async () => {
+    try {
+
+      const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForDay`;
+      const response = await axios.get(apiUrl);
+      if (response.status === 200) {
+        console.log(response.data.data); 
+        SetselectedResponses(response.data.data);
+        console.log(response.data.data.map((feedback)=>feedback._id));
+      
+        const formattedDates = formatDateObjects(response.data.data.map((feedback)=>feedback._id));
+        console.log(formattedDates)
+       
+        SetformatedDate(formattedDates)
+           
+     
+      } else {
+        throw new Error("Failed to fetch data from the API.");
+      }
+    } catch (error) {
+      throw new Error("API request failed: " + error.message);
+    }
+  };
+  if(dates)
+  {
+    
+  }
+  useEffect(() => {
+    fetchData();
+ 
+    
+  }, [])
+  
+  
+  const options = {
+    legend: {
       show: false,
+      position: 'top',
+      horizontalAlign: 'left',
     },
-  },
-  responsive: [
-    {
-      breakpoint: 1024,
-      options: {
-        chart: {
-          height: 300,
+    colors: ['#3C50E0', '#80CAEE'],
+    chart: {
+      fontFamily: 'Satoshi, sans-serif',
+      height: 335,
+      type: 'area',
+      dropShadow: {
+        enabled: true,
+        color: '#623CEA14',
+        top: 10,
+        blur: 4,
+        left: 0,
+        opacity: 0.1,
+      },
+      toolbar: {
+        show: false,
+      },
+    },
+    responsive: [
+      {
+        breakpoint: 1024,
+        options: {
+          chart: {
+            height: 300,
+          },
+        },
+      },
+      {
+        breakpoint: 1366,
+        options: {
+          chart: {
+            height: 350,
+          },
+        },
+      },
+    ],
+    stroke: {
+      width: [2, 2],
+      curve: 'straight',
+    },
+    grid: {
+      xaxis: {
+      
+        lines: {
+          show: true,
+        },
+      },
+      yaxis: {
+        lines: {
+          show: true,
         },
       },
     },
-    {
-      breakpoint: 1366,
-      options: {
-        chart: {
-          height: 350,
-        },
-      },
+    dataLabels: {
+      enabled: true,
+      colors:['#3056D3', '#80CAEE']
     },
-  ],
-  stroke: {
-    width: [2, 2],
-    curve: 'straight',
-  },
-  grid: {
+    markers: {
+      size: 4,
+      colors: '#fff',
+      strokeColors: ['#3056D3', '#80CAEE'],
+      strokeWidth: 3,
+      strokeOpacity: 0.9,
+      strokeDashArray: 0,
+      fillOpacity: 1,
+      discrete: [],
+      hover: {
+        size: undefined,
+        sizeOffset: 5,
+      },
+    }, 
     xaxis: {
-      lines: {
-        show: true,
+      type: 'category',
+      categories: formatedDate,
+      colors:'#d33043',
+      labels:{
+        style: {
+          colors: '#FFFFFF',
+          fontSize: ' 10px'
+        }
       },
+      axisBorder: {
+
+        show: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+      
     },
     yaxis: {
-      lines: {
-        show: true,
+      title: {
+        style: {
+          fontSize: '0px',
+        },
+        colors: ['#F44336', '#E91E63', '#9C27B0']
       },
-    },
-  },
-  dataLabels: {
-    enabled: false,
-  },
-  markers: {
-    size: 4,
-    colors: '#fff',
-    strokeColors: ['#3056D3', '#80CAEE'],
-    strokeWidth: 3,
-    strokeOpacity: 0.9,
-    strokeDashArray: 0,
-    fillOpacity: 1,
-    discrete: [],
-    hover: {
-      size: undefined,
-      sizeOffset: 5,
-    },
-  },
-  xaxis: {
-    type: 'category',
-    categories: [
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-    ],
-    axisBorder: {
-      show: false,
-    },
-    axisTicks: {
-      show: false,
-    },
-  },
-  yaxis: {
-    title: {
-      style: {
-        fontSize: '0px',
+      labels:{
+        style: {
+          colors: '#FFFFFF',
+          fontSize: ' 10px'
+        }
       },
+      min: 0,
+      max: 100,
     },
-    min: 0,
-    max: 100,
-  },
-};
-
-const ChartOne = () => {
-  const [series] = useState([
-    {
-      name: 'Product One',
-      data: [23, 11, 22, 27, 13, 22, 37, 21, 44, 22, 30, 45],
-    },
-    {
-      name: 'Product Two',
-      data: [30, 25, 36, 30, 45, 35, 64, 52, 59, 36, 39, 51],
-    },
-  ]);
+  };
 
   return (
     <div className="col-span-12 rounded-sm border border-stroke bg-white px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:col-span-8">
@@ -130,43 +210,41 @@ const ChartOne = () => {
               <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-primary"></span>
             </span>
             <div className="w-full">
-              <p className="font-semibold text-primary">Total Revenue</p>
-              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
+              <p className="font-semibold text-primary">Total Feedbacks</p>
+              <p className="text-sm font-medium">03.11.2023 - 10.11.2023</p>
             </div>
           </div>
-          <div className="flex min-w-47.5">
-            <span className="mt-1 mr-2 flex h-4 w-full max-w-4 items-center justify-center rounded-full border border-secondary">
-              <span className="block h-2.5 w-full max-w-2.5 rounded-full bg-secondary"></span>
-            </span>
-            <div className="w-full">
-              <p className="font-semibold text-secondary">Total Sales</p>
-              <p className="text-sm font-medium">12.04.2022 - 12.05.2022</p>
-            </div>
-          </div>
+         
         </div>
         <div className="flex w-full max-w-45 justify-end">
           <div className="inline-flex items-center rounded-md bg-whiter p-1.5 dark:bg-meta-4">
             <button className="rounded bg-white py-1 px-3 text-xs font-medium text-black shadow-card hover:bg-white hover:shadow-card dark:bg-boxdark dark:text-white dark:hover:bg-boxdark">
               Day
             </button>
-            <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
+            {/* <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
               Week
             </button>
             <button className="rounded py-1 px-3 text-xs font-medium text-black hover:bg-white hover:shadow-card dark:text-white dark:hover:bg-boxdark">
               Month
-            </button>
+            </button> */}
           </div>
         </div>
       </div>
 
       <div>
         <div id="chartOne" className="-ml-5">
+        {formatedDate &&  selectedResponses&&
           <ReactApexChart
             options={options}
-            series={series}
+            series={    [{ 
+              name: 'Response Per day',
+              data: selectedResponses.map((feedback)=>feedback.count),
+            }]
+          }
             type="area"
             height={350}
           />
+        }
         </div>
       </div>
     </div>

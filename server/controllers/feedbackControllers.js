@@ -205,6 +205,42 @@ const getFeedbackCountPerStation = async (req, res) => {
     });
   }
 };
+const getFeedbackwithTime =async(req,res)=>{
+  try {
+    const feedbackCounts = await Feedback.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$feedbackTime" },
+            month: { $month: "$feedbackTime" },
+            day: { $dayOfMonth: "$feedbackTime" }
+          },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: {
+          "_id.year": 1,
+          "_id.month": 1,
+          "_id.day": 1
+        }
+      }
+    ])
+    res.status(200).json({
+      success: true,
+      message: "Feedback counts per day fetched successfully",
+      data: feedbackCounts,
+      
+      
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to fetch feedback counts with time",
+      error: err.message,
+    });
+  }
+}
 
 module.exports = {
   saveFeedback,
@@ -212,7 +248,8 @@ module.exports = {
   updateFeedback,
   deleteFeedback,
   getFeedbackCountForOption,
-  getFeedbackCountPerStation
+  getFeedbackCountPerStation,
+  getFeedbackwithTime
 
 };
 

@@ -100,10 +100,18 @@ async function pushRandomDataToDB() {
   await Feedback.deleteMany({});
 
   for (let i = 0; i < 500; i++) {
+    const feedbackTime = new Date(
+      2023, // Year
+      10, // November (zero-based index)
+      4 + Math.floor(Math.random() * 7), // Random day between 4th and 10th
+      Math.floor(Math.random() * 24), // Random hour
+      Math.floor(Math.random() * 60), // Random minute
+      Math.floor(Math.random() * 60) // Random second
+    );
     const feedback = new Feedback({
       userIDHash:
         "$2a$10$SclKhPpX1CKsDdl7ajILtuwOd3zBJVFukFNhRz.tRol7.KiOhyyaS", // Use any logic to generate user identifier
-      feedbackTime: new Date(), // Set the feedback time to the current time
+      feedbackTime, // Set the feedback time to the current time
       stationID: String(
         stationIDs[Math.floor(Math.random() * stationIDs.length)]
       ),
