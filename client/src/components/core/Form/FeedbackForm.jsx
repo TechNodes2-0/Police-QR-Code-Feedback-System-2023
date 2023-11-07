@@ -255,9 +255,12 @@ export default function FeedbackForm() {
     try {
       // Retrieve the 'station' from localStorage
       const localstation = localStorage.getItem("Policestation");
+      console.log("localstation",typeof localstation,localstation);
       const stationObject = JSON.parse(localstation);
+      console.log("stationObject",typeof stationObject,stationObject);
       const stationID = stationObject.station;
-      console.log(localstation);
+       console.log("stationID",typeof stationID,stationID);
+
       const FormfeedbackData = {
         stationID: stationID,
         mobileNumber: user.phoneNumber,
