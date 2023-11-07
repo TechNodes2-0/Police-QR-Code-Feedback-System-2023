@@ -22,14 +22,13 @@ const ECommerce = () => {
      setFeedbackData(response.data.data);
 
       // Assuming your data is structured as an array of feedback objects
-      console.log(feedbackData);  
+      console.log(feedbackData);
       // console.log(response.data.data.map((feedback) => feedback.count));
     } catch (error) {
-      console.error('Error fetching feedback:', error);
-   
+      console.error("Error fetching feedback:", error);
     }
   };
-  
+
   useEffect(() => {
     fetchData();
   }, []);
