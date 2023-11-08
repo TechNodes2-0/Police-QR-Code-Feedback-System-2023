@@ -61,14 +61,12 @@ function App() {
         <Route path="/feedback" element={<FeedbackForm />}></Route>
         {/* <Route path="/feedback-portal" element={<PhoneAuth />} /> */}
         <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
-
+<Route path="/Testing" element={<AdminDashboard/>} />
         <Route path="/login" element={<Login />} />
         {/*Don't Touch this Route*/}
 
         {/* ------------Test--------- */}
-        <Route path="/test">
-          <Route index element={<QRCodeGenerator />} />
-        </Route>
+     
         {/* ------------Test End--------- */}
         <Route path="*" element={<NotFound />} />
         <Route path="/Signup" element={<Signup />} />
@@ -78,6 +76,9 @@ function App() {
             <Route index element={<ECommerce />} />
             <Route path="profile" element={<AdminProfile />}></Route>
             <Route path="Table" element={<Table />}></Route>
+            <Route path="test">
+          <Route index element={<QRCodeGenerator />} />
+        </Route>
           </Route>
         </Route>
       </Routes>
