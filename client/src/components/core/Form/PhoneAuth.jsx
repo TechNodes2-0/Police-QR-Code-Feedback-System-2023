@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../../context/AuthContext";
-
 // Configure Firebase.
 const config = {
   apiKey: "AIzaSyCbxIXw-pXevk9nmq2MEonu86uemZCjvCk",
@@ -55,6 +54,7 @@ function SignInScreen() {
           src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"
           alt=""
         />
+        <Link to="/test">Test</Link>
         <p className=" font-medium text-md ">welcome to</p>
         <p className="mb-14 font-bold text-xl">Gujrat Police Feedback System</p>
         <StyledFirebaseAuth

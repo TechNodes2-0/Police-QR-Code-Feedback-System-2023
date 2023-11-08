@@ -10,6 +10,7 @@ import ECommerce from "./pages/Dashboard/ECommerce";
 import DefaultLayout from "./layout/DefaultLayout";
 import Form from "./pages/Forms/Form";
 import QRCodeGenerator from "./test/QRCodeGenerator";
+import Test from "./test/Test";
 import FeedbackForm from "./components/core/Form/FeedbackForm";
 import PhoneAuth from "./components/core/Form/PhoneAuth";
 import AdminRoutes from "./components/Routes/AdminRoutes";
@@ -50,6 +51,8 @@ function App() {
         <Route path="/feedback-portal/:qrCodeId" element={<PhoneAuth />} />
         <Route path="/login" element={<Login />} />
         <Route path="/QRCode-Generator" element={<QRCodeGenerator />} />
+        <Route path="/test" element={<Test />} />
+
         <Route path="*" element={<NotFound />} />
         <Route path="/Signup" element={<Signup />} />
         <Route path="/Login" element={<Login />} />

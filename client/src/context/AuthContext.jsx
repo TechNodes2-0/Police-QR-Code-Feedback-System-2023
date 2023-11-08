@@ -1,5 +1,4 @@
-import { useContext, useState, useEffect } from "react";
-import { createContext } from "react";
+import { useContext, useState, useEffect, createContext } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -7,22 +6,13 @@ const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
-  const saveStationToLocalStorage = (stationDetails) => {
-    localStorage.setItem("stationDetails", JSON.stringify(stationDetails));
-  };
+  const [stationId, setStationId] = useState(null);
 
   const setStation = (stationIdPara) => {
     console.log("AuthContext", stationIdPara);
     console.log("Set");
     setStationId(stationIdPara);
-    saveStationToLocalStorage(stationIdPara);
   };
-  const getStationFromLocalStorage = () => {
-    return localStorage.getItem("stationDetails");
-  };
-  const [stationId, setStationId] = useState(
-    getStationFromLocalStorage() || null
-  );
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
