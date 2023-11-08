@@ -18,6 +18,7 @@ import AdminProfile from "./Admin/AdminProfile";
 import Table from "./components/Table";
 import { ToastContainer } from "react-toastify";
 import Home from "./pages/Home/Home";
+import AdminDashboard from "./Admin/AdminDashboard"
 function App() {
   const [loading, setLoading] = useState(true);
   useEffect(() => {

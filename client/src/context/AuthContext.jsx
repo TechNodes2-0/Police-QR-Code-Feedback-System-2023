@@ -1,10 +1,12 @@
 import { useContext, useState, useEffect, createContext } from "react";
 import { auth } from "../firebase/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export function AuthContextProvider({ children }) {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [stationId, setStationId] = useState(null);
 
@@ -16,7 +18,9 @@ export function AuthContextProvider({ children }) {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
+
       setUser(user);
+
     });
 
     return unsubscribe;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../../../context/AuthContext";
 // Configure Firebase.
@@ -17,21 +17,31 @@ const config = {
 };
 
 // Configure FirebaseUI.
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: "popup",
-  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
-  signInSuccessUrl: "/feedback",
-  // We will display Google and Facebook as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-  ],
-};
+
 
 function SignInScreen() {
+  const navigate=useNavigate();
   firebase.initializeApp(config);
+  const uiConfig = {
+    callbacks: {
+      signInSuccessWithAuthResult: (authResult, redirectUrl) => {
+        console.log('signInSuccessWithAuthResult', authResult);
+      navigate('/test');
+        return false
+      }
+    },
+
+    // Popup signin flow rather than redirect flow.
+    signInFlow: "redirect",
+    // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+    // signInSuccessUrl: "/feedback",
+    // We will display Google and Facebook as auth providers.
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.PhoneAuthProvider.PROVIDER_ID,
+    ],
+  };
   const { qrCodeId } = useParams();
   const { setStation } = useAuth();
 
