@@ -1,197 +1,199 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import axios from "axios";
 
-const questions = {
-  en: [
-    {
-      question: "After How much time you are heard in Police Station?",
-      key: "time",
-      options: [
-        { value: "Less than 10 minutes", label: "Less than 10 minutes" },
-        {
-          value: "Between 10 and 15 minutes",
-          label: "Between 10 and 15 minutes",
-        },
-        { value: "More than 15 minutes", label: "More than 15 minutes" },
-      ],
-    },
-    {
-      question:
-        "How would you describe your overall experience when communicating with the police at the station?",
-      key: "communication",
-      options: [
-        { value: "Excellent", label: "Excellent" },
-        { value: "Good", label: "Good" },
-        { value: "Satisfactory", label: "Satisfactory" },
-        { value: "Poor", label: "Poor" },
-        { value: "Very Poor", label: "Very Poor" },
-      ],
-    },
-    {
-      question:
-        "How would you rate the overall cleanliness and maintenance of the police station premises?",
-      key: "cleanliness",
-      options: [
-        { value: "5", label: "🌟🌟🌟🌟🌟" },
-        { value: "4", label: "🌟🌟🌟🌟" },
-        { value: "3", label: "🌟🌟🌟" },
-        { value: "2", label: "🌟🌟" },
-        { value: "1", label: "🌟" },
-      ],
-    },
-    {
-      question:
-        "Do you think the police effectively keep residents informed about safety issues and initiatives?",
-      key: "awareness",
-      options: [
-        { value: "Very Effective", label: "Very Effective" },
-        { value: "Effective", label: "Effective" },
-        { value: "Neutral", label: "Neutral" },
-        { value: "Ineffective", label: "Ineffective" },
-        { value: "Very Ineffective", label: "Very Ineffective" },
-      ],
-    },
-    {
-      question:
-        "How would you rate the level of trust you have in the police based on your experience?",
-      key: "trust",
-      options: [
-        { value: "Very Trusting", label: "Very Trusting" },
-        { value: "Trusting", label: "Trusting" },
-        { value: "Neutral", label: "Neutral" },
-        { value: "Distrustful", label: "Distrustful" },
-        { value: "Very Distrustful", label: "Very Distrustful" },
-      ],
-    },
-  ],
-  hi: [
-    {
-      question:
-        "1. आपके समुदाय में पुलिस सेवाओं के साथ आपके कुल संतोष को आप किस प्रकार से मूल्यांकित करेंगे?",
-      key: "satisfaction",
-      options: [
-        { value: "verySatisfied", label: "बहुत संतुष्ट" },
-        { value: "satisfied", label: "संतुष्ट" },
-        { value: "neutral", label: "न्यूट्रल" },
-        { value: "dissatisfied", label: "असंतुष्ट" },
-        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
-      ],
-    },
-    {
-      question:
-        "2. पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की प्रतिक्रिया को आप कैसे मूल्यांकित करेंगे?",
-      key: "responsiveness",
-      options: [
-        { value: "verySatisfied", label: "बहुत संतुष्ट" },
-        { value: "satisfied", label: "संतुष्ट" },
-        { value: "neutral", label: "न्यूट्रल" },
-        { value: "dissatisfied", label: "असंतुष्ट" },
-        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
-      ],
-    },
-    {
-      question:
-        "3. क्या आपको लगता है कि पुलिस समुदाय के साथ प्रभावी रूप से संवाद करती है और निवासियों को सुरक्षा मुद्दों और पहल के बारे में सूचित करती है?",
-      key: "communication",
-      options: [
-        { value: "verySatisfied", label: "बहुत संतुष्ट" },
-        { value: "satisfied", label: "संतुष्ट" },
-        { value: "neutral", label: "न्यूट्रल" },
-        { value: "dissatisfied", label: "असंतुष्ट" },
-        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
-      ],
-    },
-    {
-      question: "4. आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
-      key: "trust",
-      options: [
-        { value: "verySatisfied", label: "बहुत संतुष्ट" },
-        { value: "satisfied", label: "संतुष्ट" },
-        { value: "neutral", label: "न्यूट्रल" },
-        { value: "dissatisfied", label: "असंतुष्ट" },
-        { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
-      ],
-    },
-  ],
-  gu: [
-    {
-      question:
-        "આપની પોલીસ સ્થળમાં કેટલીક સમય આપની સાથે મુલાકાત મેળવવામાં કેટલો સમય લાગ્યો?",
-      key: "time",
-      options: [
-        { value: "10 મિનિટ થયા પર", label: "10 મિનિટ થયા પર" },
-        { value: "10 અને 15 મિનિટ વચ્છે", label: "10 અને 15 મિનિટ વચ્છે" },
-        { value: "15 મિનિટ થયા પર", label: "15 મિનિટ થયા પર" },
-      ],
-    },
-    {
-      question:
-        "પોલીસ સ્થળમાં પોલીસ સાથે સંપર્ક કરવામાં કેવું અનુભવ આવ્યું છે?",
-      key: "communication1",
-      options: [
-        { value: "શ્રેષ્ઠ", label: "શ્રેષ્ઠ" },
-        { value: "સારું", label: "સારું" },
-        { value: "સંતોષજનક", label: "સંતોષજનક" },
-        { value: "મધ્યમ", label: "મધ્યમ" },
-        { value: "ખરાબ", label: "ખરાબ" },
-      ],
-    },
-    {
-      question:
-        "પોલીસ સ્થળમાંની સાફસફાઇ અને સારાં રાખવાનો આપેલું સ્તર તમે કેવું મૂલ્યાંકન આપો છો?",
-      key: "cleanliness",
-      options: [
-        { value: "5", label: "🌟🌟🌟🌟🌟" },
-        { value: "4", label: "🌟🌟🌟🌟" },
-        { value: "3", label: "🌟🌟🌟" },
-        { value: "2", label: "🌟🌟" },
-        { value: "1", label: "🌟" },
-      ],
-    },
-    {
-      question:
-        "ક્યારેક પોલીસ સમાચારવાહક છે કે નાગરિકોને સુરક્ષા વિષયો અને પ્રયાસો વિશે પોલીસ અદ્યતન રીતે મેળવવામાં પ્રભાવશાળી છે કે નહીં?",
-      key: "awareness",
-      options: [
-        { value: "ખૂબ પ્રભાવશાળી", label: "ખૂબ પ્રભાવશાળી" },
-        { value: "પ્રભાવશાળી", label: "પ્રભાવશાળી" },
-        { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
-        { value: "અપ્રભાવશાળી", label: "અપ્રભાવશાળી" },
-        { value: "ખૂબ અપ્રભાવશાળી", label: "ખૂબ અપ્રભાવશાળી" },
-      ],
-    },
-    {
-      question: "તમે પોલીસને વિશ્વાસ કરનું કેવું છે, તમારું અનુભવ આ આધાર પર?",
-      key: "trust",
-      options: [
-        { value: "ખૂબ વિશ્વાસ", label: "ખૂબ વિશ્વાસ" },
-        { value: "વિશ્વાસ", label: "વિશ્વાસ" },
-        { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
-        { value: "અવિશ્વાસ", label: "અવિશ્વાસ" },
-        { value: "ખૂબ અવિશ્વાસ", label: "ખૂબ અવિશ્વાસ" },
-      ],
-    },
-  ],
-};
-
-export default function FeedbackForm() {
-  const { user, signOut, station } = useAuth();
+function FeedbackForm() {
+  const { user, stationId } = useAuth();
   const [feedbackData, setFeedbackData] = useState({});
   const [selectedLanguage, setSelectedLanguage] = useState("en");
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  // const [selectedStation, setSelectedStation] = useState("");
   const [textInput, setTextInput] = useState(""); // State variable for the text input
-  const handleOptionSelect = (question, value) => {
+  console.log(stationId, typeof stationId);
+  const questions = {
+    en: [
+      {
+        question: "After How much time you are heard in Police Station?",
+        key: "time",
+        options: [
+          { value: "Less than 10 minutes", label: "Less than 10 minutes" },
+          {
+            value: "Between 10 and 15 minutes",
+            label: "Between 10 and 15 minutes",
+          },
+          { value: "More than 15 minutes", label: "More than 15 minutes" },
+        ],
+      },
+      {
+        question:
+          "How would you describe your overall experience when communicating with the police at the station?",
+        key: "communication",
+        options: [
+          { value: "Excellent", label: "Excellent" },
+          { value: "Good", label: "Good" },
+          { value: "Satisfactory", label: "Satisfactory" },
+          { value: "Poor", label: "Poor" },
+          { value: "Very Poor", label: "Very Poor" },
+        ],
+      },
+      {
+        question:
+          "How would you rate the overall cleanliness and maintenance of the police station premises?",
+        key: "cleanliness",
+        options: [
+          { value: "5", label: "🌟🌟🌟🌟🌟" },
+          { value: "4", label: "🌟🌟🌟🌟" },
+          { value: "3", label: "🌟🌟🌟" },
+          { value: "2", label: "🌟🌟" },
+          { value: "1", label: "🌟" },
+        ],
+      },
+      {
+        question:
+          "Do you think the police effectively keep residents informed about safety issues and initiatives?",
+        key: "awareness",
+        options: [
+          { value: "Very Effective", label: "Very Effective" },
+          { value: "Effective", label: "Effective" },
+          { value: "Neutral", label: "Neutral" },
+          { value: "Ineffective", label: "Ineffective" },
+          { value: "Very Ineffective", label: "Very Ineffective" },
+        ],
+      },
+      {
+        question:
+          "How would you rate the level of trust you have in the police based on your experience?",
+        key: "trust",
+        options: [
+          { value: "Very Trusting", label: "Very Trusting" },
+          { value: "Trusting", label: "Trusting" },
+          { value: "Neutral", label: "Neutral" },
+          { value: "Distrustful", label: "Distrustful" },
+          { value: "Very Distrustful", label: "Very Distrustful" },
+        ],
+      },
+    ],
+    hi: [
+      {
+        question:
+          "1. आपके समुदाय में पुलिस सेवाओं के साथ आपके कुल संतोष को आप किस प्रकार से मूल्यांकित करेंगे?",
+        key: "satisfaction",
+        options: [
+          { value: "verySatisfied", label: "बहुत संतुष्ट" },
+          { value: "satisfied", label: "संतुष्ट" },
+          { value: "neutral", label: "न्यूट्रल" },
+          { value: "dissatisfied", label: "असंतुष्ट" },
+          { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+        ],
+      },
+      {
+        question:
+          "2. पुलिस के समुदाय के मुद्दों को संबोधन करने में पुलिस की प्रतिक्रिया को आप कैसे मूल्यांकित करेंगे?",
+        key: "responsiveness",
+        options: [
+          { value: "verySatisfied", label: "बहुत संतुष्ट" },
+          { value: "satisfied", label: "संतुष्ट" },
+          { value: "neutral", label: "न्यूट्रल" },
+          { value: "dissatisfied", label: "असंतुष्ट" },
+          { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+        ],
+      },
+      {
+        question:
+          "3. क्या आपको लगता है कि पुलिस समुदाय के साथ प्रभावी रूप से संवाद करती है और निवासियों को सुरक्षा मुद्दों और पहल के बारे में सूचित करती है?",
+        key: "communication",
+        options: [
+          { value: "verySatisfied", label: "बहुत संतुष्ट" },
+          { value: "satisfied", label: "संतुष्ट" },
+          { value: "neutral", label: "न्यूट्रल" },
+          { value: "dissatisfied", label: "असंतुष्ट" },
+          { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+        ],
+      },
+      {
+        question: "4. आपके समुदाय में पुलिस पर जोर किस प्रकार की आस्था है?",
+        key: "trust",
+        options: [
+          { value: "verySatisfied", label: "बहुत संतुष्ट" },
+          { value: "satisfied", label: "संतुष्ट" },
+          { value: "neutral", label: "न्यूट्रल" },
+          { value: "dissatisfied", label: "असंतुष्ट" },
+          { value: "veryDissatisfied", label: "बहुत असंतुष्ट" },
+        ],
+      },
+    ],
+    gu: [
+      {
+        question:
+          "આપની પોલીસ સ્થળમાં કેટલીક સમય આપની સાથે મુલાકાત મેળવવામાં કેટલો સમય લાગ્યો?",
+        key: "time",
+        options: [
+          { value: "10 મિનિટ થયા પર", label: "10 મિનિટ થયા પર" },
+          { value: "10 અને 15 મિનિટ વચ્છે", label: "10 અને 15 મિનિટ વચ્છે" },
+          { value: "15 મિનિટ થયા પર", label: "15 મિનિટ થયા પર" },
+        ],
+      },
+      {
+        question:
+          "પોલીસ સ્થળમાં પોલીસ સાથે સંપર્ક કરવામાં કેવું અનુભવ આવ્યું છે?",
+        key: "communication1",
+        options: [
+          { value: "શ્રેષ્ઠ", label: "શ્રેષ્ઠ" },
+          { value: "સારું", label: "સારું" },
+          { value: "સંતોષજનક", label: "સંતોષજનક" },
+          { value: "મધ્યમ", label: "મધ્યમ" },
+          { value: "ખરાબ", label: "ખરાબ" },
+        ],
+      },
+      {
+        question:
+          "પોલીસ સ્થળમાંની સાફસફાઇ અને સારાં રાખવાનો આપેલું સ્તર તમે કેવું મૂલ્યાંકન આપો છો?",
+        key: "cleanliness",
+        options: [
+          { value: "5", label: "🌟🌟🌟🌟🌟" },
+          { value: "4", label: "🌟🌟🌟🌟" },
+          { value: "3", label: "🌟🌟🌟" },
+          { value: "2", label: "🌟🌟" },
+          { value: "1", label: "🌟" },
+        ],
+      },
+      {
+        question:
+          "ક્યારેક પોલીસ સમાચારવાહક છે કે નાગરિકોને સુરક્ષા વિષયો અને પ્રયાસો વિશે પોલીસ અદ્યતન રીતે મેળવવામાં પ્રભાવશાળી છે કે નહીં?",
+        key: "awareness",
+        options: [
+          { value: "ખૂબ પ્રભાવશાળી", label: "ખૂબ પ્રભાવશાળી" },
+          { value: "પ્રભાવશાળી", label: "પ્રભાવશાળી" },
+          { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
+          { value: "અપ્રભાવશાળી", label: "અપ્રભાવશાળી" },
+          { value: "ખૂબ અપ્રભાવશાળી", label: "ખૂબ અપ્રભાવશાળી" },
+        ],
+      },
+      {
+        question: "તમે પોલીસને વિશ્વાસ કરનું કેવું છે, તમારું અનુભવ આ આધાર પર?",
+        key: "trust",
+        options: [
+          { value: "ખૂબ વિશ્વાસ", label: "ખૂબ વિશ્વાસ" },
+          { value: "વિશ્વાસ", label: "વિશ્વાસ" },
+          { value: "મધ્યસ્થ", label: "મધ્યસ્થ" },
+          { value: "અવિશ્વાસ", label: "અવિશ્વાસ" },
+          { value: "ખૂબ અવિશ્વાસ", label: "ખૂબ અવિશ્વાસ" },
+        ],
+      },
+    ],
+  };
+
+  // Fetch police stations from the API
+  useEffect(() => {}, []);
+
+  const handleOptionSelect = (questionKey, value) => {
     setFeedbackData((prevData) => ({
       ...prevData,
-      [question]: value,
+      [questionKey]: value,
     }));
   };
 
   const handleTextInputChange = (e) => {
-    const value = e.target.value;
-    setTextInput(value);
+    setTextInput(e.target.value);
   };
 
   const renderOptions = (questionKey, options) => {
@@ -231,35 +233,13 @@ export default function FeedbackForm() {
     setCurrentQuestionIndex(0);
   };
 
-  const [policeStations, setPoliceStations] = useState([]);
-
-  // Fetch police stations from the API
-  useEffect(() => {
-    // selectedStation = policeStationsLocalStation;
-    const fetchPoliceStations = async () => {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}/police-stations`
-        );
-        setPoliceStations(response.data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    // fetchPoliceStations();
-  }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Retrieve the 'station' from localStorage
-      const localstation = localStorage.getItem("Policestation");
-      const stationObject = JSON.parse(localstation);
-      const stationID = stationObject.station;
-      console.log(localstation);
+      console.log(typeof String(stationId));
       const FormfeedbackData = {
-        stationID: stationID,
+        stationID: JSON.parse(stationId).station,
         mobileNumber: user.phoneNumber,
         questions: questions[selectedLanguage].map((q) => ({
           question: q.question,
@@ -269,7 +249,7 @@ export default function FeedbackForm() {
       };
 
       const response = await axios.post(
-        "http://localhost:3000/feedback/postfeedback",
+        `${import.meta.env.VITE_API_URL}/feedback/postfeedback`,
         FormfeedbackData
       );
 
@@ -281,8 +261,12 @@ export default function FeedbackForm() {
       } else {
         console.error("Failed to submit feedback");
       }
+      // }
+
+      localStorage.removeItem("stationDetails");
     } catch (error) {
       console.error("An error occurred:", error);
+      localStorage.removeItem("stationDetails");
     }
   };
 
@@ -292,7 +276,7 @@ export default function FeedbackForm() {
         <div className="mb-4 flex justify-between items-center py-2 px-5 bg-[#FFFFFF] border-0 rounded-xl shadow-xl">
           <div>
             <label className="mr-2 text-sm sm:text-base lg:text-md">
-              {station}
+              Language :
             </label>
             <select
               className="bg-[#FFFFFF] border-0 text-sm sm:text-base lg:text-md"
@@ -382,3 +366,5 @@ export default function FeedbackForm() {
     </div>
   );
 }
+
+export default FeedbackForm;

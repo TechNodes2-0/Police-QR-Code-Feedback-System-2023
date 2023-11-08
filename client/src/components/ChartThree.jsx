@@ -1,6 +1,6 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
-import axios from 'axios'
+import axios from "axios";
 function ChartThree() {
   const questions = [
     {
@@ -68,25 +68,24 @@ function ChartThree() {
   const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
   const selectedQuestion = questions[selectedQuestionIndex];
   const selectedOptions = selectedQuestion.options;
-  const [selectedResponses,SetselectedResponses] = useState([10, 15, 13, 55, 53]);
+  const [selectedResponses, SetselectedResponses] = useState([
+    10, 15, 13, 55, 53,
+  ]);
   const handleQuestionChange = async (index) => {
     setSelectedQuestionIndex(index);
     try {
       const selectedQuestion = questions[index];
       const queryParams = { question: selectedQuestion.question };
       const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
-  
+
       const data = await fetchData(apiUrl, queryParams);
-  
+
       // Update the chart data with the new feedback count
       const feedbackCount = data.data;
       SetselectedResponses(feedbackCount.map((count) => count.count));
     } catch (error) {
       console.error(error);
     }
-
-
-
   };
   const fetchData = async (url, queryParams) => {
     try {
@@ -111,8 +110,8 @@ function ChartThree() {
       position: "bottom",
       labels: {
         colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
-        useSeriesColors: false
-    },
+        useSeriesColors: false,
+      },
     },
     plotOptions: {
       pie: {
@@ -146,22 +145,25 @@ function ChartThree() {
   };
 
   useEffect(() => {
-    const getData=async()=> {
-      fetchData( `${import.meta.env.VITE_API_URL}/feedback/CountForOption`,{params:'After How much time you are heard in Police Station?'});
-      const queryParams = { question: 'After How much time you are heard in Police Station?' };
+    const getData = async () => {
+      fetchData(`${import.meta.env.VITE_API_URL}/feedback/CountForOption`, {
+        params: "After How much time you are heard in Police Station?",
+      });
+      const queryParams = {
+        question: "After How much time you are heard in Police Station?",
+      };
       const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
-    
-      const data =  fetchData(apiUrl, queryParams);
-    
+
+      const data = fetchData(apiUrl, queryParams);
+
       // Update the chart data with the new feedback count
       const feedbackCount = data.data;
       SetselectedResponses(feedbackCount.map((count) => count.count));
-      
-    }
-  
-  getData();
-  }, [])
-  
+    };
+
+    getData();
+  }, []);
+
   return (
     <div className="col-span-12 rounded-sm text-white border border-stroke bg-darkgray px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark-bg-boxdark sm-px-7.5 xl-col-span-5">
       <div className="mb-3 justify-between gap-4 sm-flex">
@@ -171,7 +173,7 @@ function ChartThree() {
           </h5>
         </div>
         <div>
-        <div className="relative z-20  mt-4 inline-block text-black">
+          <div className="relative z-20  mt-4 inline-block text-black">
             <label htmlFor="questionDropdown" className="mr-2">
               Select a Question:
             </label>

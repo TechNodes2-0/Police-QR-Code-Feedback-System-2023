@@ -1,12 +1,10 @@
-// Import FirebaseAuth and firebase.
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import axios from "axios";
-import { useAuth } from "../../../context/AuthContext"; // Import the useAuth function
-
+import { useAuth } from "../../../context/AuthContext";
 // Configure Firebase.
 const config = {
   apiKey: "AIzaSyCbxIXw-pXevk9nmq2MEonu86uemZCjvCk",
@@ -32,43 +30,21 @@ const uiConfig = {
   ],
 };
 
-function QRCodeDetails({ details }) {
-  if (!details) {
-    return null;
-  }
-
-  return (
-    <div>
-      <p>QR Code ID: {details._id}</p>
-      <p>Station ID: {details.station}</p>
-      <p>QR Code Image URL: {details.qrCodeImageURL}</p>
-      <p>Creator: {details.creator}</p>
-      <p>Is Disabled: {details.isDisabled ? "Yes" : "No"}</p>
-      <p>Creation Date: {new Date(details.creationDate).toLocaleString()}</p>
-    </div>
-  );
-}
-
 function SignInScreen() {
   firebase.initializeApp(config);
   const { qrCodeId } = useParams();
-
-  const [qrCodeDetails, setQrCodeDetails] = useState(null);
   const { setStation } = useAuth();
+
   useEffect(() => {
     const fetchQRCodeDetails = async () => {
       const response = await axios.get(
         `http://localhost:3000/qrcodes/${qrCodeId}`
       );
-      setQrCodeDetails(response?.data?.data);
-      localStorage.setItem("Policestation", JSON.stringify(response.data.data));
-      if (response?.data?.data?.station) {
-        setStation("vinayak");
-      }
-      console.log(qrCodeDetails);
+      const stationId = response.data.data;
+      setStation(stationId);
     };
     fetchQRCodeDetails();
-  }, [qrCodeId, setStation]);
+  }, [qrCodeId]);
 
   return (
     <div className="flex justify-center items-center min-h-screen py-5 bg-blue-100 border-black border-2 px-5">
@@ -78,9 +54,9 @@ function SignInScreen() {
           src="https://gujhome.gujarat.gov.in/portal/images/Home/gujaratpolice.png"
           alt=""
         />
+        <Link to="/test">Test</Link>
         <p className=" font-medium text-md ">welcome to</p>
         <p className="mb-14 font-bold text-xl">Gujrat Police Feedback System</p>
-        <QRCodeDetails details={qrCodeDetails} />
         <StyledFirebaseAuth
           uiConfig={uiConfig}
           firebaseAuth={firebase.auth()}
