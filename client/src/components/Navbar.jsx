@@ -17,10 +17,10 @@ function Navbar() {
         </div>
         <div className="font-semibold capitalize max-md:hidden">
           <div className="flex justify-center cursor-pointer">
-            <Link to="/" className="mx-3 hover:text-gray-800">
-              English
+            <Link to="/login" className="mx-3 hover:text-gray-800">
+              Admin Login
             </Link>
-            <div className="mx-3 hover:text-gray-800 ">Dashboard</div>
+            <Link to='/admin/dashboard' className="mx-3 hover:text-gray-800 " >Dashboard</Link>
           </div>
         </div>
       </div>

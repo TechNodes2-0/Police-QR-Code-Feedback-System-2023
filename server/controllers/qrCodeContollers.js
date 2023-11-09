@@ -79,6 +79,7 @@ const getAllQRCodes = async (req, res) => {
 const getQRCodeById = async (req, res) => {
   try {
     const { id } = req.params;
+    console.log(id);
     const qrcode = await QRCode.findById(id);
     if (!qrcode) {
       return res.status(404).json({

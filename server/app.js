@@ -6,24 +6,21 @@ const divisionRoutes = require("./routes/divisonRoutes");
 const policeStationRoutes = require("./routes/policeStationRoutes");
 const feedbackRoutes = require("./routes/feedbackRoutes");
 const qrCodesRoutes = require("./routes/qrCodesRoutes");
-const positionRoutes=require("./routes/positionRoutes")
+const positionRoutes = require("./routes/positionRoutes");
 const cors = require("cors");
 const connectDB = require("./db/connect");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 const fileUpload = require("express-fileupload");
 const cloudinary = require("./db/cloudinary");
+const morgan =require('morgan')
 
 require("dotenv").config();
 
-app.use(
-  cors({
-    origin: ["http://localhost:5173","http://127.0.0.1:5173","http://127.0.0.1:5174","https://police-qr-code-feedback-system-2023.vercel.app"],
-    credentials: true,
-  })
-);
+app.use(cors({}));
 
 // Middleware
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.use(
   fileUpload({
@@ -39,7 +36,7 @@ app.use("/divisions", divisionRoutes);
 app.use("/police-stations", policeStationRoutes);
 app.use("/feedback", feedbackRoutes);
 app.use("/qrcodes", qrCodesRoutes);
-app.use("/position",positionRoutes)
+app.use("/position", positionRoutes);
 
 // Error handler middleware
 app.use(errorHandlerMiddleware);

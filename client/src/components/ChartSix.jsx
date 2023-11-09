@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactApexChart from "react-apexcharts";
-import axios from "axios";
-function ChartThree() {
+
+function ChartSix() {
   const questions = [
     {
       question: "After How much time you are heard in Police Station?",
@@ -65,40 +65,12 @@ function ChartThree() {
     },
   ];
 
-  const [selectedQuestionIndex, setSelectedQuestionIndex] = useState(0);
+  const selectedQuestionIndex = 3;
+
   const selectedQuestion = questions[selectedQuestionIndex];
   const selectedOptions = selectedQuestion.options;
-  const [selectedResponses, SetselectedResponses] = useState([
-    10, 15, 13, 55, 53,
-  ]);
-  const handleQuestionChange = async (index) => {
-    setSelectedQuestionIndex(index);
-    try {
-      const selectedQuestion = questions[index];
-      const queryParams = { question: selectedQuestion.question };
-      const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
+  const selectedResponses = [12, 15, 18, 35, 3]; // Dummy data for the pie chart
 
-      const data = await fetchData(apiUrl, queryParams);
-
-      // Update the chart data with the new feedback count
-      const feedbackCount = data.data;
-      SetselectedResponses(feedbackCount.map((count) => count.count));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  const fetchData = async (url, queryParams) => {
-    try {
-      const response = await axios.get(url, { params: queryParams });
-      if (response.status === 200) {
-        return response.data;
-      } else {
-        throw new Error("Failed to fetch data from the API.");
-      }
-    } catch (error) {
-      throw new Error("API request failed: " + error.message);
-    }
-  };
   const options = {
     chart: {
       type: "donut",
@@ -110,8 +82,8 @@ function ChartThree() {
       position: "bottom",
       labels: {
         colors: ["#ffffff", "#ffffff", "#ffffff", "#ffffff", "#ffffff"],
-        useSeriesColors: false,
-      },
+        useSeriesColors: false
+    },
     },
     plotOptions: {
       pie: {
@@ -144,26 +116,6 @@ function ChartThree() {
     ],
   };
 
-  useEffect(() => {
-    const getData = async () => {
-      fetchData(`${import.meta.env.VITE_API_URL}/feedback/CountForOption`, {
-        params: "After How much time you are heard in Police Station?",
-      });
-      const queryParams = {
-        question: "After How much time you are heard in Police Station?",
-      };
-      const apiUrl = `${import.meta.env.VITE_API_URL}/feedback/CountForOption`;
-
-      const data = fetchData(apiUrl, queryParams);
-
-      // Update the chart data with the new feedback count
-      const feedbackCount = data.data;
-      SetselectedResponses(feedbackCount.map((count) => count.count));
-    };
-
-    getData();
-  }, []);
-
   return (
     <div className="col-span-12 rounded-sm text-white border border-stroke bg-darkgray px-5 pt-7.5 pb-5 shadow-default dark:border-strokedark dark-bg-boxdark sm-px-7.5 xl-col-span-5">
       <div className="mb-3 justify-between gap-4 sm-flex">
@@ -173,27 +125,25 @@ function ChartThree() {
           </h5>
         </div>
         <div>
-          <div className="relative z-20  mt-4 inline-block text-black">
-            <label htmlFor="questionDropdown" className="mr-2">
-              Select a Question:
-            </label>
-            <select
-              id="questionDropdown"
-              onChange={(e) => handleQuestionChange(e.target.value)}
-              value={selectedQuestionIndex}
-            >
-              {questions.map((question, index) => (
-                <option key={index} value={index}>
-                  {question.question}
-                </option>
-              ))}
-            </select>
+          <div className="relative z-20 inline-block">
+          <div>{questions[selectedQuestionIndex].question}</div>
+            <span className="absolute top-1/2 right-3 z-10 pointer-events-none">
+              <svg
+                width="10"
+                height="6"
+                viewBox="0 0 10 6"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                {/* Dropdown arrow SVG */}
+              </svg>
+            </span>
           </div>
         </div>
       </div>
 
       <div className="mb-2">
-        <div id="chartThree" className="mx-auto flex justify-center">
+        <div id="ChartSix" className="mx-auto flex justify-center">
           <ReactApexChart
             options={options}
             series={selectedResponses}
@@ -223,4 +173,4 @@ function ChartThree() {
   );
 }
 
-export default ChartThree;
+export default ChartSix;

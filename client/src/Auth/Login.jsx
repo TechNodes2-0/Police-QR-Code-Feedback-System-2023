@@ -144,6 +144,15 @@ function EcommerceLoginPage() {
                 Sign in
               </button>
             </div>
+            <p>don't have account?</p>
+            <div className="text-center">
+              <Link
+                to='/Signup'
+                className="border-2 w-full rounded-xl px-36  py-2 mx-auto bg-primary hover:bg-blue-600 text-md text-white font-bold hover:-translate-y-1 duration-200 hover:shadow-xl"
+              >
+                Sign Up
+              </Link>
+            </div>
           </form>
         </div>
       </div>

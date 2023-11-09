@@ -5,17 +5,9 @@ import { Outlet } from "react-router-dom";
 import {useAdminAuth} from "../context/AdminAuth"
 function DefaultLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const[adminAuth, setAdminAuth]=useAdminAuth();
-  const handleLogout=()=>{
-    setAdminAuth({
-      ... adminAuth,
-      user:null,
-      token:''
-    });
-    localStorage.removeItem("adminAuth");
-    console.log("logout successfully")
+  
 
-  }
+  
   return (
     <div className="">
       <div className="dark:bg-boxdark-2 dark:text-bodydark">
